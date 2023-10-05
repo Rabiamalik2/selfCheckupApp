@@ -1,0 +1,23 @@
+const Images = {
+    userDummyImage: require('../../assets/images/user-dummy.png'),
+    bike: require('../../assets/images/bike.png'),
+    campage: require('../../assets/images/campage.png'),
+    chat: require('../../assets/images/chat.png'),
+    checkup: require('../../assets/images/checkup.png'),
+    choosePic: require('../../assets/images/choosepic.png'),
+    fun: require('../../assets/images/fun.png'),
+    health: require('../../assets/images/health.png'),
+    meter: require('../../assets/images/meter.png'),
+    person: require('../../assets/images/person.png'), 
+    retcam: require('../../assets/images/retcam.png'),
+    vital: require('../../assets/images/vital.png'), 
+    img1: require('../../assets/images/img1.png'),
+    img2: require('../../assets/images/img2.png'),
+    img3: require('../../assets/images/img3.png'),
+    img4: require('../../assets/images/img4.png'), 
+    img5: require('../../assets/images/img5.png'),
+    img6: require('../../assets/images/img6.png'),
+    google: require('../../assets/images/google.png'),
+    phone: require('../../assets/images/phone.png'),
+}
+export default Images
