@@ -1,5 +1,4 @@
-//import liraries
-//import liraries
+
 import React, { Component ,useState} from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, ImageBackground, BackHandler, SafeAreaView ,Alert} from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -10,8 +9,8 @@ import auth, { firebase ,onAuthStateChanged } from "@react-native-firebase/auth"
 // create a component
 const OtpPhoneScreen = (props) => {
     const navigation = useNavigation();
-    const [code, setCode] = useState(null);
-    const [confirm, setConfirm] = useState(null);
+    const [code, setCode] = useState('');
+    const [confirm, setConfirm] = useState('');
     const confirmCode = async() => {
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {

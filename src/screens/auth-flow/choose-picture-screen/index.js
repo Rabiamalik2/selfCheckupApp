@@ -24,7 +24,7 @@ import Account from '../../../components/text-input-component/haveAccount';
 import Terms from '../../../components/text-input-component/termsConditions';
 import RouteNames from '../../../services/constants/route-names';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
-import {addImage} from '../../../services/apis/auth';
+import {addImage} from '../../../services/apis/app/userApis';
 import storage from '@react-native-firebase/storage';
 
 // create a component

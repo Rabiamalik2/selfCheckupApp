@@ -5,7 +5,7 @@ import styles from './styles';
 import {
   fetchEmergencyContacts,
   deleteContact,
-} from '../../../services/apis/auth';
+} from '../../../services/apis/app/contactApis';
 import {
   useFocusEffect,
   useNavigation,

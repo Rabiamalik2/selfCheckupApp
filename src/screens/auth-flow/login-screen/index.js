@@ -27,7 +27,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loader from '../../../components/loader';
 import auth from '@react-native-firebase/auth';
 import * as Keychain from 'react-native-keychain';
-import {loginToMyProfile, fetchUserData} from '../../../services/apis/auth';
+import {loginToMyProfile} from '../../../services/apis/auth';
+import { fetchUserData } from '../../../services/apis/app/userApis';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {
   GoogleSignin,

@@ -8,7 +8,7 @@ import {
   ScrollView,
   SafeAreaView,
   Alert,
-  FlatList
+  FlatList,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {
@@ -29,21 +29,20 @@ const HealthEduScreen = props => {
     {
       key: '1',
       name: 'Health Insurance',
-      onPress: Alert.alert('No Health Insurance at the moment'),
+      onPress: {},
       imageUri: Images.img5,
     },
     {
       key: '2',
       name: 'Health Activity',
-      onPress: Alert.alert('No Recipies found'),
+      onPress: {},
       imageUri: Images.img6,
-     
     },
     {
       key: '3',
       name: 'Yoga Video Activity',
       onPress: () =>
-      navigation.navigate('funNavigator', {screen: 'liveActivityScreen'}),
+        navigation.navigate('funNavigator', {screen: 'liveActivityScreen'}),
       imageUri: Images.person,
     },
   ];
@@ -59,7 +58,7 @@ const HealthEduScreen = props => {
       key: '2',
       name: 'Cycling Activity',
       imageUri: Images.bike,
-      onPress: Alert.alert("No Cycling Activity for now"),
+      onPress: {},
     },
     {
       key: '3',
@@ -79,14 +78,14 @@ const HealthEduScreen = props => {
   const renderItem = ({item}) => (
     <HealthItem
       onPress={item.onPress}
-      imageUri={item.imageUri}
+      source={item.imageUri}
       name={item.name}
     />
   );
   const renderRecentItem = ({item}) => (
     <PopularActivities
       onPress={item.onPress}
-      imageUri={item.imageUri}
+      source={item.imageUri}
       name={item.name}
     />
   );
@@ -124,12 +123,12 @@ const HealthEduScreen = props => {
             </Text>
           </View>
           <View style={{marginTop: 20, height: responsiveHeight(30)}}>
-          <FlatList
-          data={data1}
-          horizontal={true}
-          renderItem={renderRecentItem}
-          keyExtractor={item => item.key}
-        />
+            <FlatList
+              data={data1}
+              horizontal={true}
+              renderItem={renderRecentItem}
+              keyExtractor={item => item.key}
+            />
           </View>
         </View>
       </ScrollView>

@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import styles from './funItemsStyle1';
+import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {
   responsiveHeight,
@@ -17,13 +17,13 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 // create a component
-const RecentVideos = (imageUri,name) => {
+const RecentVideos = ({source, name}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
         // onPress={Alert.alert('No Cycling Activity for now')}
         style={{flex: 1.4, marginLeft: 20, marginTop: 20}}>
-        <Image source={imageUri} style={styles.image} />
+        <Image source={source} style={styles.image} />
         <View style={{flex: 1, alignItems: 'center'}}>
           <Text style={styles.title}>{name}</Text>
         </View>

@@ -4,13 +4,14 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
+import Colors from '../../../services/constants/colors';
 // define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     //justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
   },
   scView: {
     marginLeft: 40,
@@ -21,19 +22,17 @@ const styles = StyleSheet.create({
   selfTxt: {
     fontFamily: 'Poppins-Bold',
     fontSize: responsiveFontSize(5),
-    fontWeight: 'bold',
-    color: 'rgba(51, 41, 93, 1)',
+    color: Colors.purple,
   },
   checkTxt: {
-  //   justifyContent:'center',
-  //  textAlign: 'center',
+    //   justifyContent:'center',
+    //  textAlign: 'center',
     fontFamily: 'Poppins-Bold',
     height: responsiveHeight(6),
     width: responsiveWidth(30),
     fontSize: responsiveFontSize(5),
-    fontWeight: 'bold',
-    color: 'white',
-    backgroundColor: 'rgba(51, 41, 93, 1)',
+    color: Colors.white,
+    backgroundColor: Colors.purple,
     marginHorizontal: 10,
     // alignItems: 'center',
     borderWidth: 0.2,
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '700',
     fontFamily: 'Poppins-Regular',
-    color: 'black',
+    color: Colors.black,
   },
   viewImg2: {
     paddingVertical: 0,
@@ -84,7 +83,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '700',
     fontFamily: 'Poppins-Regular',
-    color: 'black',
+    color: Colors.black,
   },
   viewImg3: {
     paddingVertical: 0,
@@ -104,7 +103,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '700',
     fontFamily: 'Poppins-Regular',
-    color: 'black',
+    color: Colors.black,
   },
   parent: {
     marginTop: 50,
@@ -115,7 +114,7 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 400,
     borderBottomStartRadius: 400,
     borderBottomEndRadius: 400,
-    backgroundColor: '#d6d4df',
+    backgroundColor: Colors.lightGrey,
     transform: [{scaleX: 1.5}],
     overflow: 'hidden',
   },
@@ -127,7 +126,7 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 400,
     borderBottomStartRadius: 400,
     borderBottomEndRadius: 400,
-    backgroundColor: '#33295d',
+    backgroundColor: Colors.purple,
     // justifyContent:'center',
     alignItems: 'center',
     transform: [{scaleX: 1}],
@@ -143,22 +142,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     //flexDirection:'row',
-    backgroundColor: 'red',
+    backgroundColor: Colors.red,
     width: responsiveWidth(40),
     height: responsiveHeight(15),
     borderRadius: 20,
   },
   iconSos: {
-    color: 'red',
+    color: Colors.red,
     fontSize: responsiveFontSize(4),
-    fontWeight: 'bold',
+
     borderRadius: 20,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.white,
     padding: 5,
   },
   txtSos: {
     textAlign: 'center',
-    color: '#fff',
+    color: Colors.white,
     fontSize: responsiveFontSize(8),
     fontWeight: 'bold',
     padding: 2,
@@ -186,7 +185,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '700',
     fontFamily: 'Poppins-Regular',
-    color: 'black',
+    color: Colors.black,
   },
   viewImg5: {
     paddingVertical: 0,
@@ -204,21 +203,20 @@ const styles = StyleSheet.create({
     padding: 2,
     paddingTop: 6,
     textAlign: 'center',
-    fontWeight: '700',
     fontFamily: 'Poppins-Regular',
-    color: 'black',
+    color: Colors.black,
   },
   iconContact: {
     padding: 10,
-    paddingLeft:40,
-    color: '#33295d',
+    paddingLeft: 40,
+    color: Colors.purple,
     fontSize: responsiveFontSize(4),
   },
-  iconLogout:{
+  iconLogout: {
     padding: 20,
     left: -60,
-    color: 'black',
+    color: Colors.black,
     fontSize: responsiveFontSize(3),
-  }
+  },
 });
 export default styles;

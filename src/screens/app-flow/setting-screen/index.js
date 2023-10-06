@@ -19,8 +19,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector} from 'react-redux';
 
-
-const SettingScreen = (props) => {
+const SettingScreen = props => {
   const navigation = useNavigation();
   const userData = useSelector(state => state.user);
   console.log('sys:', userData);
@@ -30,7 +29,7 @@ const SettingScreen = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.istView}>
-        <TouchableOpacity onPress={()=> props.navigation.goBack()}>
+        <TouchableOpacity onPress={() => props.navigation.goBack()}>
           <MaterialIcons name="keyboard-arrow-left" style={styles.arrowIcon} />
         </TouchableOpacity>
         <Text style={styles.txtProfile}>Profile</Text>
@@ -45,22 +44,26 @@ const SettingScreen = (props) => {
           />
           <Text style={styles.biTxt}>Basic Information</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.biView}
-        onPress={() =>
-          navigation.dispatch(
-            StackActions.replace('sosNavigator', {
-              screen: "personalInfoScreen",
-            }))
-        }
-        >
+        <TouchableOpacity
+          style={styles.biView}
+          onPress={() =>
+            navigation.dispatch(
+              StackActions.replace('sosNavigator', {
+                screen: 'personalInfoScreen',
+              }),
+            )
+          }>
           <MaterialCommunityIcons
             name="clipboard-account-outline"
             style={styles.pInfoIcon}
           />
           <Text style={styles.biTxt}>Personal Information</Text>
         </TouchableOpacity>
-        <TouchableOpacity  style={styles.biView}>
-          <MaterialCommunityIcons name="sticker-text-outline" style={styles.hbIcon} />
+        <TouchableOpacity style={styles.biView}>
+          <MaterialCommunityIcons
+            name="sticker-text-outline"
+            style={styles.hbIcon}
+          />
           <Text style={styles.biTxt}>Health Background</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.biView}>
@@ -76,10 +79,7 @@ const SettingScreen = (props) => {
           <Text style={styles.infoTxt}>History</Text>
 
           <TouchableOpacity style={styles.biView}>
-            <MaterialIcons
-              name="insert-chart-outlined"
-              style={styles.haIcon}
-            />
+            <MaterialIcons name="insert-chart-outlined" style={styles.haIcon} />
             <Text style={styles.biTxt}>Health Assessments</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.biView}>

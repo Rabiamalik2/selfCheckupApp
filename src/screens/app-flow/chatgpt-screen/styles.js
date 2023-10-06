@@ -4,13 +4,14 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
+import Colors from '../../../services/constants/colors';
 // define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     // alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
     paddingBottom: 100,
   },
   viewS1: {
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
     fontSize: responsiveFontSize(5),
     fontWeight: 'bold',
-    color: 'rgba(51, 41, 93, 1)',
+    color: Colors.purple,
     textAlign: 'center',
     alignItems: 'center',
     justifyContent:'center',
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
   icon: {
     left: -80,
     fontSize: responsiveFontSize(4),
-    color: '#33295d',
+    color: Colors.purple,
   },
   parent: {
     flex: 1,
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     width: responsiveWidth(100),
     borderTopStartRadius: 200,
     borderTopEndRadius: 200,
-    backgroundColor: '#d6d4df',
+    backgroundColor: Colors.lightGrey,
     //borderBottomStartRadius : 200,
     //borderBottomEndRadius : 200,
     //overflow : 'hidden',
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     width: responsiveWidth(100),
     borderTopStartRadius: 200,
     borderTopEndRadius: 200,
-    backgroundColor: '#33295d',
+    backgroundColor: Colors.purple,
     transform: [{scaleX: 1}],
     // overflow: 'hidden',
   },
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems: 'center',
     height: responsiveHeight(5),
-    backgroundColor: '#3B5998',
+    backgroundColor: Colors.oceanBlue,
     borderRadius: 17,
   },
 });

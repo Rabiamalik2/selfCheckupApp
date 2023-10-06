@@ -30,7 +30,7 @@ import {
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Picker} from '@react-native-picker/picker';
 import DatePicker from '@react-native-community/datetimepicker';
-import {getPersonalInfo} from '../../../services/apis/auth';
+import {getPersonalInfo} from '../../../services/apis/app/userApis';
 import RouteNames from '../../../services/constants/route-names';
 import {useSelector} from 'react-redux';
 import {

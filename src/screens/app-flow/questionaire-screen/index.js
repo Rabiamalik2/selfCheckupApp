@@ -31,7 +31,7 @@ import CheckBox from '@react-native-community/checkbox';
 import {
   getQuestionaire,
   storeQuestionaireAnswers,
-} from '../../../services/apis/auth';
+} from '../../../services/apis/app/questionaireApis';
 import Loader from '../../../components/loader';
 import {useSelector} from 'react-redux';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';

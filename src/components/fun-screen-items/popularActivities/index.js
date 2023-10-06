@@ -8,7 +8,7 @@ import {
   useWindowDimensions,
   TouchableOpacity,
 } from 'react-native';
-import styles from './funItemsStyle';
+import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {
   responsiveHeight,
@@ -16,17 +16,15 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 // create a component
-const PopularActivities = (imageUri, name, onPress) => {
+const PopularActivities = ({source, name, onPress}) => {
   const navigation = useNavigation();
   const {width} = useWindowDimensions('screen');
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() => {
-            onPress();
-        }}
+        onPress={onPress}
         style={{flex: 1.4, marginLeft: 20, marginTop: 20}}>
-        <Image source={imageUri} style={styles.image} />
+        <Image source={source} style={styles.image} />
         <View style={{flex: 1, alignItems: 'center'}}>
           <Text style={styles.title}>{name}</Text>
         </View>

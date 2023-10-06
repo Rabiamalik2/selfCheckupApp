@@ -21,7 +21,7 @@ import {
   StackActions,
   useRoute,
 } from '@react-navigation/native';
-import {getMedicoreInfo} from '../../../services/apis/auth';
+import {getMedicoreInfo} from '../../../services/apis/app/medicalApis';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import RouteNames from '../../../services/constants/route-names';
 import {useSelector} from 'react-redux';

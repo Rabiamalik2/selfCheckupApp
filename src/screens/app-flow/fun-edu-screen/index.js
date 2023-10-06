@@ -38,7 +38,7 @@ const FunEduScreen = props => {
       key: '2',
       name: 'Cycling Activity',
       imageUri: Images.bike,
-      onPress: Alert.alert("No Cycling Activity for now"),
+      onPress: {},
     },
     {
       key: '3',
@@ -56,12 +56,12 @@ const FunEduScreen = props => {
     },
   ];
   const renderItem = ({item}) => (
-    <PopularActivities onPress={item.onPress} imageUri={item.imageUri} name={item.name} />
+    <PopularActivities onPress={item.onPress} source={item.imageUri} name={item.name} />
   );
   const renderRecentItem = ({item}) => (
     <RecentVideos
       onPress={item.onPress}
-      imageUri={item.imageUri}
+      source={item.imageUri}
       name={item.name}
     />
   );

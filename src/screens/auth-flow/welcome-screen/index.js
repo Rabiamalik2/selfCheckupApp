@@ -12,7 +12,7 @@ import {
   StackActions,
 } from '@react-navigation/native';
 import * as Keychain from 'react-native-keychain';
-import {fetchUserData ,getMyProfile} from '../../../services/apis/auth';
+import {fetchUserData} from '../../../services/apis/app/userApis';
 import {setUser} from '../../../services/redux/reducers/user-reducer';
 // create a component
 const WelcomeScreen = () => {

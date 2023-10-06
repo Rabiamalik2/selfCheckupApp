@@ -8,7 +8,7 @@ import {
 import React, {useState} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
+import Colors from '../../services/constants/colors';
 const Input = ({
   placeholder,
   value,
@@ -28,7 +28,7 @@ const Input = ({
   return (
     <View style={{flex: 0, marginTop: 15, bottom: 20, alignItems: 'center'}}>
       <View style={styles.txtinpView}>
-        <TextInput 
+        <TextInput
           autoCapitalize={autoCapitalize}
           value={value}
           onSubmitEditing={OnSubmitEditting}
@@ -51,12 +51,14 @@ const Input = ({
             style={styles.icon1S}
           />
         )}
-        {picker && <MaterialIcons name="arrow-drop-down" style={styles.iconPicker} />}
+        {picker && (
+          <MaterialIcons name="arrow-drop-down" style={styles.iconPicker} />
+        )}
       </View>
       {error && (
         <Text
           style={{
-            color: 'red',
+            color: Colors.red,
             textAlign: 'auto',
             alignItems: 'center',
             justifyContent: 'center',
@@ -76,8 +78,8 @@ const styles = StyleSheet.create({
     width: responsiveWidth(80),
     alignItems: 'center',
     borderRadius: 12,
-    backgroundColor: '#33295d',
-    borderColor: '#D6D4DF',
+    backgroundColor: Colors.purple,
+    borderColor: Colors.lightGrey,
     borderWidth: 2,
     padding: 1.7,
     opacity: 0.5,
@@ -87,18 +89,18 @@ const styles = StyleSheet.create({
     height: responsiveHeight(5),
     left: 10,
     flexWrap: 'wrap',
-    color: 'white',
+    color: Colors.white,
   },
   icon1S: {
     left: -40,
     fontSize: responsiveFontSize(2.5),
-    color: 'black',
+    color: Colors.black,
     //   alignItems: 'center'
   },
   iconPicker: {
     left: 230,
     fontSize: responsiveFontSize(4),
-    color: 'white',
+    color: Colors.white,
     //   alignItems: 'center'
   },
 });

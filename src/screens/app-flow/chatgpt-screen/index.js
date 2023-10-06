@@ -15,9 +15,10 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Loader from '../../../components/loader';
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
-import {createMsgApi, getGptMSgs} from '../../../services/apis/auth';
+import {createMsgApi, getGptMSgs} from '../../../services/apis/app/chatApis';
 import {View, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
+import Colors from '../../../services/constants/colors';
 import {useSelector} from 'react-redux';
 // create a component
 const ChatGptScreen = props => {
@@ -100,20 +101,20 @@ const ChatGptScreen = props => {
                     {...props}
                     textStyle={{
                       right: {
-                        color: 'white',
+                        color: Colors.white,
                         // fontFamily: 'CerebriSans-Book',
                       },
                       left: {
-                        color: 'black',
+                        color: Colors.black,
                         // fontFamily: 'P',
                       },
                     }}
                     wrapperStyle={{
                       left: {
-                        backgroundColor: '#D6D4DF',
+                        backgroundColor: Colors.lightGrey,
                       },
                       right: {
-                        backgroundColor: '#FF8845',
+                        backgroundColor: Colors.orange,
                       },
                     }}
                   />

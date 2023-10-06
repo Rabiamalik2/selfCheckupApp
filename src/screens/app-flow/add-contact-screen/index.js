@@ -21,7 +21,7 @@ import {
   StackActions,
   useRoute,
 } from '@react-navigation/native';
-import {addContacts, updateContact} from '../../../services/apis/auth';
+import {addContacts, updateContact} from '../../../services/apis/app/contactApis';
 import RouteNames from '../../../services/constants/route-names';
 import {useSelector} from 'react-redux';
 // create a component
@@ -37,7 +37,7 @@ const AddContactScreen = props => {
   const [lastname, setLastname] = useState('');
   const [phone, setPhone] = useState('');
   const [relation, setRelation] = useState('');
-  const addContact = async userID => {
+  const addContactOnPress = async userID => {
     try {
       if (userData.user.step == 1) {
         setLoading(true);
@@ -172,7 +172,7 @@ const AddContactScreen = props => {
                 returnKeyType="next"
               />
               <View style={styles.btnView}>
-                <TouchableOpacity style={styles.saveToS} onPress={addContact}>
+                <TouchableOpacity style={styles.saveToS} onPress={addContactOnPress}>
                   <Text style={styles.saveBtnS}>Save</Text>
                 </TouchableOpacity>
               </View>

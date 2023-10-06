@@ -20,7 +20,7 @@ import {
 import {
   fetchEmergencyContacts,
   sendSosMessageCall,
-} from '../../../services/apis/auth';
+} from '../../../services/apis/app/contactApis';
 import {
   useFocusEffect,
   useNavigation,

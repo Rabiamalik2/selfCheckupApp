@@ -4,13 +4,14 @@ import {
     responsiveWidth,
     responsiveFontSize
   } from "react-native-responsive-dimensions";
+  import Colors from '../../../services/constants/colors';
 // define your styles
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         //justifyContent: 'center',
        // alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: Colors.white,
     },
     scView:{
         justifyContent: 'center',
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
         fontFamily:'Poppins-Bold',
         fontSize:responsiveFontSize(5),
         fontWeight:'bold',
-        color:'rgba(51, 41, 93, 1)',
+        color: Colors.purple,
     },
     checkTxt:{
         textAlign:'center',
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
         fontSize:responsiveFontSize(5),
         fontWeight:'bold',
         color:'white',
-        backgroundColor:'rgba(51, 41, 93, 1)',
+        backgroundColor:Colors.white,
         marginHorizontal: 10,
         alignItems:'center',
         borderWidth: 1,
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
         fontFamily:'Poppins-Regular',
         fontSize:responsiveFontSize(2.5),
         fontWeight:'700',
-        color:'black',
+        color:Colors.black,
     },
     parent : {
         top:50,
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
         width :  responsiveWidth(100),
         borderTopStartRadius:500,
         borderTopEndRadius:500,
-        backgroundColor:'#d6d4df',
+        backgroundColor:Colors.lightGrey,
         //borderBottomStartRadius : 200,
         //borderBottomEndRadius : 200,
         //overflow : 'hidden',
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
         width :  responsiveWidth(100),
         borderTopStartRadius:400,
         borderTopEndRadius:400,
-        backgroundColor : '#33295d',
+        backgroundColor : Colors.purple,
        // justifyContent:'center',
         alignItems:"center",
         transform : [ { scaleX : 1 } ],
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
         fontFamily:'Poppins-Regular',
         fontSize:responsiveFontSize(1.5),
         fontWeight:'400',
-        color:'white',
+        color:Colors.white,
         marginBottom:30,
     },
     subTxt:{
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
         fontFamily:'Poppins-Regular',
         fontSize:responsiveFontSize(1.7),
         fontWeight:'700',
-        color:'white',
+        color:Colors.white,
         
     
     },
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
         alignItems:"center",  
         justifyContent:"center",
         borderRadius:450,
-        backgroundColor: 'white',
+        backgroundColor: Colors.white,
     },
     icon1:{ 
         textAlign:'center',
@@ -120,9 +121,9 @@ const styles = StyleSheet.create({
         borderWidth:2,
         marginTop:20, 
         justifyContent:"center",
-        backgroundColor: '#33295d',
+        backgroundColor: Colors.purple,
         opacity:0.5,
-        borderColor:'#d6d4df'
+        borderColor: Colors.lightGrey
 
     },
     textiS:{
@@ -143,12 +144,12 @@ const styles = StyleSheet.create({
         fontFamily:"Poppins", 
         justifyContent:"center",
         alignItems:"center",
-        color:"#f7f7f7",
+        color:Colors.lightGrey1,
         fontWeight: "700",
     },
     saveToS:{
         justifyContent:"center",
-        backgroundColor: "#ff8945",
+        backgroundColor: Colors.orange,
         width:responsiveWidth(80),
         height: responsiveHeight(5),
         alignItems:'center' ,

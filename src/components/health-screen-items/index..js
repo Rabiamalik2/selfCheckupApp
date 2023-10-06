@@ -16,7 +16,7 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 // create a component
-const HealthItem = (imageUri, name, onPress) => {
+const HealthItem = ({source, name, onPress}) => {
   const {width} = useWindowDimensions('screen');
 
   return (
@@ -26,7 +26,7 @@ const HealthItem = (imageUri, name, onPress) => {
           onPress();
         }}
         style={{flex: 1.4, marginLeft: 20, marginTop: 20}}>
-        <Image source={imageUri} style={styles.image} />
+        <Image source={source} style={styles.image} />
         <View style={{flex: 1, alignItems: 'center'}}>
           <Text style={styles.title}>{name}</Text>
         </View>
