@@ -8,7 +8,7 @@ import styles from './styles';
 import RouteNames from '../../../services/constants/route-names';
 import Input from '../../../components/text-input-component/textInput';
 import PasswordInput from '../../../components/text-input-component/passwordInput';
-import Button from '../../../components/button-component/button';
+import Button from '../../../components/button-component/index.js';
 import Account from '../../../components/text-input-component/haveAccount';
 // create a component
 const ForgetPasswordScreen = (props) => {

@@ -13,7 +13,7 @@ import styles from './styles';
 import {Picker} from '@react-native-picker/picker';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Input from '../../../components/text-input-component/textInput';
-import Button from '../../../components/button-component/button';
+import Button from '../../../components/button-component/index.js';
 import Loader from '../../../components/loader';
 import {
   useFocusEffect,

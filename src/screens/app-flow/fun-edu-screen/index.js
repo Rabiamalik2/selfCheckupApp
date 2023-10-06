@@ -18,8 +18,8 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
-import FunItem from '../../../components/fun-screen-items/funItems';
-import FunItem1 from '../../../components/fun-screen-items/funItem1';
+import PopularActivities from '../../../components/fun-screen-items/popularActivities/index.js';
+import RecentVideos from '../../../components/fun-screen-items/recentVideos/index.js';
 import Video from 'react-native-video';
 import Images from '../../../services/constants/images';
 import styles from './styles';
@@ -56,10 +56,10 @@ const FunEduScreen = props => {
     },
   ];
   const renderItem = ({item}) => (
-    <FunItem onPress={item.onPress} imageUri={item.imageUri} name={item.name} />
+    <PopularActivities onPress={item.onPress} imageUri={item.imageUri} name={item.name} />
   );
   const renderRecentItem = ({item}) => (
-    <FunItem1
+    <RecentVideos
       onPress={item.onPress}
       imageUri={item.imageUri}
       name={item.name}

@@ -20,7 +20,7 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import Input from '../../../components/text-input-component/textInput';
-import Button from '../../../components/button-component/button';
+import Button from '../../../components/button-component/index.js';
 import {
   useFocusEffect,
   useNavigation,

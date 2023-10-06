@@ -19,7 +19,7 @@ import Loader from '../../../components/loader';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 import Images from '../../../services/constants/images';
-import Button from '../../../components/button-component/button';
+import Button from '../../../components/button-component/index.js';
 import Account from '../../../components/text-input-component/haveAccount';
 import Terms from '../../../components/text-input-component/termsConditions';
 import RouteNames from '../../../services/constants/route-names';

@@ -10,7 +10,7 @@ import React from 'react'
 const Button = ({onPress, name,style}) => {
     return (
         <View style={styles.btnSigninView}>
-            <TouchableOpacity style={style} onPress={()=>{onPress()}}>
+            <TouchableOpacity style={[style, styles.toSignin]} onPress={()=>{onPress()}}>
                 <Text style={[styles.signinS]}>{name}</Text>
             </TouchableOpacity>
         </View>

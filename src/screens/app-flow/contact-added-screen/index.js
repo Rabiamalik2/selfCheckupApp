@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet,TouchableOpacity } from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Icon1 from 'react-native-vector-icons/Entypo'
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { SafeAreaView } from 'react-native-safe-area-context';
 // create a component

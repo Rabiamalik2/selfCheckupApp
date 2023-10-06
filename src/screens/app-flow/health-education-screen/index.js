@@ -16,8 +16,9 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
-import HealthItem from '../../../components/fun-screen-items/funItems';
-import FunItem1 from '../../../components/fun-screen-items/funItem1';
+import PopularActivities from '../../../components/fun-screen-items/popularActivities/index.js';
+import RecentVideos from '../../../components/fun-screen-items/recentVideos/index.js';
+import HealthItem from '../../../components/health-screen-items/index..js';
 import styles from '../fun-edu-screen/styles';
 import Images from '../../../services/constants/images';
 // create a component
@@ -83,7 +84,7 @@ const HealthEduScreen = props => {
     />
   );
   const renderRecentItem = ({item}) => (
-    <FunItem1
+    <PopularActivities
       onPress={item.onPress}
       imageUri={item.imageUri}
       name={item.name}

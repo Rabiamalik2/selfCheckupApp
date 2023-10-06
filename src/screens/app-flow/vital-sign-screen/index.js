@@ -22,7 +22,7 @@ import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {getVitalSigns, displayVitalSigns} from '../../../services/apis/auth';
 import Input from '../../../components/text-input-component/textInput';
-import Button from '../../../components/button-component/button';
+import Button from '../../../components/button-component/index.js';
 import {useSelector} from 'react-redux';
 import styles from './styles';
 // create a component

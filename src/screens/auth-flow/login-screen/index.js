@@ -20,7 +20,7 @@ import Images from '../../../services/constants/images';
 import RouteNames from '../../../services/constants/route-names';
 import styles from './styles';
 import Input from '../../../components/text-input-component/textInput';
-import Button from '../../../components/button-component/button';
+import Button from '../../../components/button-component/index.js';
 import NoAccount from '../../../components/text-input-component/noAccount';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';

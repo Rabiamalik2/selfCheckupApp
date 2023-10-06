@@ -16,7 +16,7 @@ import {
 } from '@react-navigation/native';
 import Gavel from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
-import Button from '../../../components/button-component/button';
+import Button from '../../../components/button-component/index.js';
 import Account from '../../../components/text-input-component/haveAccount';
 import Terms from '../../../components/text-input-component/termsConditions';
 import RouteNames from '../../../services/constants/route-names';

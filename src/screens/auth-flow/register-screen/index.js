@@ -26,7 +26,7 @@ import {
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import RouteNames from '../../../services/constants/route-names';
 import Input from '../../../components/text-input-component/textInput';
-import Button from '../../../components/button-component/button';
+import Button from '../../../components/button-component/index.js';
 import Account from '../../../components/text-input-component/haveAccount';
 import Loader from '../../../components/loader';
 import Terms from '../../../components/text-input-component/termsConditions';

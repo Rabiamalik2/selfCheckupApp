@@ -5,7 +5,7 @@ import {useFocusEffect,  useNavigation,StackActions,CommonActions } from '@react
 import RouteNames from '../../../services/constants/route-names';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
-import Button from '../../../components/button-component/button';
+import Button from '../../../components/button-component/index.js';
 import NoAccount from '../../../components/text-input-component/noAccount';
 // create a component
 const SignupCompleteScreen = (props) => {
