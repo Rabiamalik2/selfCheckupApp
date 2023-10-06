@@ -19,7 +19,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {
   fetchEmergencyContacts,
-  sendMessageCall,
+  sendSosMessageCall,
 } from '../../../services/apis/auth';
 import {
   useFocusEffect,
@@ -73,7 +73,7 @@ const SosScreen = props => {
     console.log('phone:', phone);
     try {
       setLoading(true);
-      const response = await sendMessageCall(phone);
+      const response = await sendSosMessageCall(phone);
       setLoading(false);
       if (response.status === 200) {
         setLoading(false);

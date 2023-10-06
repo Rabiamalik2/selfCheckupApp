@@ -15,20 +15,26 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Loader from '../../../components/loader';
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
-import {sendMsg, getGptMSgs} from '../../../services/apis/auth';
+import {createMsgApi, getGptMSgs} from '../../../services/apis/auth';
 import {View, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {useSelector} from 'react-redux';
 // create a component
 const ChatGptScreen = props => {
   const userData = useSelector(state => state.user);
+  // console.log("msgUSer", userData);
   const [loading, setLoading] = React.useState(false);
   const [messages, setMessages] = useState([]);
+  const userID = userData.user._id;
+  
   // const [answer, setAnswer] = useState();
   const defaultMsg = async messages => {
     try {
+      console.log("userMsgId", userID)
       setLoading(true);
-      const res = await sendMsg(userData.user._id, messages[0]);
+      const res = await createMsgApi(userID, messages[0]);
+      setLoading(false);
+      console.log(res.data)
       if (res.status == 201) {
         setMessages(previousMessages =>
           GiftedChat.append(previousMessages, res.data.msg),
@@ -53,8 +59,9 @@ const ChatGptScreen = props => {
       const displayingMsgs = async () => {
         try {
           setLoading(true);
-          const fetchedMsgs = await getGptMSgs(userData.user._id);
-          console.log('all mesgs', fetchedMsgs[0].messages);
+          const fetchedMsgs = await getGptMSgs(userID);
+          console.log("userMsgId111", userID)
+          console.log('all mesgs', fetchedMsgs);
           setLoading(false);
           if (fetchedMsgs.length > 0) {
             setLoading(false);

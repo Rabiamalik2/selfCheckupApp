@@ -12,19 +12,20 @@ import {
   StackActions,
 } from '@react-navigation/native';
 import * as Keychain from 'react-native-keychain';
-import {getMyProfile} from '../../../services/apis/auth';
+import {fetchUserData ,getMyProfile} from '../../../services/apis/auth';
 import {setUser} from '../../../services/redux/reducers/user-reducer';
 // create a component
 const WelcomeScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
-  const [userData, setUserData] = useState(null);
+  // const [userData, setUserData] = useState(null);
+  // console.log("user", userData)
   const isTokenValid = async token => {
     try {
       setLoading(true);
-      const response = await getMyProfile(token);
-      // console.log('isTokenValid', response.user);
+      const response = await fetchUserData(token);
+      console.log('isTokenValid', response.user);
       setLoading(false);
       return response;
     } catch (error) {
@@ -38,9 +39,9 @@ const WelcomeScreen = () => {
       if (credentials) {
         const token = credentials.password;
         const isValid = await isTokenValid(token);
-        // console.log('isValid:', isValid.user);
+        // console.log("isuser: ", isValid.user)
         dispatch(setUser(isValid.user));
-        //const user = isValid.user;
+        // setUserData(isValid.user);
         if (isValid) {
           navigation.dispatch(
             StackActions.replace('appNavigator', {

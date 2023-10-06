@@ -14,7 +14,19 @@ const registerMe = async (firstname, lastname, phone, email, password) => {
   });
   return response;
 };
-
+const fetchUserData = async (userID) => {
+  try {
+      const response = await axiosInstance.get(endPoints?.userKey, {
+        params: {userID: userID},
+      });
+      const data = response.data;
+      //console.log('data:', data);
+      return data;
+  
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
 const getMyProfile = async token => {
   try {
     if (token) {
@@ -56,7 +68,7 @@ const addImage = async (email, imagePath) => {
 };
 
 const getPersonalInfo = async (userID, dob, gender, homeAddress) => {
-  const response = await axiosInstance.post(endPoints.personalInfoKey, {
+  const response = await axiosInstance.put(endPoints.personalInfoKey, {
     userID: userID,
     dob: dob,
     gender: gender,
@@ -64,26 +76,6 @@ const getPersonalInfo = async (userID, dob, gender, homeAddress) => {
   });
   //console.log('perosnal info Api:', userID);
   //console.log('personal info', response);
-  return response;
-};
-const addContacts = async (
-  userID,
-  firstname,
-  lastname,
-  phone,
-  relation,
-  user,
-) => {
-  // console.log(userID);
-  const response = await axiosInstance.post(endPoints?.contactKey, {
-    userID: userID,
-    firstname: firstname,
-    lastname: lastname,
-    phone: phone,
-    relation: relation,
-    user: userID,
-  });
-
   return response;
 };
 
@@ -135,9 +127,6 @@ const getVitalSigns = async (
   user,
 ) => {
   const response = await axiosInstance.post(endPoints?.storeVitalSignsKey, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
     userID: userID,
     bloodPressure: bloodPressure,
     bloodSugarLevel: bloodSugarLevel,
@@ -161,17 +150,25 @@ const displayVitalSigns = async userID => {
   }
 };
 
-const fetchUserData = async userID => {
-  try {
-    const response = await axiosInstance.get(endPoints?.userKey, {
-      params: {userID: userID},
-    });
-    const data = response.data;
-    //console.log('data:', data);
-    return data;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
+const addContacts = async (
+  userID,
+  firstname,
+  lastname,
+  phone,
+  relation,
+  user,
+) => {
+  // console.log(userID);
+  const response = await axiosInstance.post(endPoints?.contactKey, {
+    userID: userID,
+    firstname: firstname,
+    lastname: lastname,
+    phone: phone,
+    relation: relation,
+    user: userID,
+  });
+
+  return response;
 };
 
 const fetchEmergencyContacts = async userID => {
@@ -186,7 +183,38 @@ const fetchEmergencyContacts = async userID => {
     console.error('Error fetching data:', error);
   }
 };
-const sendMessageCall = async phone => {
+
+const updateContact = async (
+  contactID,
+  firstname,
+  lastname,
+  phone,
+  relation,
+) => {
+  const response = await axiosInstance.post(endPoints?.contactKey, {
+    contactID: contactID,
+    firstname: firstname,
+    lastname: lastname,
+    phone: phone,
+    relation: relation,
+  });
+
+  return response;
+};
+
+const deleteContact = async (userID, contactID) => {
+  try {
+    console.log(contactID, userID);
+    const response = await axiosInstance.delete(endPoints?.contactKey, {
+      params: {contactID: contactID, userID: userID},
+    });
+    return response;
+  } catch (error) {
+    console.error('Error Deleting Emergency Contact:', error);
+  }
+};
+
+const sendSosMessageCall = async phone => {
   const response = await axiosInstance.post(endPoints?.sendMessageKey, {
     phone: phone,
   });
@@ -226,9 +254,9 @@ const storeQuestionaireAnswers = async (
   return response;
 };
 
-const sendMsg = async (userID, messages) => {
+const createMsgApi = async (userID, messages) => {
   try {
-    const response = await axiosInstance.post(endPoints?.recMsgKey, {
+    const response = await axiosInstance.post(endPoints?.chatGptMsgKey, {
       userID: userID,
       messages: messages,
     });
@@ -240,7 +268,7 @@ const sendMsg = async (userID, messages) => {
 };
 const getGptMSgs = async userID => {
   try {
-    const response = await axiosInstance.get(endPoints?.getAllMsgsKey, {
+    const response = await axiosInstance.get(endPoints?.chatGptMsgKey, {
       params: {userID: userID},
     });
     // console.log(response.data)
@@ -249,35 +277,6 @@ const getGptMSgs = async userID => {
   } catch (error) {
     console.error('Error fetching data:', error);
   }
-};
-const deleteContact = async (userID, contactID) => {
-  try {
-    console.log(contactID , userID);
-    const response = await axiosInstance.delete(endPoints?.contactKey, {
-      params: {contactID: contactID, userID: userID,},
-    });
-    return response;
-  } catch (error) {
-    console.error('Error Deleting Emergency Contact:', error);
-  }
-};
-
-const updateContact = async (
-  contactID,
-  firstname,
-  lastname,
-  phone,
-  relation,
-) => {
-  const response = await axiosInstance.post(endPoints?.contactKey, {
-    contactID: contactID,
-    firstname: firstname,
-    lastname: lastname,
-    phone: phone,
-    relation: relation,
-  });
-
-  return response;
 };
 
 export {
@@ -290,13 +289,13 @@ export {
   getDoctorInfo,
   getMedicoreInfo,
   fetchEmergencyContacts,
-  sendMessageCall,
+  sendSosMessageCall,
   fetchUserData,
   getVitalSigns,
   displayVitalSigns,
   getQuestionaire,
   storeQuestionaireAnswers,
-  sendMsg,
+  createMsgApi,
   getGptMSgs,
   deleteContact,
   updateContact,

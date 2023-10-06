@@ -75,9 +75,9 @@ const LoginScreen = props => {
       await Keychain.setGenericPassword(emailaddress, token);
       if (response.status === 200) {
         const user = response.data.user;
-        // console.log('From login Page user: ', user);
+        console.log('From login Page user: ', user);
         const step = user.step;
-        await fetchUserData(user._id);
+        // await fetchUserData(user._id);
         dispatch(setUser(response.data.user));
         if (step === 1) {
           navigation.dispatch(
