@@ -4,13 +4,12 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
+import Colors from '../../../services/constants/colors';
 // define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
   },
   scView: {
     justifyContent: 'center',
@@ -23,15 +22,15 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
     fontSize: responsiveFontSize(5),
     fontWeight: 'bold',
-    color: 'rgba(51, 41, 93, 1)',
+    color: Colors.purple,
   },
   checkTxt: {
     textAlign: 'center',
     fontFamily: 'Poppins-Bold',
     fontSize: responsiveFontSize(5),
     fontWeight: 'bold',
-    color: 'white',
-    backgroundColor: 'rgba(51, 41, 93, 1)',
+    color: Colors.white,
+    backgroundColor: Colors.purple,
     marginHorizontal: 10,
     alignItems: 'center',
     borderWidth: 1,
@@ -39,9 +38,9 @@ const styles = StyleSheet.create({
     padding: 1,
   },
   youtubePlayer: {
-    alignSelf:  'center',
+    alignSelf: 'center',
     height: responsiveHeight(40),
-    width: responsiveWidth(80), 
+    width: responsiveWidth(80),
   },
   txt1: {
     alignItems: 'center',
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
     fontSize: responsiveFontSize(3),
     fontWeight: '400',
-    color: '#33295d',
+    color: Colors.purple,
   },
   parent: {
     top: 50,
@@ -57,7 +56,7 @@ const styles = StyleSheet.create({
     width: responsiveWidth(100),
     borderTopStartRadius: 500,
     borderTopEndRadius: 500,
-    backgroundColor: '#d6d4df',
+    backgroundColor: Colors.lightGrey,
     //borderBottomStartRadius : 200,
     //borderBottomEndRadius : 200,
     //overflow : 'hidden',
@@ -70,7 +69,7 @@ const styles = StyleSheet.create({
     width: responsiveWidth(100),
     borderTopStartRadius: 400,
     borderTopEndRadius: 400,
-    backgroundColor: '#33295d',
+    backgroundColor: Colors.purple,
     // justifyContent:'center',
     alignItems: 'center',
     transform: [{scaleX: 1}],
@@ -84,27 +83,27 @@ const styles = StyleSheet.create({
   },
   compCS: {
     fontSize: responsiveFontSize(10),
-    color: 'white',
+    color: Colors.white,
   },
   contactAddedTxt: {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 30,
-    color: 'white',
+    color: Colors.white,
     fontFamily: 'Poppins-Medium',
     fontWeight: 'bold',
     fontSize: responsiveFontSize(4),
   },
   subTxt: {
     textAlign: 'left',
-    color: 'black',
+    color: Colors.black,
     fontFamily: 'Poppins-Regular',
     fontSize: responsiveFontSize(1.5),
     fontWeight: '400',
   },
   play: {
     fontSize: responsiveFontSize(8),
-    color: 'white',
+    color: Colors.white,
 
     position: 'absolute',
     marginTop: 120,

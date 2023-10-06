@@ -18,6 +18,7 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
+import Colors from '../../../services/constants/colors.js';
 import PopularActivities from '../../../components/fun-screen-items/popularActivities/index.js';
 import RecentVideos from '../../../components/fun-screen-items/recentVideos/index.js';
 import Video from 'react-native-video';
@@ -74,7 +75,7 @@ const FunEduScreen = props => {
             style={{
               left: -60,
               fontSize: responsiveFontSize(4),
-              color: '#33295d',
+              color: Colors.purple,
             }}></Icon>
         </TouchableOpacity>
         <Text style={styles.selfTxt}>Self</Text>

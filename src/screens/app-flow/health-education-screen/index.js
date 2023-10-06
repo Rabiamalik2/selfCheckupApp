@@ -21,6 +21,7 @@ import RecentVideos from '../../../components/fun-screen-items/recentVideos/inde
 import HealthItem from '../../../components/health-screen-items/index..js';
 import styles from '../fun-edu-screen/styles';
 import Images from '../../../services/constants/images';
+import Colors from '../../../services/constants/colors.js';
 // create a component
 
 const HealthEduScreen = props => {
@@ -107,7 +108,7 @@ const HealthEduScreen = props => {
             keyExtractor={item => item.key}
           />
         </View>
-        <View style={[styles.child, {backgroundColor: '#ff8845'}]}>
+        <View style={[styles.child, {backgroundColor: Colors.orange}]}>
           <View style={{alignItems: 'center'}}>
             <Text
               style={{
@@ -116,7 +117,7 @@ const HealthEduScreen = props => {
                 fontFamily: 'Poppins-Bold',
                 fontSize: responsiveFontSize(2),
                 fontWeight: '400',
-                color: 'white',
+                color: Colors.white,
               }}>
               {' '}
               Recent Videos
