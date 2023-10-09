@@ -1,13 +1,11 @@
 //import liraries
-import React, { Component,useState } from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity, ImageBackground, BackHandler, SafeAreaView } from 'react-native';
-import { useFocusEffect, useNavigation, StackActions } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { View, Text, SafeAreaView } from 'react-native';
+import {  useNavigation, StackActions } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Entypo from 'react-native-vector-icons/Entypo';
 import styles from './styles';
 import RouteNames from '../../../services/constants/route-names';
 import Input from '../../../components/text-input-component/textInput';
-import PasswordInput from '../../../components/text-input-component/passwordInput';
 import Button from '../../../components/button-component/index.js';
 import Account from '../../../components/text-input-component/haveAccount';
 // create a component
@@ -38,7 +36,7 @@ const ForgetPasswordScreen = (props) => {
                         value={emailaddress}
                         onChangeText={text => setEmailaddress(text)}
                       />
-                        <Button onPress={() => navigation.dispatch(StackActions.replace('authNavigator', { screen: 'codeScreen' }))} style={styles.toSignin}
+                        <Button onPress={() => navigation.dispatch(StackActions.replace(RouteNames.navigatorNames.authNavigator, { screen: RouteNames.authRoutes.codeScreen }))} style={styles.toSignin}
                             name='RESET PASSWORD' />
                         <Text style={styles.item}>
                             You will receive a code on your email if your account exists on the app.

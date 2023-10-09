@@ -9,27 +9,31 @@ import Colors from '../../services/constants/colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent: 'center',
-    // alignItems: 'center',
-    // backgroundColor: '#2c3e50',
   },
   image: {
     flex: 1,
     justifyContent: 'center',
-    //  alignItems:'center',
     height: responsiveHeight(10),
     width: responsiveWidth(40),
     resizeMode: 'cover',
   },
   title: {
     flex: 1,
-    //marginTop:30,
     fontWeight: '700',
     fontFamily: 'Poppins-Regular',
     fontSize: responsiveFontSize(2),
     color: Colors.black,
     marginBottom: 10,
     textAlign: 'center',
+  },
+  healthTo: {
+    flex: 1.4,
+    marginLeft: 20,
+    marginTop: 20,
+  },
+  healthView: {
+    flex: 1,
+    alignItems: 'center',
   },
 });
 

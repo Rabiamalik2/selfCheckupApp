@@ -1,5 +1,3 @@
-//import liraries
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {Component, useState} from 'react';
 import {
   View,
@@ -7,14 +5,8 @@ import {
   Image,
   SafeAreaView,
   PermissionsAndroid,
-  Alert,
 } from 'react-native';
-import {
-  useFocusEffect,
-  useNavigation,
-  StackActions,
-  useRoute,
-} from '@react-navigation/native';
+import {useNavigation, StackActions, useRoute} from '@react-navigation/native';
 import Loader from '../../../components/loader';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
@@ -26,7 +18,6 @@ import RouteNames from '../../../services/constants/route-names';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import {addImage} from '../../../services/apis/app/userApis';
 import storage from '@react-native-firebase/storage';
-
 // create a component
 const ChoosePicScreen = () => {
   const Route = useRoute();
@@ -79,8 +70,8 @@ const ChoosePicScreen = () => {
       console.log('Image uploaded successfully:', downloadURL);
       const imagePath = downloadURL;
       navigation.dispatch(
-        StackActions.replace('authNavigator', {
-          screen: 'signupCompleteScreen',
+        StackActions.replace(RouteNames.navigatorNames.authNavigator, {
+          screen: RouteNames.authRoutes.signupCompleteScreen,
         }),
       );
       await addImage(user.email, imagePath);
@@ -91,7 +82,7 @@ const ChoosePicScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-    <Loader visible={loading} />
+      <Loader visible={loading} />
       <View style={styles.viewS1}>
         <Text style={styles.txtS1}>Self</Text>
         <Text style={styles.txtS2}>Check</Text>
@@ -138,9 +129,12 @@ const ChoosePicScreen = () => {
             <Button
               onPress={() =>
                 navigation.dispatch(
-                  StackActions.replace('authNavigator', {
-                    screen: 'signupCompleteScreen',
-                  }),
+                  StackActions.replace(
+                    RouteNames.navigatorNames.authNavigator,
+                    {
+                      screen: RouteNames.authRoutes.signupCompleteScreen,
+                    },
+                  ),
                 )
               }
               style={styles.SkipToStyle}
@@ -158,8 +152,8 @@ const ChoosePicScreen = () => {
         name="Terms & Conditions"
         onPress={() =>
           navigation.dispatch(
-            StackActions.replace('authNavigator', {
-              screen: 'termScreen',
+            StackActions.replace(RouteNames.navigatorNames.authNavigator, {
+              screen: RouteNames.authRoutes.termScreen,
               params: {isReadOnly: true},
             }),
           )
@@ -171,4 +165,3 @@ const ChoosePicScreen = () => {
 
 //make this component available to the app
 export default ChoosePicScreen;
-// <Image source={{ uri: galleryPhoto }} style={{ width: 200, height: 200 }} />

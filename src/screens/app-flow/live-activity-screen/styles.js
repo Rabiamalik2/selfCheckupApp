@@ -9,6 +9,7 @@ import Colors from '../../../services/constants/colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // flexGrow: 0,
     backgroundColor: Colors.white,
   },
   scView: {
@@ -110,5 +111,11 @@ const styles = StyleSheet.create({
     // height: responsiveHeight(10),
     // width: responsiveWidth(22)
   },
+  videoView: {
+    alignItems: 'center',
+    height: responsiveHeight(40),
+    width: responsiveWidth(100),
+  },
+  viewTxt: {marginTop: 10, marginLeft: 50},
 });
 export default styles;

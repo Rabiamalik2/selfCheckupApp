@@ -3,55 +3,35 @@ import React, {Component, useState, useEffect} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
   SafeAreaView,
   BackHandler,
   FlatList,
-  ScrollView,
   Alert,
 } from 'react-native';
 import styles from './styles';
 import Loader from '../../../components/loader';
-import {
-  responsiveFontSize,
-  responsiveHeight,
-} from 'react-native-responsive-dimensions';
+import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import {
   fetchEmergencyContacts,
   sendSosMessageCall,
 } from '../../../services/apis/app/contactApis';
-import {
-  useFocusEffect,
-  useNavigation,
-  StackActions,
-  useRoute,
-} from '@react-navigation/native';
+import {useFocusEffect} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import RouteNames from '../../../services/constants/route-names';
 
 // create a component
 const SosScreen = props => {
   const userData = useSelector(state => state.user);
-  // console.log('sos:', userData);
-
-  const navigation = useNavigation();
-  const Route = useRoute();
-  // console.log(userID);
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
         props.navigation.goBack();
-        // Return true to stop default back navigaton
-        // Return false to keep default back navigaton
         return true;
       };
-
-      // Add Event Listener for hardwareBackPress
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
-
       return () => {
-        // Once the Screen gets blur Remove Event Listener
         BackHandler.removeEventListener('hardwareBackPress', onBackPress);
       };
     }, []),
@@ -95,17 +75,11 @@ const SosScreen = props => {
   }, []);
   return (
     <SafeAreaView style={styles.container}>
-    <Loader visible={loading} />
+      <Loader visible={loading} />
       <View style={{alignItems: 'center'}}>
         <View style={styles.scView}>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <Icon
-              name="west"
-              style={{
-                left: -60,
-                fontSize: responsiveFontSize(4),
-                color: '#33295d',
-              }}></Icon>
+            <MaterialIcons name="west" style={styles.iconSty} />
           </TouchableOpacity>
           <Text style={styles.selfTxt}>Self</Text>
           <Text style={styles.checkTxt}>Check</Text>
@@ -114,8 +88,8 @@ const SosScreen = props => {
         <TouchableOpacity
           style={{alignItems: 'center'}}
           onPress={() =>
-            props.navigation.navigate('sosNavigator', {
-              screen: 'emergencyContactScreen',
+            props.navigation.navigate(RouteNames.navigatorNames.sosNavigator, {
+              screen: RouteNames.sosNavRoutes.emergencyContactScreen,
             })
           }>
           <Text style={styles.txt2}>Your Emergency Contacts</Text>

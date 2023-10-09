@@ -5,6 +5,8 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import Colors from '../../services/constants/colors';
+import Fonts from '../../services/constants/fonts';
+
 // define your styles
 const styles = StyleSheet.create({
   container: {
@@ -18,22 +20,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    //marginTop:30,
-    fontWeight: '700',
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsRegular,
     fontSize: responsiveFontSize(4),
     color: Colors.white,
     marginBottom: 10,
     textAlign: 'center',
   },
   description: {
-    fontWeight: '400',
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsRegular,
     fontSize: responsiveFontSize(2),
     paddingHorizontal: 34,
     color: Colors.white,
-    //marginBottom:10,
     textAlign: 'center',
+  },
+  obView: {
+    flex: 0.6,
+    marginTop: 130,
+  },
+  itemView: {
+    flex: 1,
+    marginTop: 50,
   },
 });
 

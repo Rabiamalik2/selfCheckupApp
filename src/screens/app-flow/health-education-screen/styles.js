@@ -5,12 +5,12 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import Colors from '../../../services/constants/colors';
+import Fonts from '../../../services/constants/fonts';
 // define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent: 'center',
-    // alignItems: 'center',
+    // flexGrow: 0,
     backgroundColor: Colors.white,
   },
   scView: {
@@ -21,16 +21,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   selfTxt: {
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(5),
-    fontWeight: 'bold',
     color: Colors.purple,
   },
   checkTxt: {
     textAlign: 'center',
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(5),
-    fontWeight: 'bold',
     color: Colors.white,
     backgroundColor: Colors.purple,
     marginHorizontal: 10,
@@ -43,17 +41,15 @@ const styles = StyleSheet.create({
   txt1: {
     alignItems: 'center',
     marginTop: 30,
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.poppinsRegular,
     fontSize: responsiveFontSize(2),
-    fontWeight: '400',
     color: Colors.purple,
   },
   recTxt: {
     alignItems: 'center',
     marginTop: 30,
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.poppinsRegular,
     fontSize: responsiveFontSize(2),
-    fontWeight: '400',
     color: Colors.white,
   },
   parent: {
@@ -64,8 +60,8 @@ const styles = StyleSheet.create({
     height: responsiveHeight(50),
     width: responsiveWidth(100),
     backgroundColor: Colors.white,
-    // justifyContent:'center',
     alignItems: 'center',
   },
+  flatlistView: {marginTop: 20, height: responsiveHeight(30)},
 });
 export default styles;

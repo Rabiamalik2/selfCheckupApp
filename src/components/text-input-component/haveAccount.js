@@ -1,10 +1,5 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {
-  Dimensions,
-  responsiveHeight,
-  responsiveWidth,
-  responsiveFontSize,
-} from 'react-native-responsive-dimensions';
+import Fonts from '../../services/constants/fonts';
 import Colors from '../../services/constants/colors';
 
 const Account = ({onPress, name, description}) => {
@@ -37,13 +32,11 @@ const styles = StyleSheet.create({
   },
   txtS3: {
     color: Colors.purple,
-    fontFamily: 'Poppins',
-    fontWeight: '400',
+    fontFamily: Fonts.poppinsRegular,
   },
   txtS4: {
     paddingVertical: 0,
     color: Colors.orange,
-    fontWeight: '700',
-    fontFamily: 'Poppins',
+    fontFamily: Fonts.poppinsBold,
   },
 });

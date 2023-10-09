@@ -1,27 +1,17 @@
 //import libraries
-import React, {Component, useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  SafeAreaView,
-  Alert,
-} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, TouchableOpacity, SafeAreaView, Alert} from 'react-native';
 import styles from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import Input from '../../../components/text-input-component/textInput';
 import Loader from '../../../components/loader';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {
-  useFocusEffect,
-  useNavigation,
-  StackActions,
-  useRoute,
-} from '@react-navigation/native';
-import {addContacts, updateContact} from '../../../services/apis/app/contactApis';
+  addContacts,
+  updateContact,
+} from '../../../services/apis/app/contactApis';
 import RouteNames from '../../../services/constants/route-names';
 import {useSelector} from 'react-redux';
 // create a component
@@ -30,7 +20,7 @@ const AddContactScreen = props => {
   const navigation = useNavigation();
   const Route = useRoute();
   const contactId = Route.params?.itemId;
-  
+
   const userData = useSelector(state => state.user);
   const [loading, setLoading] = useState(false);
   const [firstname, setFirstname] = useState('');
@@ -60,7 +50,6 @@ const AddContactScreen = props => {
           Alert.alert('Contact could not be added. Please try again.');
         }
       } else if (userData.user.step == 2) {
-       
         if (contactId != null) {
           console.log('contactId : ', contactId);
           setLoading(true);
@@ -114,18 +103,14 @@ const AddContactScreen = props => {
       style={{flex: 1}}
       enableOnAndroid={true}
       scrollEnabled={false}
-      extraScrollHeight={150}>
+      extraScrollHeight={50}>
       <SafeAreaView style={styles.container}>
         <Loader visible={loading} />
         <View style={styles.scView}>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
             <MaterialIcons
               name="west"
-              style={{
-                left: -60,
-                fontSize: responsiveFontSize(4),
-                color: '#33295d',
-              }}
+              style={styles.westIcon}
             />
           </TouchableOpacity>
           <Text style={styles.selfTxt}>Self</Text>
@@ -172,7 +157,9 @@ const AddContactScreen = props => {
                 returnKeyType="next"
               />
               <View style={styles.btnView}>
-                <TouchableOpacity style={styles.saveToS} onPress={addContactOnPress}>
+                <TouchableOpacity
+                  style={styles.saveToS}
+                  onPress={addContactOnPress}>
                   <Text style={styles.saveBtnS}>Save</Text>
                 </TouchableOpacity>
               </View>

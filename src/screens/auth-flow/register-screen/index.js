@@ -1,12 +1,5 @@
-//import liraries
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {
-  Component,
-  useEffect,
-  FC,
-  ReactElement,
   useState,
-  createRef,
 } from 'react';
 import {
   View,
@@ -77,7 +70,7 @@ const RegisterScreen = props => {
   return (
     <KeyboardAwareScrollView
       enableOnAndroid={true}
-      extraScrollHeight={100}
+      extraScrollHeight={50}
       keyboardShouldPersistTaps="handled"
       scrollEnabled={false}>
       <SafeAreaView style={styles.container}>
@@ -154,8 +147,8 @@ const RegisterScreen = props => {
           name="Terms & Conditions"
           onPress={() =>
             navigation.dispatch(
-              StackActions.replace('authNavigator', {
-                screen: 'termScreen',
+              StackActions.replace(RouteNames.navigatorNames.authNavigator, {
+                screen: RouteNames.authRoutes.termScreen,
                 params: {isReadOnly: true},
               }),
             )

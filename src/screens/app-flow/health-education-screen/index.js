@@ -19,7 +19,7 @@ import {
 import PopularActivities from '../../../components/fun-screen-items/popularActivities/index.js';
 import RecentVideos from '../../../components/fun-screen-items/recentVideos/index.js';
 import HealthItem from '../../../components/health-screen-items/index..js';
-import styles from '../fun-edu-screen/styles';
+import styles from '../health-education-screen/styles.js';
 import Images from '../../../services/constants/images';
 import Colors from '../../../services/constants/colors.js';
 // create a component
@@ -110,20 +110,9 @@ const HealthEduScreen = props => {
         </View>
         <View style={[styles.child, {backgroundColor: Colors.orange}]}>
           <View style={{alignItems: 'center'}}>
-            <Text
-              style={{
-                alignItems: 'center',
-                marginTop: 30,
-                fontFamily: 'Poppins-Bold',
-                fontSize: responsiveFontSize(2),
-                fontWeight: '400',
-                color: Colors.white,
-              }}>
-              {' '}
-              Recent Videos
-            </Text>
+            <Text style={styles.childTxt}> Recent Videos</Text>
           </View>
-          <View style={{marginTop: 20, height: responsiveHeight(30)}}>
+          <View style={styles.flatlistView}>
             <FlatList
               data={data1}
               horizontal={true}

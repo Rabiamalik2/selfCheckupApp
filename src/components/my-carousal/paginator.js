@@ -8,7 +8,6 @@ import {
 import {
   responsiveHeight,
   responsiveWidth,
-  responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import React from 'react';
 

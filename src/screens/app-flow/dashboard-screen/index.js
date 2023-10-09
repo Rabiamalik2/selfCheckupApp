@@ -1,32 +1,12 @@
 //import liraries
-import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Platform,
-  TouchableWithoutFeedback,
-  ImageBackground,
-  Keyboard,
-  BackHandler,
-} from 'react-native';
-import {
-  useFocusEffect,
-  useNavigation,
-  StackActions,
-  useRoute,
-} from '@react-navigation/native';
+import React from 'react';
+import {View, Text, Image, TouchableOpacity, BackHandler} from 'react-native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import Images from '../../../services/constants/images';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {
-  responsiveHeight,
-  responsiveWidth,
-  responsiveFontSize,
-} from 'react-native-responsive-dimensions';
+import RouteNames from '../../../services/constants/route-names';
 // create a component
 const DashboardScreen = props => {
   const navigation = useNavigation();
@@ -56,8 +36,8 @@ const DashboardScreen = props => {
         <Text style={styles.checkTxt}>Check</Text>
         <TouchableOpacity
           onPress={() =>
-            props.navigation.navigate('appNavigator', {
-              screen: 'settingScreen',
+            props.navigation.navigate(RouteNames.navigatorNames.appNavigator, {
+              screen: RouteNames.appRoutes.settingScreen,
             })
           }>
           <MaterialIcons name="person" style={styles.iconContact} />
@@ -68,9 +48,12 @@ const DashboardScreen = props => {
           <TouchableOpacity
             style={{alignItems: 'center'}}
             onPress={() =>
-              props.navigation.navigate('tabNavigator', {
-                screen: 'vitalSignsScreen',
-              })
+              props.navigation.navigate(
+                RouteNames.navigatorNames.tabNavigator,
+                {
+                  screen: RouteNames.tabNavRoutes.vitalSignsScreen,
+                },
+              )
             }>
             <Image source={Images.vital} style={styles.img1} />
             <Text style={styles.txtImg1}>Vital Signs</Text>
@@ -80,9 +63,12 @@ const DashboardScreen = props => {
           <TouchableOpacity
             style={{alignItems: 'center'}}
             onPress={() =>
-              props.navigation.navigate('selfCheckNavigator', {
-                screen: 'questionScreen1',
-              })
+              props.navigation.navigate(
+                RouteNames.navigatorNames.selfCheckNavigator,
+                {
+                  screen: RouteNames.selfCheckNavRoutes.questionScreen1,
+                },
+              )
             }>
             <Image source={Images.meter} style={styles.img2}></Image>
             <Text style={[styles.txtImg2]}>Heart Attack {'\n'} Risk Meter</Text>
@@ -92,9 +78,12 @@ const DashboardScreen = props => {
           <TouchableOpacity
             style={{alignItems: 'center'}}
             onPress={() =>
-              props.navigation.navigate('tabNavigator', {
-                screen: 'selfCheckNavigator',
-              })
+              props.navigation.navigate(
+                RouteNames.navigatorNames.tabNavigator,
+                {
+                  screen: RouteNames.navigatorNames.selfCheckNavigator,
+                },
+              )
             }>
             <Image source={Images.checkup} style={styles.img3}></Image>
             <Text style={styles.txtImg3}>Self Checkup</Text>
@@ -106,12 +95,14 @@ const DashboardScreen = props => {
           <View style={styles.viewS2}>
             <View style={styles.viewSos}>
               <TouchableOpacity
-                style={{alignItems: 'center', flexDirection: 'row'}}
+                style={styles.sosTo}
                 onPress={() =>
-                  props.navigation.navigate('tabNavigator', {
-                    screen: 'sosNavigator',
-            
-                  })
+                  props.navigation.navigate(
+                    RouteNames.navigatorNames.tabNavigator,
+                    {
+                      screen: RouteNames.navigatorNames.sosNavigator,
+                    },
+                  )
                 }>
                 <Text style={styles.txtSos}>S</Text>
                 <MaterialIcons name="call" style={styles.iconSos} />
@@ -126,9 +117,12 @@ const DashboardScreen = props => {
           <TouchableOpacity
             style={{alignItems: 'center'}}
             onPress={() =>
-              props.navigation.navigate('tabNavigator', {
-                screen: 'chatGptScreen',
-              })
+              props.navigation.navigate(
+                RouteNames.navigatorNames.tabNavigator,
+                {
+                  screen: RouteNames.tabNavRoutes.chatGptScreen,
+                },
+              )
             }>
             <Image source={Images.chat} style={styles.img4}></Image>
             <Text style={styles.txtImg4}>ChatGpt</Text>
@@ -138,9 +132,12 @@ const DashboardScreen = props => {
           <TouchableOpacity
             style={{alignItems: 'center'}}
             onPress={() =>
-              props.navigation.navigate('tabNavigator', {
-                screen: 'funNavigator',
-              })
+              props.navigation.navigate(
+                RouteNames.navigatorNames.tabNavigator,
+                {
+                  screen: RouteNames.navigatorNames.funNavigator,
+                },
+              )
             }>
             <Image source={Images.fun} style={styles.img5}></Image>
             <Text style={styles.txtImg5}>Edu</Text>
@@ -149,10 +146,10 @@ const DashboardScreen = props => {
       </View>
       <View style={{flexDirection: 'row'}}>
         <TouchableOpacity
-          style={{alignItems: 'center', justifyContent: 'center'}}
+          style={styles.contactTo}
           onPress={() =>
-            props.navigation.navigate('sosNavigator', {
-              screen: 'emergencyContactScreen',
+            props.navigation.navigate(RouteNames.navigatorNames.sosNavigator, {
+              screen: RouteNames.sosNavRoutes.emergencyContactScreen,
             })
           }>
           <MaterialIcons name="contacts" style={styles.iconContact} />

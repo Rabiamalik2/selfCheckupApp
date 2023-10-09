@@ -4,12 +4,12 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
-import {colors} from 'react-native-swiper-flatlist/src/themes';
+import Colors from '../../../services/constants/colors';
+import Fonts from '../../../services/constants/fonts';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent:'center',
-    //alignItems:'center'
+    // flexGrow: 0,
     marginTop: 20,
   },
   istView: {
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     height: responsiveHeight(80),
     width: responsiveWidth(100),
-    borderColor: 'black',
+    borderColor: Colors.black,
     borderTopWidth: 1,
     borderBottomWidth: 1,
   },
@@ -35,63 +35,62 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 10,
     fontSize: responsiveFontSize(1.5),
-    fontFamily: 'Poppins',
-    fontWeight: 'bold',
-    color: 'black',
+    fontFamily: Fonts.poppinsExtraBold,
+    color: Colors.black,
   },
   biView: {
     marginTop: 10,
     paddingLeft: 10,
     height: responsiveHeight(5),
     width: responsiveWidth(100),
-    borderColor: 'black',
+    borderColor: Colors.black,
     borderBottomWidth: 0.4,
     flexDirection: 'row',
-    alignItems:'center'
+    alignItems: 'center',
   },
   biIcon: {
-    color: '#87CEEB',
+    color: Colors.skyBlue,
     fontSize: responsiveFontSize(3),
   },
   pInfoIcon: {
-    color: '#FFA400',
+    color: Colors.yellow,
     fontSize: responsiveFontSize(3),
   },
   hbIcon: {
-    color: '#20b2aa',
+    color: Colors.oceanBlue,
     fontSize: responsiveFontSize(3),
   },
   medicIcon: {
-    color: '#e75480',
+    color: Colors.pink,
     fontSize: responsiveFontSize(3),
   },
   allergiesIcon: {
-    color: '#ffa500',
+    color: Colors.yellow,
     fontSize: responsiveFontSize(3),
   },
   haIcon: {
-    color: '#ff80ff',
+    color: Colors.darkPink,
     fontSize: responsiveFontSize(3),
   },
   stIcon: {
-    color: '#ff80ff',
+    color: Colors.yellow,
     fontSize: responsiveFontSize(3),
   },
   biTxt: {
     marginLeft: 20,
     fontSize: responsiveFontSize(1.8),
-    fontFamily: 'Poppins',
-    color: 'black',
+    fontFamily: Fonts.poppinsExtraBold,
+    color: Colors.black,
   },
   historyView: {
     marginTop: 10,
   },
   logout: {
-    color: '#e75480',
+    color: Colors.pink,
     fontSize: responsiveFontSize(3),
   },
   deleteTxt: {
-    color: '#e75480',
+    color: Colors.pink,
     fontSize: responsiveFontSize(2),
   },
   logoutView: {
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     height: responsiveHeight(5),
     width: responsiveWidth(100),
-    borderColor: 'black',
+    borderColor: Colors.black,
     borderBottomWidth: 0.4,
     flexDirection: 'row',
     alignContent: 'center',

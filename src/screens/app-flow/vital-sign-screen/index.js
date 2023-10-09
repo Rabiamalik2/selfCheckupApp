@@ -1,16 +1,6 @@
 //import liraries
-import React, {Component, useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  Image,
-  TouchableOpacity,
-  ImageBackground,
-  BackHandler,
-  SafeAreaView,
-  Alert,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, TouchableOpacity, SafeAreaView, Alert} from 'react-native';
 import {
   useFocusEffect,
   useNavigation,
@@ -20,14 +10,17 @@ import Loader from '../../../components/loader';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {getVitalSigns, displayVitalSigns} from '../../../services/apis/app/medicalApis';
+import {
+  getVitalSigns,
+  displayVitalSigns,
+} from '../../../services/apis/app/medicalApis';
 import Input from '../../../components/text-input-component/textInput';
 import Button from '../../../components/button-component/index.js';
 import {useSelector} from 'react-redux';
 import styles from './styles';
+import Colors from '../../../services/constants/colors';
 // create a component
 const VitalSignsScreen = props => {
-  const navigation = useNavigation();
   const userData = useSelector(state => state.user);
   const [loading, setLoading] = React.useState(false);
   const [bloodPressure, setBloodPressure] = useState('');
@@ -89,7 +82,7 @@ const VitalSignsScreen = props => {
   return (
     <KeyboardAwareScrollView
       enableOnAndroid={true}
-      extraScrollHeight={150}
+      extraScrollHeight={50}
       keyboardShouldPersistTaps="handled"
       scrollEnabled={false}>
       <SafeAreaView style={styles.container}>
@@ -101,7 +94,7 @@ const VitalSignsScreen = props => {
               style={{
                 left: -60,
                 fontSize: responsiveFontSize(4),
-                color: '#33295d',
+                color: Colors.purple,
               }}
             />
           </TouchableOpacity>
@@ -112,7 +105,7 @@ const VitalSignsScreen = props => {
           <View style={styles.childView}>
             <View style={styles.viewS2}>
               <Text style={styles.crtAccS}>Vital Signs</Text>
-              <Text style={{marginTop: 20, color: 'white'}}>
+              <Text style={{marginTop: 20, color: Colors.white}}>
                 Please provide the following information:
               </Text>
               <View style={{marginTop: 40}}>

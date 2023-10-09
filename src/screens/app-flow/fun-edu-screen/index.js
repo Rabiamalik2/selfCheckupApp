@@ -1,27 +1,17 @@
 //import liraries
-import React, {Component, useState, useRef} from 'react';
+import React from 'react';
 import {
   View,
   Text,
-  StyleSheet,
-  Image,
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
   FlatList,
-  Alert
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import {
-  responsiveHeight,
-  responsiveWidth,
-  responsiveFontSize,
-} from 'react-native-responsive-dimensions';
-import Colors from '../../../services/constants/colors.js';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import PopularActivities from '../../../components/fun-screen-items/popularActivities/index.js';
 import RecentVideos from '../../../components/fun-screen-items/recentVideos/index.js';
-import Video from 'react-native-video';
 import Images from '../../../services/constants/images';
 import styles from './styles';
 // create a component
@@ -57,7 +47,11 @@ const FunEduScreen = props => {
     },
   ];
   const renderItem = ({item}) => (
-    <PopularActivities onPress={item.onPress} source={item.imageUri} name={item.name} />
+    <PopularActivities
+      onPress={item.onPress}
+      source={item.imageUri}
+      name={item.name}
+    />
   );
   const renderRecentItem = ({item}) => (
     <RecentVideos
@@ -70,54 +64,35 @@ const FunEduScreen = props => {
     <SafeAreaView style={styles.container}>
       <View style={styles.scView}>
         <TouchableOpacity onPress={() => props.navigation.goBack()}>
-          <Icon
-            name="west"
-            style={{
-              left: -60,
-              fontSize: responsiveFontSize(4),
-              color: Colors.purple,
-            }}></Icon>
+          <MaterialIcons name="west" style={styles.westSty} />
         </TouchableOpacity>
         <Text style={styles.selfTxt}>Self</Text>
         <Text style={styles.checkTxt}>Check</Text>
       </View>
-      <ScrollView scrollEventThrottle={32}>
-        <View style={{alignItems: 'center'}}>
-          <Text style={styles.txt1}> Popular Activities</Text>
-        </View>
-        <View style={styles.parent}>
+      <View style={{alignItems: 'center'}}>
+        <Text style={styles.txt1}> Popular Activities</Text>
+      </View>
+      <View style={styles.parent}>
+        <FlatList
+          data={data}
+          horizontal={true}
+          renderItem={renderItem}
+          keyExtractor={item => item.key}
+        />
+      </View>
+      <View style={styles.child}>
+        <View style={styles.viewchild1}>
+          <View style={{alignItems: 'center'}}>
+            <Text style={styles.childTxt}> Recent Videos</Text>
+          </View>
           <FlatList
             data={data}
             horizontal={true}
-            renderItem={renderItem}
+            renderItem={renderRecentItem}
             keyExtractor={item => item.key}
           />
         </View>
-        <View style={styles.child}>
-          <View style={{marginTop: 20, height: responsiveHeight(30)}}>
-            <View style={{alignItems: 'center'}}>
-              <Text
-                style={{
-                  alignItems: 'center',
-                  marginTop: 30,
-                  fontFamily: 'Poppins-Bold',
-                  fontSize: responsiveFontSize(2),
-                  fontWeight: '400',
-                  color: 'white',
-                }}>
-                {' '}
-                Recent Videos
-              </Text>
-            </View>
-            <FlatList
-              data={data}
-              horizontal={true}
-              renderItem={renderRecentItem}
-              keyExtractor={item => item.key}
-            />
-          </View>
-        </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };

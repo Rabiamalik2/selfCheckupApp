@@ -6,20 +6,14 @@ import {
   fetchEmergencyContacts,
   deleteContact,
 } from '../../../services/apis/app/contactApis';
-import {
-  useFocusEffect,
-  useNavigation,
-  StackActions,
-  useRoute,
-} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import Loader from '../../../components/loader';
-// import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-// create a component
+import RouteNames from '../../../services/constants/route-names';
 
 const EmergencyContactScreen = props => {
   const userData = useSelector(state => state.user);
@@ -38,11 +32,11 @@ const EmergencyContactScreen = props => {
       console.error('Error sending data:', error);
     }
   };
-  const deleteContacts = async (id) => {
+  const deleteContacts = async id => {
     try {
       console.log(id);
       setLoading(true);
-      
+
       const response = await deleteContact(userData.user._id, id);
       setLoading(false);
       if (response.status == 204) {
@@ -65,11 +59,7 @@ const EmergencyContactScreen = props => {
         <TouchableOpacity onPress={() => props.navigation.goBack()}>
           <MaterialIcons
             name="west"
-            style={{
-              left: -60,
-              fontSize: responsiveFontSize(4),
-              color: '#33295d',
-            }}
+            style={styles.westIcon}
           />
         </TouchableOpacity>
         <Text style={styles.selfTxt}>Self</Text>
@@ -86,9 +76,12 @@ const EmergencyContactScreen = props => {
             </View>
             <TouchableOpacity
               onPress={() =>
-                props.navigation.navigate('sosNavigator', {
-                  screen: 'addContactScreen',
-                })
+                props.navigation.navigate(
+                  RouteNames.navigatorNames.sosNavigator,
+                  {
+                    screen: RouteNames.sosNavRoutes.addContactScreen,
+                  },
+                )
               }>
               <Text style={styles.mainTxt}>Add Emergency Contacts</Text>
             </TouchableOpacity>
@@ -106,8 +99,8 @@ const EmergencyContactScreen = props => {
                       <TouchableOpacity
                         style={styles.icon1View}
                         onPress={() =>
-                          props.navigation.navigate('sosNavigator', {
-                            screen: 'addContactScreen',
+                          props.navigation.navigate( RouteNames.navigatorNames.sosNavigator, {
+                            screen: RouteNames.sosNavRoutes.addContactScreen,
                             params: {itemId: item._id},
                           })
                         }>

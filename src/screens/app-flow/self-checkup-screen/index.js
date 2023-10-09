@@ -9,31 +9,20 @@ import {
   Alert,
 } from 'react-native';
 import styles from './styles';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {
-  responsiveHeight,
-  responsiveWidth,
-  responsiveFontSize,
-} from 'react-native-responsive-dimensions';
-import TabNavigation from '../../../services/navigation/app-navigation/tab-navigation';
+import RouteNames from '../../../services/constants/route-names';
 const SelfCheckupScreen = props => {
   return (
     <KeyboardAwareScrollView
       enableOnAndroid={true}
-      extraScrollHeight={100}
+      extraScrollHeight={50}
       keyboardShouldPersistTaps="handled"
       scrollEnabled={false}>
       <SafeAreaView style={styles.container}>
         <View style={styles.scView}>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <Icon
-              name="west"
-              style={{
-                left: -60,
-                fontSize: responsiveFontSize(4),
-                color: '#33295d',
-              }}></Icon>
+            <MaterialIcons name="west" style={styles.westIcon} />
           </TouchableOpacity>
           <Text style={styles.selfTxt}>Self</Text>
           <Text style={styles.checkTxt}>Check</Text>
@@ -52,9 +41,12 @@ const SelfCheckupScreen = props => {
                 <TouchableOpacity
                   style={styles.btnToStyle}
                   onPress={() =>
-                    props.navigation.navigate('selfCheckNavigator', {
-                      screen: 'questionScreen1',
-                    })
+                    props.navigation.navigate(
+                      RouteNames.navigatorNames.selfCheckNavigator,
+                      {
+                        screen: RouteNames.selfCheckNavRoutes.questionScreen1,
+                      },
+                    )
                   }>
                   <Text style={styles.btnTxtStyle}>Yes</Text>
                 </TouchableOpacity>

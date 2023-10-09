@@ -5,12 +5,12 @@ import {
     responsiveFontSize
   } from "react-native-responsive-dimensions";
   import Colors from '../../../services/constants/colors';
+import Fonts from '../../../services/constants/fonts';
 // define your styles
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //justifyContent: 'center',
-       // alignItems: 'center',
+        // flexGrow: 0,
         backgroundColor: Colors.white,
     },
     scView:{
@@ -21,16 +21,14 @@ const styles = StyleSheet.create({
         marginBottom:10,
     },
     selfTxt:{
-        fontFamily:'Poppins-Bold',
+        fontFamily: Fonts.poppinsExtraBold,
         fontSize:responsiveFontSize(5),
-        fontWeight:'bold',
         color: Colors.purple,
     },
     checkTxt:{
         textAlign:'center',
-        fontFamily:'Poppins-Bold',
+        fontFamily: Fonts.poppinsExtraBold,
         fontSize:responsiveFontSize(5),
-        fontWeight:'bold',
         color:Colors.white,
         backgroundColor:Colors.purple,
         marginHorizontal: 10,
@@ -43,13 +41,12 @@ const styles = StyleSheet.create({
     txt1:{
         alignItems:'center',
         marginTop:30,
-        fontFamily:'Poppins-Regular',
+        fontFamily: Fonts.poppinsExtraBold,
         fontSize:responsiveFontSize(2.5),
-        fontWeight:'700',
         color:Colors.white,
     },
     parent: {
-        //To make Circle Shape
+    
         marginTop: 30,
         width:  responsiveWidth(100),
         height: responsiveHeight(73),
@@ -102,21 +99,18 @@ const styles = StyleSheet.create({
         textAlign:'center',
         //alignItems:'center',
         marginTop:10,
-        fontFamily:'Poppins-Regular',
+        fontFamily:Fonts.poppinsExtraBold,
         fontSize:responsiveFontSize(3.5),
-        fontWeight:'700',
         color:Colors.white,
     },
     subTxt:{
         paddingLeft:20,
         alignItems:'center',
-        fontFamily:'Poppins-Regular',
+        fontFamily: Fonts.poppinsBold,
         fontSize:responsiveFontSize(1.7),
-        fontWeight:'700',
         color:Colors.white,
     },
     icon1View:{
-       // marginHorizontal:4,
         width:  responsiveWidth(20),
         height: responsiveHeight(2),
         alignItems:"center",  
@@ -127,7 +121,6 @@ const styles = StyleSheet.create({
     icon1:{ 
         right:-30,
         color:Colors.white,
-        //textAlign:'center',
         fontSize: responsiveFontSize(5.5),
     },
     icon2:{ 
@@ -160,12 +153,10 @@ const styles = StyleSheet.create({
     pickerView: {
         width: responsiveWidth(80),
         height: responsiveHeight(5),
-        //alignItems: 'center',
         borderRadius: 12,
         backgroundColor: Colors.purple,
         borderColor: Colors.lightGrey,
         borderWidth: 2,
-        //padding: 1.7,
         opacity: 0.5,
         justifyContent: 'center',
         marginBottom: 20,
@@ -175,7 +166,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         color: Colors.white,
         marginTop: 4,
-        //padding: 1.7,
         fontSize: responsiveFontSize(1),
       },
       pickerItem: {
@@ -186,29 +176,21 @@ const styles = StyleSheet.create({
         flexWrap:'wrap',
         fontSize: responsiveFontSize(1.5),
         left:10,
-       // marginLeft:10,
         flexWrap:'wrap',
-      //  marginRight:200,
         paddingVertical: 0,
     },
     textiS1:{
-        
         flexWrap:'wrap',
         fontSize: responsiveFontSize(1.5),
         left:-30,
-       // marginLeft:10,
         flexWrap:'wrap',
-      //  marginRight:200,
         paddingVertical: 0,
     },
     textiS2:{
-        
         flexWrap:'wrap',
         fontSize: responsiveFontSize(1.5),
         left:-45,
-       // marginLeft:10,
         flexWrap:'wrap',
-      //  marginRight:200,
         paddingVertical: 0,
     },
     btnView:{
@@ -217,11 +199,10 @@ const styles = StyleSheet.create({
         alignItems:"center",
     },
     saveBtnS:{
-        fontFamily:"Poppins", 
+        fontFamily: Fonts.poppinsBold, 
         justifyContent:"center",
         alignItems:"center",
         color: Colors.white,
-        fontWeight: "700",
     },
     saveToS:{
         justifyContent:"center",

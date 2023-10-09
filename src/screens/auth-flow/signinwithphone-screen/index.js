@@ -1,28 +1,10 @@
-//import liraries
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, {Component, useState, useEffect, useRef} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  Image,
-  TouchableOpacity,
-  ImageBackground,
-  BackHandler,
-  SafeAreaView,
-  Alert,
-} from 'react-native';
-import {
-  useFocusEffect,
-  useNavigation,
-  StackActions,
-} from '@react-navigation/native';
+import React, {useState} from 'react';
+import {View, Text, SafeAreaView} from 'react-native';
+import {useNavigation, StackActions} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Entypo from 'react-native-vector-icons/Entypo';
 import styles from './styles';
 import RouteNames from '../../../services/constants/route-names';
 import Input from '../../../components/text-input-component/textInput';
-import PasswordInput from '../../../components/text-input-component/passwordInput';
 import Button from '../../../components/button-component/index.js';
 import Account from '../../../components/text-input-component/haveAccount';
 import auth, {firebase} from '@react-native-firebase/auth';
@@ -30,7 +12,6 @@ import auth, {firebase} from '@react-native-firebase/auth';
 const SiginInWithPhoneScreen = props => {
   const navigation = useNavigation();
   const [phone, setPhone] = useState('');
-  const [code, setCode] = useState(null);
   const [confirm, setConfirm] = useState(null);
   // const recaptchaVerifier = useRef(null);
   const sendVerification = async () => {
@@ -38,7 +19,9 @@ const SiginInWithPhoneScreen = props => {
       const confirmation = await auth().signInWithPhoneNumber(phone);
       setConfirm(confirmation); // Save this confirmation object for later.
       navigation.dispatch(
-        StackActions.replace('authNavigator', {screen: 'otpPhoneScreen'}),
+        StackActions.replace(RouteNames.navigatorNames.authNavigator, {
+          screen: RouteNames.authRoutes.otpPhoneScreen,
+        }),
       );
       // Navigate to the OTP verification screen.
     } catch (error) {

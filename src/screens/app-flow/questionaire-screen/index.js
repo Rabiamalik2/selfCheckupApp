@@ -1,32 +1,11 @@
 import React, {Component, useRef, useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  SafeAreaView,
-  Dimensions,
-  ScrollView,
-  Alert,
-} from 'react-native';
+import {View, Text, TouchableOpacity, SafeAreaView, Alert} from 'react-native';
 import styles from './styles';
-import {SwiperFlatList} from 'react-native-swiper-flatlist';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {
-  responsiveHeight,
-  responsiveWidth,
-  responsiveFontSize,
-} from 'react-native-responsive-dimensions';
+import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import Input from '../../../components/text-input-component/textInput';
 import Button from '../../../components/button-component/index.js';
-import {
-  useFocusEffect,
-  useNavigation,
-  StackActions,
-  useRoute,
-} from '@react-navigation/native';
+import {useNavigation, StackActions} from '@react-navigation/native';
 import CheckBox from '@react-native-community/checkbox';
 import {
   getQuestionaire,
@@ -35,6 +14,8 @@ import {
 import Loader from '../../../components/loader';
 import {useSelector} from 'react-redux';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import Colors from '../../../services/constants/colors';
+import RouteNames from '../../../services/constants/route-names';
 
 const QuestionaireScreen1 = props => {
   const userData = useSelector(state => state.user);
@@ -79,8 +60,8 @@ const QuestionaireScreen1 = props => {
         setLoading(false);
         Alert.alert('Answers Stored Successfully');
         navigation.dispatch(
-          StackActions.replace('appNavigator', {
-            screen: 'dashboardScreen',
+          StackActions.replace(RouteNames.navigatorNames.appNavigator, {
+            screen: RouteNames.appRoutes.dashboardScreen,
           }),
         );
       } else {
@@ -126,21 +107,14 @@ const QuestionaireScreen1 = props => {
   return (
     <KeyboardAwareScrollView
       enableOnAndroid={true}
-      extraScrollHeight={100}
+      extraScrollHeight={50}
       keyboardShouldPersistTaps="handled"
       scrollEnabled={false}>
       <SafeAreaView style={styles.container}>
         <Loader visible={loading} />
         <View style={styles.scView}>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <MaterialIcons
-              name="west"
-              style={{
-                left: -60,
-                fontSize: responsiveFontSize(4),
-                color: '#33295d',
-              }}
-            />
+            <MaterialIcons name="west" style={styles.westStyle} />
           </TouchableOpacity>
           <Text style={styles.selfTxt}>Self</Text>
           <Text style={styles.checkTxt}>Check</Text>
@@ -153,30 +127,16 @@ const QuestionaireScreen1 = props => {
             <View style={styles.viewS2}>
               {questionaire.length > 0 && (
                 <View key={questionaire[0].questions[currentQuestionIndex]._id}>
-                  <Text
-                    style={{
-                      color: 'white',
-                      fontSize: responsiveFontSize(2),
-                      marginBottom: 20,
-                    }}>
+                  <Text style={styles.txtStyle1}>
                     {questionaire[0].questions[currentQuestionIndex].text}
                   </Text>
                   {questionaire[0].questions[currentQuestionIndex].type ===
                   'checkbox' ? (
                     questionaire[0].questions[currentQuestionIndex].options.map(
                       (option, optionIndex) => (
-                        <View
-                          key={optionIndex}
-                          style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            margin: 10,
-                          }}>
+                        <View key={optionIndex} style={styles.txtStyle2}>
                           <CheckBox
-                            style={{
-                              borderColor: 'white',
-                              borderBlockColor: 'white',
-                            }}
+                            style={styles.txtStyle3}
                             value={
                               selectedAnswers[
                                 questionaire[0].questions[currentQuestionIndex]
@@ -207,14 +167,7 @@ const QuestionaireScreen1 = props => {
                               );
                             }}
                           />
-                          <Text
-                            style={{
-                              color: 'white',
-                              fontSize: responsiveFontSize(1.7),
-                              alignItems: 'center',
-                            }}>
-                            {option}
-                          </Text>
+                          <Text style={styles.options}>{option}</Text>
                         </View>
                       ),
                     )

@@ -1,11 +1,7 @@
 import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {
-  responsiveHeight,
-  responsiveWidth,
-  responsiveFontSize,
-} from 'react-native-responsive-dimensions';
 import Colors from '../../services/constants/colors';
+import Fonts from '../../services/constants/fonts';
 const NoAccount = ({name, description, onPress}) => {
   return (
     <View style={styles.viewS7}>
@@ -35,14 +31,12 @@ const styles = StyleSheet.create({
   },
   txtS3: {
     color: Colors.purple,
-    fontFamily: 'Poppins',
-    fontWeight: '400',
+    fontFamily: Fonts.poppinsBold,
   },
   txtS4: {
     flex: 1,
     paddingVertical: 0,
     color: Colors.orange,
-    fontWeight: '700',
-    fontFamily: 'Poppins',
+    fontFamily: Fonts.poppinsExtraBold,
   },
 });

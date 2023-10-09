@@ -5,12 +5,12 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import Colors from '../../../services/constants/colors';
+import Fonts from '../../../services/constants/fonts';
 // define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent: 'center',
-    // alignItems: 'center',
+    // flexGrow: 0,
     backgroundColor: Colors.white,
   },
   scView: {
@@ -21,31 +21,32 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   selfTxt: {
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(5),
-    fontWeight: 'bold',
     color: Colors.purple,
   },
   checkTxt: {
     textAlign: 'center',
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(5),
-    fontWeight: 'bold',
-    color: 'white',
-    backgroundColor: Colors.white,
+    color: Colors.white,
+    backgroundColor: Colors.purple,
     marginHorizontal: 10,
     alignItems: 'center',
     borderWidth: 1,
     borderRadius: 70,
     padding: 1,
   },
-
+  iconStyle: {
+    left: -60,
+    fontSize: responsiveFontSize(4),
+    color: Colors.purple,
+  },
   txt1: {
     alignItems: 'center',
     marginTop: 30,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsRegular,
     fontSize: responsiveFontSize(2),
-    fontWeight: '400',
     color: Colors.black,
   },
   parent: {
@@ -55,9 +56,6 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 500,
     borderTopEndRadius: 500,
     backgroundColor: Colors.lightGrey,
-    //borderBottomStartRadius : 200,
-    //borderBottomEndRadius : 200,
-    //overflow : 'hidden',
     transform: [{scaleX: 1.5}],
     overflow: 'hidden',
   },
@@ -68,7 +66,6 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 400,
     borderTopEndRadius: 400,
     backgroundColor: Colors.purple,
-    // justifyContent:'center',
     alignItems: 'center',
     transform: [{scaleX: 1}],
     overflow: 'hidden',
@@ -88,18 +85,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 30,
     color: Colors.white,
-    fontFamily: 'Poppins-Medium',
-    fontWeight: 'bold',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(4),
   },
   subTxt: {
     textAlign: 'center',
     color: Colors.white,
     padding: 20,
-    fontFamily: 'Poppins-Light',
+    fontFamily: Fonts.poppinsThin,
     fontSize: responsiveFontSize(1.7),
     marginTop: 12,
-    fontWeight: '200',
   },
 });
 export default styles;

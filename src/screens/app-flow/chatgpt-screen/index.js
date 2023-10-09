@@ -2,24 +2,17 @@
 import React, {useState, useCallback, useEffect} from 'react';
 import {GiftedChat, Bubble, InputToolbar} from 'react-native-gifted-chat';
 import {
-  responsiveHeight,
-  responsiveWidth,
-  responsiveFontSize,
-} from 'react-native-responsive-dimensions';
-import {
   useFocusEffect,
-  useNavigation,
-  StackActions,
 } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Loader from '../../../components/loader';
 import 'react-native-get-random-values';
-import {v4 as uuidv4} from 'uuid';
 import {createMsgApi, getGptMSgs} from '../../../services/apis/app/chatApis';
 import {View, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import Colors from '../../../services/constants/colors';
 import {useSelector} from 'react-redux';
+import RenderBubble from '../../../components/render-bubble-component';
 // create a component
 const ChatGptScreen = props => {
   const userData = useSelector(state => state.user);
@@ -95,31 +88,7 @@ const ChatGptScreen = props => {
             <GiftedChat
               messages={messages}
               onSend={messages => onSend(messages)}
-              renderBubble={props => {
-                return (
-                  <Bubble
-                    {...props}
-                    textStyle={{
-                      right: {
-                        color: Colors.white,
-                        // fontFamily: 'CerebriSans-Book',
-                      },
-                      left: {
-                        color: Colors.black,
-                        // fontFamily: 'P',
-                      },
-                    }}
-                    wrapperStyle={{
-                      left: {
-                        backgroundColor: Colors.lightGrey,
-                      },
-                      right: {
-                        backgroundColor: Colors.orange,
-                      },
-                    }}
-                  />
-                );
-              }}
+              renderBubble={(props) => <RenderBubble {...props} />}
               renderInputToolbar={props => customtInputToolbar(props)}
               user={userData.user}
             />

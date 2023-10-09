@@ -5,12 +5,13 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import Colors from '../../../services/constants/colors';
+import Fonts from '../../../services/constants/fonts';
 // define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    // alignItems: 'center',
+    // flexGrow: 0,
     backgroundColor: Colors.white,
     paddingBottom: 100,
   },
@@ -22,14 +23,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   txtS1: {
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(5),
-    fontWeight: 'bold',
     color: Colors.purple,
     textAlign: 'center',
     alignItems: 'center',
-    justifyContent:'center',
-    left: -25
+    justifyContent: 'center',
+    left: -25,
   },
   icon: {
     left: -80,
@@ -38,17 +38,13 @@ const styles = StyleSheet.create({
   },
   parent: {
     flex: 1,
-    top: 30, 
+    top: 30,
     height: responsiveHeight(80),
     width: responsiveWidth(100),
     borderTopStartRadius: 200,
     borderTopEndRadius: 200,
     backgroundColor: Colors.lightGrey,
-    //borderBottomStartRadius : 200,
-    //borderBottomEndRadius : 200,
-    //overflow : 'hidden',
     transform: [{scaleX: 1.78}],
-    //  overflow: 'hidden',
   },
   child: {
     flex: 1,
@@ -68,10 +64,10 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginBottom: 30,
     transform: [{scaleX: 0.5}],
-    zIndex: 4
+    zIndex: 4,
   },
   inputContainer: {
-    justifyContent:'center',
+    justifyContent: 'center',
     alignItems: 'center',
     height: responsiveHeight(5),
     backgroundColor: Colors.oceanBlue,

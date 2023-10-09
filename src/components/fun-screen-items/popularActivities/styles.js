@@ -5,6 +5,7 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import Colors from '../../../services/constants/colors';
+import Fonts from '../../../services/constants/fonts';
 // define your styles
 const styles = StyleSheet.create({
   container: {
@@ -13,20 +14,26 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     justifyContent: 'center',
-    //  alignItems:'center',
     height: responsiveHeight(10),
     width: responsiveWidth(40),
     resizeMode: 'cover',
   },
   title: {
     flex: 1,
-    //marginTop:30,
-    fontWeight: '700',
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsRegular,
     fontSize: responsiveFontSize(2),
     color: Colors.black,
     marginBottom: 10,
     textAlign: 'center',
+  },
+  popTo: {
+    flex: 1.4,
+    marginLeft: 20,
+    marginTop: 20,
+  },
+  popView: {
+    flex: 1,
+    alignItems: 'center',
   },
 });
 

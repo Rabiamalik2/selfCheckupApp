@@ -1,4 +1,4 @@
-import React, {Component, useState, createRef, useEffect} from 'react';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import RouteNames from '../constants/route-names';
@@ -8,8 +8,6 @@ import TabNavigation from './app-navigation/tab-navigation';
 import SosNavigation from './app-navigation/sosNavigation';
 import FunNavigation from './app-navigation/fun-navigation';
 import SelfCheckNavigation from './app-navigation/selfCheck-navigation';
-import * as Keychain from 'react-native-keychain';
-import {getMyProfile} from '../apis/auth/index';
 const {navigatorNames} = RouteNames;
 const Stack = createNativeStackNavigator();
 

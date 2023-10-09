@@ -4,32 +4,33 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
+import Colors from '../../../services/constants/colors';
+import Fonts from '../../../services/constants/fonts';
 // define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: 'white',
+    // flexGrow: 0,
+    // justifyContent: 'space-between',
+    // alignItems: 'center',
+    // backgroundColor: Colors.white,
   },
   scView: {
     marginTop: 30,
     flexDirection: 'row',
-    marginBottom: 10,
+    marginBottom: -100,
   },
   selfTxt: {
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(5),
-    fontWeight: 'bold',
-    color: 'rgba(51, 41, 93, 1)',
+    color: Colors.purple,
   },
   checkTxt: {
     textAlign: 'center',
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(5),
-    fontWeight: 'bold',
-    color: 'white',
-    backgroundColor: 'rgba(51, 41, 93, 1)',
+    color: Colors.white,
+    backgroundColor: Colors.purple,
     marginHorizontal: 10,
     alignItems: 'center',
     borderWidth: 1,
@@ -38,49 +39,43 @@ const styles = StyleSheet.create({
   },
 
   txt1: {
-    marginTop: 10,
-    fontFamily: 'Poppins-Regular',
+    marginTop: 120,
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(3.5),
-    fontWeight: '700',
-    color: 'rgba(51, 41, 93, 1)',
+    color: Colors.purple,
   },
   txt2: {
-    marginTop: 10,
-    fontFamily: 'Poppins-Regular',
+    marginTop: 30,
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(2.5),
-    fontWeight: '700',
-    color: 'rgba(51, 41, 93, 1)',
+    color: Colors.purple
   },
   txt3: {
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(2.5),
-    fontWeight: '700',
-    color: 'rgba(51, 41, 93, 1)',
+    color: Colors.purple,
   },
   txt4: {
-    marginTop: 80,
-    fontFamily: 'Poppins-Regular',
+    marginTop: 8,
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(2.5),
     marginBottom: -10,
-    fontWeight: '700',
-    color: 'rgba(51, 41, 93, 1)',
+    color: Colors.purple,
   },
   flatListView: {
     marginTop: 20,
-    marginBottom: -100,
+    marginBottom: 0,
     height: responsiveHeight(10),
   },
 
   parent: {
-    // position:'absolute',
-    marginTop: 40,
+    marginTop: 30,
     height: responsiveHeight(60),
     width: responsiveWidth(100),
     borderTopStartRadius: 400,
     borderTopEndRadius: 400,
-    backgroundColor: '#d6d4df',
+    backgroundColor: Colors.lightGrey,
     transform: [{scaleX: 1.7}],
-    // overflow: 'hidden',
   },
   child: {
     marginTop: 15,
@@ -88,11 +83,9 @@ const styles = StyleSheet.create({
     width: responsiveWidth(100),
     borderTopStartRadius: 400,
     borderTopEndRadius: 400,
-    backgroundColor: '#33295d',
-    // justifyContent:'center',
+    backgroundColor: Colors.purple,
     alignItems: 'center',
     transform: [{scaleX: 1}],
-    // overflow: 'hidden',
   },
   viewS2: {
     transform: [{scaleX: 0.55}],
@@ -102,18 +95,20 @@ const styles = StyleSheet.create({
   },
   txt5: {
     marginTop: 20,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(2.5),
-    fontWeight: '700',
-    color: 'white',
+    color: Colors.white,
   },
   txt6: {
     marginTop: 20,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(4),
-
-    fontWeight: '700',
-    color: 'white',
+    color: Colors.white,
+  },
+  iconSty: {
+    left: -60,
+    fontSize: responsiveFontSize(4),
+    color: Colors.purple,
   },
 });
 export default styles;

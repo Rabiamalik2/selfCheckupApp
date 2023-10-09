@@ -1,14 +1,6 @@
 //import liraries
 import React, {Component, useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  SafeAreaView,
-  Alert,
-} from 'react-native';
+import {View, Text, SafeAreaView, Alert} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import styles from './styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -48,86 +40,89 @@ const MedicoreInfoScreen = props => {
       );
       if (response.status === 200) {
         navigation.dispatch(
-          StackActions.replace('appNavigator', {
-            screen: 'doctorInfoScreen',
+          StackActions.replace(RouteNames.navigatorNames.appNavigator, {
+            screen: RouteNames.appRoutes.doctorInfoScreen,
           }),
         );
-        setLoading(false)
+        setLoading(false);
       } else {
-        setLoading(false)
+        setLoading(false);
         console.error('Error:', response.data);
         Alert.alert('Medicore info could not be added. Please try again.');
       }
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       console.error('Error during adding info:', error);
       Alert.alert('Error during adding info');
     }
   };
   return (
     <KeyboardAwareScrollView
-      style={{flex: 1}}
+      style={{flex: 1, flexGrow:0}}
       enableOnAndroid={true}
-      scrollEnabled={false} 
-      extraScrollHeight={100}
-      >
-    <SafeAreaView style={styles.container}>
-    <Loader visible={loading} />
-      <View style={styles.scView}>
-        <Text style={styles.selfTxt}>Self</Text>
-        <Text style={styles.checkTxt}>Check</Text>
-      </View>
-      <View style={styles.parent}>
-        <View style={styles.child}>
-          <View style={styles.viewS2}>
-            <View style={styles.iconView}>
-              <MaterialIcons name="person" style={styles.icon} />
-            </View>
-            <Text style={styles.mainTxt}>Medicore Info</Text>
-            <View style={{marginTop: 40}}>
-              <View style={styles.pickerView}>
-                <Picker
-                  selectedValue={mediQues}
-                  onValueChange={itemValue => setMediQues(itemValue)}
-                  style={styles.picker}>
-                  <Picker.Item
-                    label="Yes"
-                    style={styles.pickerItem}
-                    value="yes"></Picker.Item>
-                  <Picker.Item
-                    style={styles.pickerItem}
-                    label="No"
-                    value="no"></Picker.Item>
-                </Picker>
+      scrollEnabled={false}
+      extraScrollHeight={50}>
+      <SafeAreaView style={styles.container}>
+        <Loader visible={loading} />
+        <View style={styles.scView}>
+          <Text style={styles.selfTxt}>Self</Text>
+          <Text style={styles.checkTxt}>Check</Text>
+        </View>
+        <View style={styles.parent}>
+          <View style={styles.child}>
+            <View style={styles.viewS2}>
+              <View style={styles.iconView}>
+                <MaterialIcons name="person" style={styles.icon} />
               </View>
-              <Input
-                placeholder={'Enter the medicare or mediCaid ID'}
-                placeholderTextColor="white"
-                value={mediID}
-                returnKeyType="next"
-                onChangeText={text => setMediID(text)}
-                //MaterialIcons name="arrow-drop-down" style={styles.icon1}
-              />
-              <Input
-                placeholder={'Name of your Medical Insurance'}
-                placeholderTextColor="white"
-                value={insuranceName}
-                returnKeyType="next"
-                onChangeText={text => setInsuranceName(text)}
-              />
-              <Input
-                placeholder={'Medical Insurance Id Number'}
-                placeholderTextColor="white"
-                value={insuranceId}
-                returnKeyType="next"
-                onChangeText={text => setInsuranceId(text)}
+              <Text style={styles.mainTxt}>Medicore Info</Text>
+              <View style={{marginTop: 40}}>
+                <View style={styles.pickerView}>
+                  <Picker
+                    selectedValue={mediQues}
+                    onValueChange={itemValue => setMediQues(itemValue)}
+                    style={styles.picker}>
+                    <Picker.Item
+                      label="Yes"
+                      style={styles.pickerItem}
+                      value="yes"></Picker.Item>
+                    <Picker.Item
+                      style={styles.pickerItem}
+                      label="No"
+                      value="no"></Picker.Item>
+                  </Picker>
+                </View>
+                <Input
+                  placeholder={'Enter the medicare or mediCaid ID'}
+                  placeholderTextColor="white"
+                  value={mediID}
+                  returnKeyType="next"
+                  onChangeText={text => setMediID(text)}
+                  //MaterialIcons name="arrow-drop-down" style={styles.icon1}
+                />
+                <Input
+                  placeholder={'Name of your Medical Insurance'}
+                  placeholderTextColor="white"
+                  value={insuranceName}
+                  returnKeyType="next"
+                  onChangeText={text => setInsuranceName(text)}
+                />
+                <Input
+                  placeholder={'Medical Insurance Id Number'}
+                  placeholderTextColor="white"
+                  value={insuranceId}
+                  returnKeyType="next"
+                  onChangeText={text => setInsuranceId(text)}
+                />
+              </View>
+              <Button
+                onPress={medicoreInfo}
+                style={styles.toNext}
+                name="Next"
               />
             </View>
-            <Button onPress={medicoreInfo} style={styles.toNext} name="Next" />
           </View>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
     </KeyboardAwareScrollView>
   );
 };

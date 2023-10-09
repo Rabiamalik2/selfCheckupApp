@@ -1,21 +1,11 @@
 import React, {Component, useState, useRef} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  Animated,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, Animated, TouchableOpacity} from 'react-native';
 import styles from './styles';
-import RegisterScreen from '../../screens/auth-flow/register-screen';
 import RouteNames from '../../services/constants/route-names';
 import slides from './slides';
 import Paginator from './paginator';
-import NavigationContainer from '@react-navigation/native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import OnboardingItem from './onboardingItem';
-import {SafeAreaView} from 'react-native-safe-area-context';
 // create a component
 const Onboarding = props => {
   const navigation = useNavigation();
@@ -64,15 +54,13 @@ const Onboarding = props => {
       <View style={{bottom: 130}}>
         <TouchableOpacity
           style={styles.registerTo}
-          onPress={() =>
-            navigation.navigate('authNavigator', {screen: 'registerScreen'})
-          }>
+          onPress={RouteNames.authRoutes.registerScreen}>
           <Text style={styles.registerTxt}>REGISTER</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.signinTo}
           onPress={() =>
-            navigation.navigate('authNavigator', {screen: 'loginScreen'})
+            navigation.navigate(RouteNames.authRoutes.loginScreen)
           }>
           <Text style={styles.signinTxt}>SIGN IN</Text>
         </TouchableOpacity>

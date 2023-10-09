@@ -5,12 +5,13 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import Colors from '../../../services/constants/colors';
+import Fonts from '../../../services/constants/fonts';
+import RouteNames from '../../../services/constants/route-names';
 // define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent: 'center',
-    // alignItems: 'center',
+    // flexGrow: 0,
     backgroundColor: Colors.white,
   },
   scView: {
@@ -21,16 +22,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   selfTxt: {
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(5),
-    fontWeight: 'bold',
     color: Colors.purple,
   },
   checkTxt: {
     textAlign: 'center',
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.poppinsBold,
     fontSize: responsiveFontSize(5),
-    fontWeight: 'bold',
     color: Colors.white,
     backgroundColor: Colors.purple,
     marginHorizontal: 10,
@@ -43,9 +42,8 @@ const styles = StyleSheet.create({
   txt1: {
     alignItems: 'center',
     marginTop: 30,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsBold,
     fontSize: responsiveFontSize(2.5),
-    fontWeight: '700',
     color: Colors.white,
   },
   parent: {
@@ -55,9 +53,6 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 500,
     borderTopEndRadius: 500,
     backgroundColor: Colors.lightGrey,
-    //borderBottomStartRadius : 200,
-    //borderBottomEndRadius : 200,
-    //overflow : 'hidden',
     transform: [{scaleX: 1.5}],
     overflow: 'hidden',
   },
@@ -68,7 +63,6 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 400,
     borderTopEndRadius: 400,
     backgroundColor: Colors.purple,
-    // justifyContent:'center',
     alignItems: 'center',
     transform: [{scaleX: 1}],
     overflow: 'hidden',
@@ -96,19 +90,16 @@ const styles = StyleSheet.create({
   },
   mainTxt: {
     textAlign: 'center',
-    //alignItems:'center',
     marginTop: 10,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsBold,
     fontSize: responsiveFontSize(3.5),
-    fontWeight: '700',
     color: Colors.white,
   },
   subTxt: {
     paddingLeft: 20,
     alignItems: 'center',
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsBold,
     fontSize: responsiveFontSize(1.7),
-    fontWeight: '700',
     color: Colors.white,
   },
   icon1View: {
@@ -157,12 +148,10 @@ const styles = StyleSheet.create({
   pickerView: {
     width: responsiveWidth(80),
     height: responsiveHeight(5),
-    //alignItems: 'center',
     borderRadius: 12,
     backgroundColor: Colors.purple,
     borderColor: Colors.lightGrey,
     borderWidth: 2,
-    //padding: 1.7,
     opacity: 0.5,
     justifyContent: 'center',
     marginBottom: 20,
@@ -172,7 +161,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     color: Colors.white,
     marginTop: 4,
-    //padding: 1.7,
     fontSize: responsiveFontSize(1),
   },
   pickerItem: {
@@ -190,11 +178,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   saveBtnS: {
-    fontFamily: 'Poppins',
+    fontFamily: Fonts.poppinsBold,
     justifyContent: 'center',
     alignItems: 'center',
     color: Colors.white,
-    fontWeight: '700',
   },
   saveToS: {
     justifyContent: 'center',

@@ -20,27 +20,24 @@ import Button from '../../../components/button-component/index.js';
 import Account from '../../../components/text-input-component/haveAccount';
 import Terms from '../../../components/text-input-component/termsConditions';
 import RouteNames from '../../../services/constants/route-names';
+import Colors from '../../../services/constants/colors';
 const TermsScreen = props => {
   const navigation = useNavigation();
   const route = useRoute();
   const isReadOnly = route.params?.isReadOnly || false;
   //console.log("Route.params:", Route.params);
   const user = route.params?.user.newUser;
-  console.log("Terms Screen",user)
+  console.log('Terms Screen', user);
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
-        navigation.navigate('authNavigator', {screen: 'welcomeScreen'});
-        // Return true to stop default back navigaton
-        // Return false to keep default back navigaton
+        navigation.navigate(RouteNames.navigatorNames.authNavigator, {
+          screen: RouteNames.authRoutes.welcomeScreen,
+        });
         return true;
       };
-
-      // Add Event Listener for hardwareBackPress
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
-
       return () => {
-        // Once the Screen gets blur Remove Event Listener
         BackHandler.removeEventListener('hardwareBackPress', onBackPress);
       };
     }, []),
@@ -88,9 +85,12 @@ const TermsScreen = props => {
               </Text>
               <TouchableOpacity
                 onPress={() =>
-                  props.navigation.replace('authNavigator', {
-                    screen: 'registerScreen',
-                  })
+                  props.navigation.replace(
+                    RouteNames.navigatorNames.authNavigator,
+                    {
+                      screen: RouteNames.authRoutes.registerScreen,
+                    },
+                  )
                 }
                 style={styles.toStyle2}>
                 <Text style={styles.privacyTxt}>Privacy Policy</Text>
@@ -98,12 +98,12 @@ const TermsScreen = props => {
             </View>
             {isReadOnly === false ? (
               <Button
-                style={[styles.toS1, {color: 'white'}]}
+                style={[styles.toS1, {color: Colors.white}]}
                 onPress={() =>
-                  navigation.navigate(
-                    RouteNames.authRoutes.choosePicScreen,
-                    (params = {user}),
-                  )
+                  navigation.navigate(RouteNames.navigatorNames.authNavigator, {
+                    screen: RouteNames.authRoutes.choosePicScreen,
+                    params: {user},
+                  })
                 }
                 name="I Agree"
               />
@@ -123,17 +123,17 @@ const TermsScreen = props => {
         name="Terms & Conditions"
         onPress={() =>
           navigation.dispatch(
-            StackActions.replace('authNavigator', {
-              screen: 'termScreen',
+            StackActions.replace(RouteNames.navigatorNames.authNavigator, {
+              screen: RouteNames.authRoutes.termScreen,
               params: {isReadOnly: true},
             }),
           )
         }
       />
-
-      <Text>Read-Only: {isReadOnly.toString()}</Text>
     </SafeAreaView>
   );
 };
 
 export default TermsScreen;
+
+// <Text>Read-Only: {isReadOnly.toString()}</Text>

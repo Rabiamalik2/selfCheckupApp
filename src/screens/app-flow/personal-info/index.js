@@ -9,24 +9,14 @@ import {
   SafeAreaView,
   Alert,
   Pressable,
-  KeyboardAvoidingView,
   Platform,
-  TouchableWithoutFeedback,
-  ImageBackground,
-  Keyboard,
-  BackHandler,
 } from 'react-native';
 import styles from './styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Input from '../../../components/text-input-component/textInput';
 import Button from '../../../components/button-component/index.js';
 import Loader from '../../../components/loader';
-import {
-  useFocusEffect,
-  useNavigation,
-  StackActions,
-  useRoute,
-} from '@react-navigation/native';
+import {useNavigation, StackActions, useRoute} from '@react-navigation/native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Picker} from '@react-native-picker/picker';
 import DatePicker from '@react-native-community/datetimepicker';
@@ -78,8 +68,8 @@ const PersonalInfoScreen = props => {
       if (response.status === 200) {
         //  console.log("user's personal Info", response)
         navigation.dispatch(
-          StackActions.replace('appNavigator', {
-            screen: 'medicoreInfoScreen',
+          StackActions.replace(RouteNames.navigatorNames.appNavigator, {
+            screen: RouteNames.appRoutes.medicoreInfoScreen,
           }),
         );
         setLoading(false);
@@ -97,7 +87,7 @@ const PersonalInfoScreen = props => {
   return (
     <KeyboardAwareScrollView
       enableOnAndroid={true}
-      extraScrollHeight={100}
+      extraScrollHeight={50}
       keyboardShouldPersistTaps="handled"
       scrollEnabled={false}>
       <SafeAreaView style={styles.container}>

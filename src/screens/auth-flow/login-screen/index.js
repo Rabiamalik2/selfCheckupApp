@@ -1,20 +1,7 @@
 //import liraries
-import React, {Component, useState, createRef, useEffect} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ImageBackground,
-  BackHandler,
-  Alert,
-} from 'react-native';
-import {
-  useFocusEffect,
-  useNavigation,
-  StackActions,
-} from '@react-navigation/native';
-import {Divider} from 'native-base';
+import React, {useState} from 'react';
+import {View, Text, Image, TouchableOpacity, Alert} from 'react-native';
+import {useNavigation, StackActions} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Images from '../../../services/constants/images';
 import RouteNames from '../../../services/constants/route-names';
@@ -23,27 +10,19 @@ import Input from '../../../components/text-input-component/textInput';
 import Button from '../../../components/button-component/index.js';
 import NoAccount from '../../../components/text-input-component/noAccount';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loader from '../../../components/loader';
 import auth from '@react-native-firebase/auth';
 import * as Keychain from 'react-native-keychain';
 import {loginToMyProfile} from '../../../services/apis/auth';
-import { fetchUserData } from '../../../services/apis/app/userApis';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {
-  GoogleSignin,
-  GoogleSigninButton,
-} from '@react-native-google-signin/google-signin';
-import {
-  Dimensions,
   responsiveHeight,
   responsiveWidth,
-  responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import {useDispatch} from 'react-redux';
-import { setUser } from '../../../services/redux/reducers/user-reducer';
-import axios from 'axios';
-
+import {setUser} from '../../../services/redux/reducers/user-reducer';
+import Colors from '../../../services/constants/colors';
 GoogleSignin.configure({
   webClientId:
     '416536186096-94n53m91gd4vdi536fn6lea7qfi9tmqb.apps.googleusercontent.com',
@@ -82,16 +61,16 @@ const LoginScreen = props => {
         dispatch(setUser(response.data.user));
         if (step === 1) {
           navigation.dispatch(
-            StackActions.replace('sosNavigator', {
-              screen: 'addContactScreen',
+            StackActions.replace(RouteNames.navigatorNames.sosNavigator, {
+              screen: RouteNames.sosNavRoutes.addContactScreen,
               params: {user},
-            }),           
+            }),
           );
           setLoading(false);
         } else {
           navigation.dispatch(
-            StackActions.replace('appNavigator', {
-              screen: 'dashboardScreen',
+            StackActions.replace(RouteNames.navigatorNames.appNavigator, {
+              screen: RouteNames.appRoutes.dashboardScreen,
               params: {user},
             }),
           );
@@ -110,7 +89,7 @@ const LoginScreen = props => {
   return (
     <KeyboardAwareScrollView
       enableOnAndroid={true}
-      extraScrollHeight={100}
+      extraScrollHeight={50}
       keyboardShouldPersistTaps="handled"
       scrollEnabled={false}>
       <SafeAreaView style={styles.container}>
@@ -150,8 +129,8 @@ const LoginScreen = props => {
                   <TouchableOpacity
                     onPress={() =>
                       navigation.dispatch(
-                        StackActions.replace('authNavigator', {
-                          screen: 'forgetPasswordScreen',
+                        StackActions.replace(RouteNames.navigatorNames.authNavigator, {
+                          screen: RouteNames.authRoutes.forgetPasswordScreen,
                         }),
                       )
                     }
@@ -169,7 +148,7 @@ const LoginScreen = props => {
                 <Text
                   style={{
                     textAlign: 'center',
-                    color: 'white',
+                    color: Colors.white,
                     marginTop: 20,
                     marginBottom: 2,
                   }}>
@@ -181,8 +160,8 @@ const LoginScreen = props => {
                     onPress={() =>
                       onGoogleButtonPress().then(() =>
                         navigation.dispatch(
-                          StackActions.replace('appNavigator', {
-                            screen: 'dashboardScreen',
+                          StackActions.replace(RouteNames.navigatorNames.appNavigator, {
+                            screen: RouteNames.appRoutes.dashboardScreen,
                           }),
                         ),
                       )
@@ -201,8 +180,8 @@ const LoginScreen = props => {
                     style={styles.googleButtonStyle}
                     onPress={() =>
                       navigation.dispatch(
-                        StackActions.replace('authNavigator', {
-                          screen: 'signinWithPhoneScreen',
+                        StackActions.replace(RouteNames.navigatorNames.authNavigator, {
+                          screen: RouteNames.authRoutes.signinWithPhoneScreen,
                         }),
                       )
                     }>

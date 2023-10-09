@@ -1,30 +1,20 @@
-import React, {Component, useState} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ImageBackground,
-  BackHandler,
-  SafeAreaView,
-} from 'react-native';
-import {
-  useFocusEffect,
-  useNavigation,
-  StackActions,
-  useRoute,
-} from '@react-navigation/native';
+import React from 'react';
+import {View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
+import {useNavigation, StackActions} from '@react-navigation/native';
 import styles from '../setting-screen/styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector} from 'react-redux';
+import RouteNames from '../../../services/constants/route-names';
 
 const SettingScreen = props => {
   const navigation = useNavigation();
   const userData = useSelector(state => state.user);
   console.log('sys:', userData);
   const Logout = () => {
-    navigation.navigate('authNavigator', {screen: 'loginScreen'});
+    navigation.navigate(RouteNames.navigatorNames.authNavigator, {
+      screen: RouteNames.authRoutes.loginScreen,
+    });
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -48,8 +38,8 @@ const SettingScreen = props => {
           style={styles.biView}
           onPress={() =>
             navigation.dispatch(
-              StackActions.replace('sosNavigator', {
-                screen: 'personalInfoScreen',
+              StackActions.replace(RouteNames.navigatorNames.sosNavigator, {
+                screen: RouteNames.sosNavRoutes.personalInfoScreen,
               }),
             )
           }>

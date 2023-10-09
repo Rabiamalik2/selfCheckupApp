@@ -1,19 +1,16 @@
 //import libraries
-import React, {Component, useState, createRef, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Keyboard} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, Text} from 'react-native';
 import styles from './styles';
 import Loader from '../../../components/loader';
 import Onboarding from '../../../components/my-carousal/onboarding';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch} from 'react-redux';
-import {
-  useFocusEffect,
-  useNavigation,
-  StackActions,
-} from '@react-navigation/native';
+import {useNavigation, StackActions} from '@react-navigation/native';
 import * as Keychain from 'react-native-keychain';
 import {fetchUserData} from '../../../services/apis/app/userApis';
 import {setUser} from '../../../services/redux/reducers/user-reducer';
+import RouteNames from '../../../services/constants/route-names';
 // create a component
 const WelcomeScreen = () => {
   const navigation = useNavigation();
@@ -44,13 +41,15 @@ const WelcomeScreen = () => {
         // setUserData(isValid.user);
         if (isValid) {
           navigation.dispatch(
-            StackActions.replace('appNavigator', {
-              screen: 'dashboardScreen',
+            StackActions.replace(RouteNames.navigatorNames.appNavigator, {
+              screen: RouteNames.appRoutes.dashboardScreen,
             }),
           );
         } else {
           navigation.dispatch(
-            StackActions.replace('authNavigator', {screen: 'loginScreen'}),
+            StackActions.replace(RouteNames.navigatorNames.authNavigator, {
+              screen: RouteNames.authRoutes.loginScreen,
+            }),
           );
         }
       }

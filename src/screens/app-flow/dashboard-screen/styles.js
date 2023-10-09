@@ -5,36 +5,35 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import Colors from '../../../services/constants/colors';
+import Fonts from '../../../services/constants/fonts';
 // define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     //justifyContent: 'center',
     alignItems: 'center',
+    // flexGrow: 0,
     backgroundColor: Colors.white,
   },
   scView: {
-    marginLeft: 40,
+    // marginLeft: 40,
     marginTop: 30,
     flexDirection: 'row',
     marginBottom: 10,
   },
   selfTxt: {
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(5),
     color: Colors.purple,
   },
   checkTxt: {
-    //   justifyContent:'center',
-    //  textAlign: 'center',
-    fontFamily: 'Poppins-Bold',
-    height: responsiveHeight(6),
+    fontFamily: Fonts.poppinsExtraBold,
+    height: responsiveHeight(7),
     width: responsiveWidth(30),
     fontSize: responsiveFontSize(5),
     color: Colors.white,
     backgroundColor: Colors.purple,
     marginHorizontal: 10,
-    // alignItems: 'center',
     borderWidth: 0.2,
     borderRadius: 30,
     padding: 1,
@@ -47,7 +46,6 @@ const styles = StyleSheet.create({
   },
   viewImg1: {
     paddingVertical: 0,
-    //justifyContent:'center',
     marginHorizontal: 30,
     alignItems: 'center',
   },
@@ -61,8 +59,7 @@ const styles = StyleSheet.create({
     padding: 2,
     paddingTop: 6,
     textAlign: 'center',
-    fontWeight: '700',
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsExtraBold,
     color: Colors.black,
   },
   viewImg2: {
@@ -81,13 +78,11 @@ const styles = StyleSheet.create({
     padding: 2,
     paddingTop: 9,
     textAlign: 'center',
-    fontWeight: '700',
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsExtraBold,
     color: Colors.black,
   },
   viewImg3: {
     paddingVertical: 0,
-    //justifyContent:'center',
     marginHorizontal: 30,
     alignItems: 'center',
   },
@@ -101,8 +96,7 @@ const styles = StyleSheet.create({
     padding: 2,
     paddingTop: 6,
     textAlign: 'center',
-    fontWeight: '700',
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsExtraBold,
     color: Colors.black,
   },
   parent: {
@@ -155,11 +149,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     padding: 5,
   },
+  sosTo: {alignItems: 'center', flexDirection: 'row'},
   txtSos: {
     textAlign: 'center',
     color: Colors.white,
     fontSize: responsiveFontSize(8),
-    fontWeight: 'bold',
+    fontFamily: Fonts.poppinsExtraBold,
     padding: 2,
   },
   viewS3: {
@@ -169,7 +164,6 @@ const styles = StyleSheet.create({
   },
   viewImg4: {
     paddingVertical: 0,
-    //justifyContent:'center',
     marginHorizontal: 60,
     alignItems: 'center',
   },
@@ -183,13 +177,11 @@ const styles = StyleSheet.create({
     padding: 2,
     paddingTop: 6,
     textAlign: 'center',
-    fontWeight: '700',
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsExtraBold,
     color: Colors.black,
   },
   viewImg5: {
     paddingVertical: 0,
-    //justifyContent:'center',
     marginHorizontal: 50,
     alignItems: 'center',
   },
@@ -203,7 +195,7 @@ const styles = StyleSheet.create({
     padding: 2,
     paddingTop: 6,
     textAlign: 'center',
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsExtraBold,
     color: Colors.black,
   },
   iconContact: {
@@ -218,5 +210,6 @@ const styles = StyleSheet.create({
     color: Colors.black,
     fontSize: responsiveFontSize(3),
   },
+  contactTo: {alignItems: 'center', justifyContent: 'center'},
 });
 export default styles;

@@ -10,11 +10,11 @@ const options = {
 const AppNavigation = () => {
     return (
         <Stack.Navigator screenOptions={options}>
-            <Stack.Screen name={appRoutes.homeScreen} component={AppRoutes.HomeScreen} />
-            <Stack.Screen name={appRoutes.dashboardScreen} component={AppRoutes.DashboardScreen} />
-            <Stack.Screen name={appRoutes.doctorInfoScreen} component={AppRoutes.DoctorInfoScreen} />
-            <Stack.Screen name={appRoutes.medicoreInfoScreen} component={AppRoutes.MedicoreInfoScreen} />
-            <Stack.Screen name={appRoutes.settingScreen} component={AppRoutes.SettingScreen} />
+            <Stack.Screen name={appRoutes.homeScreen} component={AppRoutes.AppRoutes.HomeScreen} />
+            <Stack.Screen name={appRoutes.dashboardScreen} component={AppRoutes.AppRoutes.DashboardScreen} />
+            <Stack.Screen name={appRoutes.doctorInfoScreen} component={AppRoutes.AppRoutes.DoctorInfoScreen} />
+            <Stack.Screen name={appRoutes.medicoreInfoScreen} component={AppRoutes.AppRoutes.MedicoreInfoScreen} />
+            <Stack.Screen name={appRoutes.settingScreen} component={AppRoutes.AppRoutes.SettingScreen} />
         </Stack.Navigator>
     );
 }

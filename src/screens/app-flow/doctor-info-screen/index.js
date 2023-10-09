@@ -1,31 +1,16 @@
 //import liraries
 import React, {Component, useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  SafeAreaView,
-  Alert,
-} from 'react-native';
+import {View, Text, SafeAreaView, Alert} from 'react-native';
 import styles from './styles';
-import {Picker} from '@react-native-picker/picker';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Input from '../../../components/text-input-component/textInput';
 import Button from '../../../components/button-component/index.js';
 import Loader from '../../../components/loader';
-import {
-  useFocusEffect,
-  useNavigation,
-  StackActions,
-  useRoute,
-} from '@react-navigation/native';
+import {useNavigation, StackActions} from '@react-navigation/native';
 import {getDoctorInfo} from '../../../services/apis/app/medicalApis';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {useDispatch} from 'react-redux';
-import {setUser} from '../../../services/redux/reducers/user-reducer';
 import {useSelector} from 'react-redux';
+import RouteNames from '../../../services/constants/route-names';
 // create a component
 
 const DoctorInfoScreen = props => {
@@ -47,8 +32,8 @@ const DoctorInfoScreen = props => {
       );
       if (response.status === 200) {
         navigation.dispatch(
-          StackActions.replace('appNavigator', {
-            screen: 'dashboardScreen',
+          StackActions.replace(RouteNames.navigatorNames.appNavigator, {
+            screen: RouteNames.appRoutes.dashboardScreen,
           }),
         );
         setLoading(false);
@@ -68,7 +53,7 @@ const DoctorInfoScreen = props => {
       style={{flex: 1}}
       enableOnAndroid={true}
       scrollEnabled={false}
-      extraScrollHeight={80}>
+      extraScrollHeight={50}>
       <SafeAreaView style={styles.container}>
         <Loader visible={loading} />
         <View style={styles.scView}>

@@ -4,6 +4,7 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
+import Fonts from '../../services/constants/fonts';
 import Colors from '../../services/constants/colors';
 // define your styles
 const styles = StyleSheet.create({
@@ -11,7 +12,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: '#2c3e50',
   },
   parent: {
     top: 250,
@@ -20,9 +20,6 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 400,
     borderTopEndRadius: 400,
     backgroundColor: Colors.lightGrey,
-    //borderBottomStartRadius : 200,
-    //borderBottomEndRadius : 200,
-    //overflow : 'hidden',
     transform: [{scaleX: 2}],
     overflow: 'hidden',
   },
@@ -33,7 +30,6 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 400,
     borderTopEndRadius: 400,
     backgroundColor: Colors.purple,
-    // justifyContent:'center',
     alignItems: 'center',
     transform: [{scaleX: 1}],
     overflow: 'hidden',
@@ -49,8 +45,7 @@ const styles = StyleSheet.create({
   },
   registerTxt: {
     color: Colors.white,
-    fontWeight: '700',
-    fontFamily: 'Poppins',
+    fontFamily: Fonts.poppinsBold,
     fontSize: responsiveFontSize(2),
   },
   signinTo: {
@@ -67,9 +62,8 @@ const styles = StyleSheet.create({
     borderColor: Colors.white,
   },
   signinTxt: {
-    color: 'rgba(214, 212, 223, 1)',
-    fontWeight: '700',
-    fontFamily: 'Poppins',
+    color: Colors.lightGrey,
+    fontFamily: Fonts.poppinsBold,
     fontSize: responsiveFontSize(2),
   },
   termsTo: {
@@ -77,9 +71,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   termsTxt: {
-    color: 'white',
-    fontWeight: '400',
-    fontFamily: 'Poppins',
+    color: Colors.white,
+    fontFamily: Fonts.poppinsRegular,
     fontSize: responsiveFontSize(1.5),
   },
 });

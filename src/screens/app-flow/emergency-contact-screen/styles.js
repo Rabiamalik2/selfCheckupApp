@@ -5,10 +5,12 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import Colors from '../../../services/constants/colors';
+import Fonts from '../../../services/constants/fonts';
 // define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // flexGrow: 0,
     backgroundColor: Colors.white,
   },
   scView: {
@@ -19,16 +21,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   selfTxt: {
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(5),
-    fontWeight: 'bold',
     color: Colors.purple,
   },
   checkTxt: {
     textAlign: 'center',
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(5),
-    fontWeight: 'bold',
     color: Colors.white,
     backgroundColor: Colors.purple,
     marginHorizontal: 10,
@@ -41,9 +41,8 @@ const styles = StyleSheet.create({
   txt1: {
     alignItems: 'center',
     marginTop: 30,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(2.5),
-    fontWeight: '700',
     color: Colors.black,
   },
   parent: {
@@ -53,9 +52,6 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 500,
     borderTopEndRadius: 500,
     backgroundColor: Colors.lightGrey,
-    //borderBottomStartRadius : 200,
-    //borderBottomEndRadius : 200,
-    //overflow : 'hidden',
     transform: [{scaleX: 1.5}],
     overflow: 'hidden',
   },
@@ -66,7 +62,6 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 400,
     borderTopEndRadius: 400,
     backgroundColor: Colors.purple,
-    // justifyContent:'center',
     alignItems: 'center',
     transform: [{scaleX: 1}],
     overflow: 'hidden',
@@ -87,17 +82,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 20,
   },
+  westIcon: {
+    left: -60,
+    fontSize: responsiveFontSize(4),
+    color: Colors.purple,
+  },
   icon: {
     textAlign: 'center',
     fontSize: responsiveFontSize(5.5),
-    color: '#33295d',
+    color: Colors.purple,
   },
   mainTxt: {
     alignItems: 'center',
     marginTop: 10,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(2),
-    fontWeight: '700',
     color: Colors.white,
   },
   subView: {
@@ -106,17 +105,13 @@ const styles = StyleSheet.create({
     height: responsiveHeight(5),
     borderRadius: 10,
     backgroundColor: Colors.orange,
-    // alignItems:"center",
-    //justifyContent:"center",
     marginTop: 20,
-    // flexDirection:'row'
   },
   subTxt: {
     paddingLeft: 20,
     alignItems: 'center',
-    fontFamily: 'Poppins-Regular',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(1.7),
-    fontWeight: '700',
     color: Colors.white,
   },
   icon1View: {
@@ -135,9 +130,6 @@ const styles = StyleSheet.create({
   },
   flatListView: {
     marginTop: 20,
-    // marginBottom: -200,
-    // height: responsiveHeight(10),
-    // position:'absolute'
   },
 });
 export default styles;

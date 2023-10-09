@@ -1,12 +1,11 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {
-  Dimensions,
   responsiveHeight,
   responsiveWidth,
-  responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import React from 'react';
 import Colors from '../../services/constants/colors';
+import Fonts from '../../services/constants/fonts';
 const Button = ({onPress, name, style}) => {
   return (
     <View style={styles.btnSigninView}>
@@ -30,11 +29,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   signinS: {
-    fontFamily: 'Poppins',
+    fontFamily: Fonts.poppinsBold,
     justifyContent: 'center',
     alignItems: 'center',
     color: Colors.lightGrey1,
-    fontWeight: '700',
   },
   toSignin: {
     justifyContent: 'center',

@@ -1,6 +1,5 @@
 import {StyleSheet, Text, View, TextInput} from 'react-native';
 import {
-  Dimensions,
   responsiveHeight,
   responsiveWidth,
   responsiveFontSize,
@@ -26,7 +25,7 @@ const Input = ({
 }) => {
   const [hidePassword, setHidePassword] = useState(password);
   return (
-    <View style={{flex: 0, marginTop: 15, bottom: 20, alignItems: 'center'}}>
+    <View style={styles.inpMainView}>
       <View style={styles.txtinpView}>
         <TextInput
           autoCapitalize={autoCapitalize}
@@ -55,18 +54,6 @@ const Input = ({
           <MaterialIcons name="arrow-drop-down" style={styles.iconPicker} />
         )}
       </View>
-      {error && (
-        <Text
-          style={{
-            color: Colors.red,
-            textAlign: 'auto',
-            alignItems: 'center',
-            justifyContent: 'center',
-            top: 10,
-          }}>
-          {error}
-        </Text>
-      )}
     </View>
   );
 };
@@ -95,12 +82,16 @@ const styles = StyleSheet.create({
     left: -40,
     fontSize: responsiveFontSize(2.5),
     color: Colors.black,
-    //   alignItems: 'center'
   },
   iconPicker: {
     left: 230,
     fontSize: responsiveFontSize(4),
     color: Colors.white,
-    //   alignItems: 'center'
+  },
+  inpMainView: {
+    flex: 0,
+    marginTop: 15,
+    bottom: 20,
+    alignItems: 'center',
   },
 });

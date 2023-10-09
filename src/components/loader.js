@@ -14,7 +14,7 @@ const Loader = ({visible = false}) => {
       <View style={[style.container, {height, width}]}>
         <View style={style.loader}>
           <ActivityIndicator size="large" color="blue" />
-          <Text style={{marginLeft: 10, fontSize: 16}}>Loading...</Text>
+          <Text style={style.loaderTxt}>Loading...</Text>
         </View>
       </View>
     );
@@ -36,6 +36,10 @@ const style = StyleSheet.create({
     zIndex: 10,
     backgroundColor: Colors.transparent,
     justifyContent: 'center',
+  },
+  loaderTxt: {
+    marginLeft: 10,
+    fontSize: 16,
   },
 });
 

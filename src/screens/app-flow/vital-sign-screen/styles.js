@@ -4,13 +4,15 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
+import Colors from '../../../services/constants/colors';
+import Fonts from '../../../services/constants/fonts';
 // define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent: 'center',
+    // flexGrow: 0,
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
   },
   viewS1: {
     marginTop: 30,
@@ -18,18 +20,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   txtS1: {
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(5),
-    fontWeight: 'bold',
-    color: 'rgba(51, 41, 93, 1)',
+    color: Colors.purple,
   },
   txtS2: {
     textAlign: 'center',
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(5),
-    fontWeight: 'bold',
-    color: 'white',
-    backgroundColor: 'rgba(51, 41, 93, 1)',
+    color: Colors.white,
+    backgroundColor: Colors.purple,
     marginHorizontal: 10,
     alignItems: 'center',
     borderWidth: 1,
@@ -37,33 +37,25 @@ const styles = StyleSheet.create({
     padding: 1,
   },
   parentView: {
-    //To make Circle Shape
     marginTop: 30,
     width: responsiveWidth(100),
     height: responsiveHeight(73),
-    //borderRadius:800,
     borderTopStartRadius: 300,
     borderTopEndRadius: 300,
-    //  borderBottomStartRadius :300,
-    // borderBottomEndRadius : 300,
     overflow: 'hidden',
-    backgroundColor: '#d6d4df',
+    backgroundColor: Colors.lightGrey,
     transform: [{scaleX: 1.5}],
   },
   childView: {
-    //To make Circle Shape
     marginTop: 13,
     width: responsiveWidth(100),
     height: responsiveHeight(70),
     borderTopStartRadius: 300,
     borderTopEndRadius: 300,
-    // borderBottomStartRadius : 300,
-    //borderBottomEndRadius : 300,
-    backgroundColor: '#33295d',
+    backgroundColor: Colors.purple,
     transform: [{scaleX: 1}],
     overflow: 'hidden',
   },
-
   viewS7: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -79,21 +71,18 @@ const styles = StyleSheet.create({
     paddingLeft: 6,
   },
   txtS3: {
-    color: '#33295d',
-    fontFamily: 'Poppins',
-    fontWeight: '400',
+    color: Colors.purple,
+    fontFamily: Fonts.poppinsRegular,
   },
   txtS4: {
     paddingVertical: 0,
-    color: '#ff8945',
-    fontWeight: '700',
-    fontFamily: 'Poppins',
+    color: Colors.orange,
+    fontFamily: Fonts.poppinsExtraBold,
   },
   txtS7: {
-    color: '#33295d',
-    fontFamily: 'Poppins',
+    color: Colors.purple,
+    fontFamily: Fonts.poppinsRegular,
     fontSize: responsiveFontSize(1.5),
-    fontWeight: '400',
   },
   viewS2: {
     transform: [
@@ -107,7 +96,7 @@ const styles = StyleSheet.create({
   },
   Save: {
     justifyContent: 'center',
-    backgroundColor: '#ff8945',
+    backgroundColor: Colors.orange,
     width: responsiveWidth(80),
     height: responsiveHeight(5),
     alignItems: 'center',
@@ -118,9 +107,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 10,
-    color: 'white',
-    fontFamily: 'Poppins',
-    fontWeight: 'bold',
+    color: Colors.white,
+    fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(4),
   },
 });

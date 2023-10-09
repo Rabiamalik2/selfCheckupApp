@@ -16,8 +16,6 @@ const AuthNavigation = () => {
             <Stack.Screen name={authRoutes.registerScreen} component={AuthRoutes.RegisterScreen}/>
             <Stack.Screen name={authRoutes.termScreen} component={AuthRoutes.TermsScreen} />
             <Stack.Screen name={authRoutes.changePasswordScreen} component={AuthRoutes.ChangePasswordScreen} />
-            <Stack.Screen name={authRoutes.cameraScreen} component={AuthRoutes.CamScreen} />
-            <Stack.Screen name={authRoutes.galleryScreen} component={AuthRoutes.GalleryScreen} />
             <Stack.Screen name={authRoutes.codeScreen} component={AuthRoutes.CodeScreen} />
             <Stack.Screen name={authRoutes.signupCompleteScreen} component={AuthRoutes.SignupCompleteScreen} />
             <Stack.Screen name={authRoutes.forgetPasswordScreen} component={AuthRoutes.ForgetPasswordScreen} />
