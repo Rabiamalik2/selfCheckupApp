@@ -190,7 +190,6 @@ const AddContactScreen = props => {
                   <Text style={styles.saveBtnS}>Save</Text>
                 </TouchableOpacity>
               </View>
-              {modalVisible == true ? (
                 <View style={styles.centeredView}>
                   <Modal
                     animationType="slide"
@@ -210,9 +209,6 @@ const AddContactScreen = props => {
                     </View>
                   </Modal>
                 </View>
-              ) : (
-                <View></View>
-              )}
             </View>
           </View>
         </View>

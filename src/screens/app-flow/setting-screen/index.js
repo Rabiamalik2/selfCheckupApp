@@ -174,36 +174,29 @@ const SettingScreen = props => {
           <Text style={styles.biTxt}>Logout</Text>
         </TouchableOpacity>
       </View>
-      {modalVisible == true ? (
-        <View style={styles.centeredView}>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}>
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalText}>
-                  Do You really want to delete your profile?
-                </Text>
-                <View style={styles.buttonView}>
-                  <Button
-                    onPress={deleteSelectedUser}
-                    style={[styles.button]}
-                    name="Yes"
-                  />
-                  <Button
-                    onPress={cancelDelete}
-                    style={[styles.button]}
-                    name="No"
-                  />
-                </View>
+      <View style={styles.centeredView}>
+        <Modal animationType="slide" transparent={true} visible={modalVisible}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>
+                Do You really want to delete your profile?
+              </Text>
+              <View style={styles.buttonView}>
+                <Button
+                  onPress={deleteSelectedUser}
+                  style={[styles.button]}
+                  name="Yes"
+                />
+                <Button
+                  onPress={cancelDelete}
+                  style={[styles.button]}
+                  name="No"
+                />
               </View>
             </View>
-          </Modal>
-        </View>
-      ) : (
-        <View></View>
-      )}
+          </View>
+        </Modal>
+      </View>
     </SafeAreaView>
   );
 };
