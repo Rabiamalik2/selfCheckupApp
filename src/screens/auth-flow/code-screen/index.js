@@ -1,6 +1,12 @@
 import React, {Component, useState} from 'react';
-import {View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
-import {useNavigation, StackActions, useRoute} from '@react-navigation/native';
+import {View, Text, TouchableOpacity, SafeAreaView, Alert} from 'react-native';
+import {
+  useNavigation,
+  useRoute,
+  CommonActions,
+  StackActions,
+} from '@react-navigation/native';
+import * as Keychain from 'react-native-keychain';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
 import Loader from '../../../components/loader';
@@ -14,24 +20,45 @@ const CodeScreen = props => {
   const [loading, setLoading] = React.useState(false);
   const route = useRoute();
   const email = route.params?.emailaddress;
-  console.log('Code Screen', email)
+  console.log('Code Screen', email);
   const resetCodeConfirmation = async () => {
-    setLoading(true);
-    const response = await confirmPasscode(code);
-    setLoading(false);
-    if (response.status == 201) {
+    try {
+      setLoading(true);
+      const response = await confirmPasscode(code);
       setLoading(false);
-      navigation.dispatch(
-        StackActions.replace(RouteNames.navigatorNames.authNavigator, {
-          screen: RouteNames.authRoutes.changePasswordScreen,
-          params:{email}
-        }),
-      );
+      if (response.status == 201) {
+        setLoading(false);
+        navigation.dispatch(
+          StackActions.replace(RouteNames.navigatorNames.authNavigator, {
+            screen: RouteNames.authRoutes.changePasswordScreen,
+            params: {email},
+          }),
+        );
+      }
+    } catch (error) {
+      setLoading(false);
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
+          }),
+        );
+      } else {
+        console.error('Network error:', error);
+        Alert.alert('Error', error);
+      }
     }
   };
   return (
     <SafeAreaView style={styles.container}>
-    <Loader visible={loading} />
+      <Loader visible={loading} />
       <View style={styles.viewS1}>
         <Text style={styles.txtS1}>Self</Text>
         <Text style={styles.txtS2}>Check</Text>

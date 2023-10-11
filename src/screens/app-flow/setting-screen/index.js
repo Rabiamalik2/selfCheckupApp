@@ -9,14 +9,20 @@ import {
 } from 'react-native';
 import Loader from '../../../components/loader';
 import Button from '../../../components/button-component';
-import {useNavigation, StackActions} from '@react-navigation/native';
+import {
+  useNavigation,
+  useRoute,
+  CommonActions,
+  StackActions,
+} from '@react-navigation/native';
+import * as Keychain from 'react-native-keychain';
 import styles from '../setting-screen/styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector} from 'react-redux';
 import {deleteUser} from '../../../services/apis/app/userApis';
 import RouteNames from '../../../services/constants/route-names';
-import * as Keychain from 'react-native-keychain';
+
 const SettingScreen = props => {
   const navigation = useNavigation();
   const userData = useSelector(state => state.user);
@@ -26,9 +32,17 @@ const SettingScreen = props => {
   const Logout = async () => {
     try {
       await Keychain.resetGenericPassword();
-      navigation.navigate(RouteNames.navigatorNames.authNavigator, {
-        screen: RouteNames.authRoutes.loginScreen,
-      });
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [
+            {
+              name: RouteNames.navigatorNames.authNavigator,
+              params: {screen: RouteNames.authRoutes.loginScreen},
+            },
+          ],
+        }),
+      );
     } catch (error) {
       console.error('Error during logout:', error);
       Alert.alert('Error during logout');
@@ -54,13 +68,37 @@ const SettingScreen = props => {
         );
         setModalVisible(false);
         await Keychain.resetGenericPassword();
-        navigation.navigate(RouteNames.navigatorNames.authNavigator, {
-          screen: RouteNames.authRoutes.loginScreen,
-        });
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
+          }),
+        );
       }
     } catch (error) {
       setLoading(false);
-      console.error('Error deleting:', error);
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
+          }),
+        );
+      } else {
+        console.error('Network error:', error);
+        Alert.alert('Error deleting:', error);
+      }
     }
   };
   return (

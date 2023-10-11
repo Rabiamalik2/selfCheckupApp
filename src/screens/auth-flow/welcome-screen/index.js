@@ -6,7 +6,12 @@ import Loader from '../../../components/loader';
 import Onboarding from '../../../components/my-carousal/onboarding';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch} from 'react-redux';
-import {useNavigation, StackActions} from '@react-navigation/native';
+import {
+  useNavigation,
+  useRoute,
+  CommonActions,
+  StackActions,
+} from '@react-navigation/native';
 import * as Keychain from 'react-native-keychain';
 import {fetchUserData} from '../../../services/apis/app/userApis';
 import {setUser} from '../../../services/redux/reducers/user-reducer';
@@ -47,8 +52,14 @@ const WelcomeScreen = () => {
           );
         } else {
           navigation.dispatch(
-            StackActions.replace(RouteNames.navigatorNames.authNavigator, {
-              screen: RouteNames.authRoutes.loginScreen,
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                {
+                  name: RouteNames.navigatorNames.authNavigator,
+                  params: {screen: RouteNames.authRoutes.loginScreen},
+                },
+              ],
             }),
           );
         }

@@ -1,17 +1,22 @@
 //import liraries
 import React, {Component, useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import {View, Text, TouchableOpacity, FlatList, Alert} from 'react-native';
 import styles from './styles';
 import {
   fetchEmergencyContacts,
   deleteContact,
 } from '../../../services/apis/app/contactApis';
-import {useNavigation} from '@react-navigation/native';
+import {
+  useNavigation,
+  useRoute,
+  CommonActions,
+  StackActions,
+} from '@react-navigation/native';
+import * as Keychain from 'react-native-keychain';
 import {useSelector} from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import Loader from '../../../components/loader';
 import RouteNames from '../../../services/constants/route-names';
 
@@ -29,7 +34,23 @@ const EmergencyContactScreen = props => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.error('Error sending data:', error);
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
+          }),
+        );
+      } else {
+        console.error('Error:', error);
+        Alert.alert('Error getting contacts', error);
+      }
     }
   };
   const deleteContacts = async id => {
@@ -46,7 +67,23 @@ const EmergencyContactScreen = props => {
       }
     } catch (error) {
       setLoading(false);
-      console.error('Error deleting:', error);
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
+          }),
+        );
+      } else {
+        console.error('Error deleting:', error);
+        Alert.alert('Error during deleting contact', error);
+      }
     }
   };
   useEffect(() => {
@@ -57,10 +94,7 @@ const EmergencyContactScreen = props => {
       <Loader visible={loading} />
       <View style={styles.scView}>
         <TouchableOpacity onPress={() => props.navigation.goBack()}>
-          <MaterialIcons
-            name="west"
-            style={styles.westIcon}
-          />
+          <MaterialIcons name="west" style={styles.westIcon} />
         </TouchableOpacity>
         <Text style={styles.selfTxt}>Self</Text>
         <Text style={styles.checkTxt}>Check</Text>
@@ -99,10 +133,13 @@ const EmergencyContactScreen = props => {
                       <TouchableOpacity
                         style={styles.icon1View}
                         onPress={() =>
-                          props.navigation.navigate( RouteNames.navigatorNames.sosNavigator, {
-                            screen: RouteNames.sosNavRoutes.addContactScreen,
-                            params: {itemId: item._id},
-                          })
+                          props.navigation.navigate(
+                            RouteNames.navigatorNames.sosNavigator,
+                            {
+                              screen: RouteNames.sosNavRoutes.addContactScreen,
+                              params: {itemId: item._id},
+                            },
+                          )
                         }>
                         <MaterialIcons
                           name="mode-edit-outline"

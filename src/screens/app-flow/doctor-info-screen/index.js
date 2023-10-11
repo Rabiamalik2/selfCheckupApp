@@ -6,7 +6,12 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Input from '../../../components/text-input-component/textInput';
 import Button from '../../../components/button-component/index.js';
 import Loader from '../../../components/loader';
-import {useNavigation, StackActions} from '@react-navigation/native';
+import {
+  useNavigation,
+  CommonActions,
+  StackActions,
+} from '@react-navigation/native';
+import * as Keychain from 'react-native-keychain';
 import {getDoctorInfo} from '../../../services/apis/app/medicalApis';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useSelector} from 'react-redux';
@@ -44,8 +49,23 @@ const DoctorInfoScreen = props => {
       }
     } catch (error) {
       setLoading(false);
-      console.error('Error during adding info:', error);
-      Alert.alert('Error during adding info');
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
+          }),
+        );
+      } else {
+        console.error('Error during adding info:', error);
+        Alert.alert('Error during adding info');
+      }
     }
   };
   return (

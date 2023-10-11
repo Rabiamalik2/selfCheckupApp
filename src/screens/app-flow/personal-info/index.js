@@ -3,9 +3,6 @@ import React, {Component, useState} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
   SafeAreaView,
   Alert,
   Pressable,
@@ -16,18 +13,19 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Input from '../../../components/text-input-component/textInput';
 import Button from '../../../components/button-component/index.js';
 import Loader from '../../../components/loader';
-import {useNavigation, StackActions, useRoute} from '@react-navigation/native';
+import {
+  useNavigation,
+  useRoute,
+  CommonActions,
+  StackActions,
+} from '@react-navigation/native';
+import * as Keychain from 'react-native-keychain';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Picker} from '@react-native-picker/picker';
 import DatePicker from '@react-native-community/datetimepicker';
 import {getPersonalInfo} from '../../../services/apis/app/userApis';
 import RouteNames from '../../../services/constants/route-names';
 import {useSelector} from 'react-redux';
-import {
-  responsiveFontSize,
-  responsiveHeight,
-  responsiveWidth,
-} from 'react-native-responsive-dimensions';
 // create a component
 
 const PersonalInfoScreen = props => {
@@ -80,8 +78,23 @@ const PersonalInfoScreen = props => {
       }
     } catch (error) {
       setLoading(false);
-      console.error('Error during adding info:', error);
-      Alert.alert('Error during adding info');
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
+          }),
+        );
+      } else {
+        console.error('Error during adding info:', error);
+        Alert.alert('Error during adding info', error);
+      }
     }
   };
   return (

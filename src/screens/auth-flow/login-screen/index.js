@@ -71,18 +71,14 @@ const LoginScreen = props => {
           );
           setLoading(false);
         }
-      } else if (error.response && error.response.status === 401) {
-        await Keychain.resetGenericPassword();
-      } else {
+      }  else {
         console.error('Credentials not matching:', error);
         Alert.alert('Invalid credentials');
       }
     } catch (error) {
       console.error('Error during login:', error);
       Alert.alert('Error during login');
-      if (error.response && error.response.status === 401) {
-        await Keychain.resetGenericPassword();
-      }
+      
     }
   };
 

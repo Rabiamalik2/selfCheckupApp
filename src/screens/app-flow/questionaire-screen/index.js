@@ -2,10 +2,15 @@ import React, {Component, useRef, useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, SafeAreaView, Alert} from 'react-native';
 import styles from './styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import Input from '../../../components/text-input-component/textInput';
 import Button from '../../../components/button-component/index.js';
-import {useNavigation, StackActions} from '@react-navigation/native';
+import {
+  useNavigation,
+  useRoute,
+  CommonActions,
+  StackActions,
+} from '@react-navigation/native';
+import * as Keychain from 'react-native-keychain';
 import CheckBox from '@react-native-community/checkbox';
 import {
   getQuestionaire,
@@ -43,7 +48,17 @@ const QuestionaireScreen1 = props => {
       }
     } catch (error) {
       setLoading(false);
-      console.error('Error sending data:', error);
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+        navigation.dispatch(
+          CommonActions.reset(RouteNames.navigatorNames.authNavigator, {
+            screen: RouteNames.authRoutes.loginScreen,
+          }),
+        );
+      } else {
+        console.error('Error sending data:', error);
+        Alert.alert('Error sending data', error);
+      }
     }
   };
   const sendQuestionaireAnswers = async () => {
@@ -70,6 +85,23 @@ const QuestionaireScreen1 = props => {
       }
     } catch (error) {
       setLoading(false);
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
+          }),
+        );
+      } else {
+        console.error('Error during storing answers:', error);
+        Alert.alert('Error ', error);
+      }
       console.error('Error during storing answers:', error);
       Alert.alert('Error ');
     }

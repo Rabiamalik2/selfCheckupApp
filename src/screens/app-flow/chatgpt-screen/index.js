@@ -1,34 +1,37 @@
 //import liraries
-import React, {useState, useCallback, useEffect} from 'react';
-import {GiftedChat, Bubble, InputToolbar} from 'react-native-gifted-chat';
+import React, {useState, useCallback} from 'react';
+import {GiftedChat, InputToolbar} from 'react-native-gifted-chat';
 import {
+  useNavigation,
+  CommonActions,
   useFocusEffect,
 } from '@react-navigation/native';
+import * as Keychain from 'react-native-keychain';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Loader from '../../../components/loader';
 import 'react-native-get-random-values';
 import {createMsgApi, getGptMSgs} from '../../../services/apis/app/chatApis';
-import {View, Text, TouchableOpacity,Modal,} from 'react-native';
+import {View, Text, TouchableOpacity, Alert} from 'react-native';
 import styles from './styles';
-import Colors from '../../../services/constants/colors';
 import {useSelector} from 'react-redux';
 import RenderBubble from '../../../components/render-bubble-component';
 // create a component
 const ChatGptScreen = props => {
   const userData = useSelector(state => state.user);
   // console.log("msgUSer", userData);
+  const navigation = useNavigation();
   const [loading, setLoading] = React.useState(false);
   const [messages, setMessages] = useState([]);
   const userID = userData.user._id;
-  
+
   // const [answer, setAnswer] = useState();
   const defaultMsg = async messages => {
     try {
-      console.log("userMsgId", userID)
+      console.log('userMsgId', userID);
       setLoading(true);
       const res = await createMsgApi(userID, messages[0]);
       setLoading(false);
-      console.log(res.data)
+      console.log(res.data);
       if (res.status == 201) {
         setMessages(previousMessages =>
           GiftedChat.append(previousMessages, res.data.msg),
@@ -37,7 +40,24 @@ const ChatGptScreen = props => {
       }
     } catch (error) {
       setLoading(false);
-      console.error('Error sending data:', error);
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
+          }),
+        );
+      } else {
+        setLoading(false);
+        console.error('Error sending data:', error);
+        Alert.alert('error: ', error);
+      }
     }
   };
   const onSend = useCallback((messages = []) => {
@@ -54,7 +74,7 @@ const ChatGptScreen = props => {
         try {
           setLoading(true);
           const fetchedMsgs = await getGptMSgs(userID);
-          console.log("userMsgId111", userID)
+          console.log('userMsgId111', userID);
           console.log('all mesgs', fetchedMsgs);
           setLoading(false);
           if (fetchedMsgs.length > 0) {
@@ -64,7 +84,23 @@ const ChatGptScreen = props => {
           }
         } catch (error) {
           setLoading(false);
-          console.error('Error getting data:', error);
+          if (error.response && error.response.status === 401) {
+            await Keychain.resetGenericPassword();
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [
+                  {
+                    name: RouteNames.navigatorNames.authNavigator,
+                    params: {screen: RouteNames.authRoutes.loginScreen},
+                  },
+                ],
+              }),
+            );
+          } else {
+            console.error('Error getting data:', error);
+            Alert.alert('Error', error);
+          }
         }
       };
       displayingMsgs();
@@ -88,7 +124,7 @@ const ChatGptScreen = props => {
             <GiftedChat
               messages={messages}
               onSend={messages => onSend(messages)}
-              renderBubble={(props) => <RenderBubble {...props} />}
+              renderBubble={props => <RenderBubble {...props} />}
               renderInputToolbar={props => customtInputToolbar(props)}
               user={userData.user}
             />

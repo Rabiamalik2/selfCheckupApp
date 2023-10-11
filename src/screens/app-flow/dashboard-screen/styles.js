@@ -16,7 +16,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   scView: {
-    // marginLeft: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 60,
     marginTop: 30,
     flexDirection: 'row',
     marginBottom: 10,

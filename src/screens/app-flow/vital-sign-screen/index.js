@@ -2,10 +2,14 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, SafeAreaView, Alert} from 'react-native';
 import {
-  useFocusEffect,
   useNavigation,
+  useRoute,
+  CommonActions,
+  StackActions,
   useIsFocused,
+  useFocusEffect,
 } from '@react-navigation/native';
+import * as Keychain from 'react-native-keychain';
 import Loader from '../../../components/loader';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
@@ -21,6 +25,7 @@ import styles from './styles';
 import Colors from '../../../services/constants/colors';
 // create a component
 const VitalSignsScreen = props => {
+  const navigation = useNavigation();
   const userData = useSelector(state => state.user);
   const [loading, setLoading] = React.useState(false);
   const [bloodPressure, setBloodPressure] = useState('');
@@ -44,7 +49,23 @@ const VitalSignsScreen = props => {
       }
     } catch (error) {
       setLoading(false);
-      console.error('Error getting vitals data:', error);
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
+          }),
+        );
+      } else {
+        console.error('Error getting vitals data:', error);
+        Alert.alert('Error getting vitals data:', error);
+      }
     }
   };
 
@@ -75,8 +96,23 @@ const VitalSignsScreen = props => {
       }
     } catch (error) {
       setLoading(false);
-      console.error('Error during adding Signs:', error);
-      Alert.alert('Error during adding Vital Signs');
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
+          }),
+        );
+      } else {
+        console.error('Error during adding Signs:', error);
+        Alert.alert('Error during adding Vital Signs');
+      }
     }
   };
   return (

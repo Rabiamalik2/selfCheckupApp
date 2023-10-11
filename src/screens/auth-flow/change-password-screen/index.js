@@ -3,7 +3,6 @@ import React, {Component, useState} from 'react';
 import {View, Text, Alert} from 'react-native';
 import {useNavigation, StackActions, useRoute} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Entypo from 'react-native-vector-icons/Entypo';
 import styles from './styles';
 import Input from '../../../components/text-input-component/textInput';
 import Button from '../../../components/button-component/index.js';
@@ -23,22 +22,43 @@ const ChangePasswordScreen = props => {
   const [password, setPassword] = useState('');
   console.log('Fp Screen', email);
   const updatePassword = async () => {
-    if (pass == password) {
-      setLoading(true);
-      const response = await updatePasswordApiCall(email, password);
-      setLoading(false);
-      if (response.status == 201) {
+    try {
+      if (pass == password) {
+        setLoading(true);
+        const response = await updatePasswordApiCall(email, password);
         setLoading(false);
-        Alert.alert('Update Password', 'Your Password has been updated');
+        if (response.status == 201) {
+          setLoading(false);
+          Alert.alert('Update Password', 'Your Password has been updated');
+          navigation.dispatch(
+            StackActions.replace(RouteNames.navigatorNames.authNavigator, {
+              screen: RouteNames.authRoutes.loginScreen,
+              params: {email},
+            }),
+          );
+        } else {
+          setLoading(false);
+          Alert.alert('Update Password', 'Your Password could not be updated');
+        }
+      }
+    } catch (error) {
+      setLoading(false);
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
         navigation.dispatch(
-          StackActions.replace(RouteNames.navigatorNames.authNavigator, {
-            screen: RouteNames.authRoutes.loginScreen,
-            params: {email},
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
           }),
         );
       } else {
-        setLoading(false);
-        Alert.alert('Update Password', 'Your Password could not be updated');
+        console.error('Network error:', error);
+        Alert.alert('Error during updating password', error);
       }
     }
   };
@@ -49,7 +69,7 @@ const ChangePasswordScreen = props => {
       keyboardShouldPersistTaps="handled"
       scrollEnabled={false}>
       <SafeAreaView style={styles.container}>
-      <Loader visible={loading} />
+        <Loader visible={loading} />
         <View style={styles.viewS1}>
           <Text style={styles.txtS1}>Self</Text>
           <Text style={styles.txtS2}>Check</Text>

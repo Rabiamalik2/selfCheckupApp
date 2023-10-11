@@ -11,12 +11,18 @@ import {
 } from 'react-native';
 import styles from './styles';
 import Loader from '../../../components/loader';
-import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import {
   fetchEmergencyContacts,
   sendSosMessageCall,
 } from '../../../services/apis/app/contactApis';
-import {useFocusEffect} from '@react-navigation/native';
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+  CommonActions,
+  StackActions,
+} from '@react-navigation/native';
+import * as Keychain from 'react-native-keychain';
 import {useSelector} from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import RouteNames from '../../../services/constants/route-names';
@@ -36,6 +42,7 @@ const SosScreen = props => {
       };
     }, []),
   );
+  const navigation = useNavigation();
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = useState([]);
   const getEmergencyContacts = async () => {
@@ -46,7 +53,23 @@ const SosScreen = props => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.error('Error sending data:', error);
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
+          }),
+        );
+      } else {
+        console.error('Error sending data:', error);
+        Alert.alert('Error', error);
+      }
     }
   };
   const sendMessage = async phone => {
@@ -66,8 +89,23 @@ const SosScreen = props => {
       }
     } catch (error) {
       setLoading(false);
-      console.error('Error:', error);
-      Alert.alert('Error');
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
+          }),
+        );
+      } else {
+        console.error('Error:', error);
+        Alert.alert('Error');
+      }
     }
   };
   useEffect(() => {

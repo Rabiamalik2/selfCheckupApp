@@ -11,11 +11,11 @@ import {
 import styles from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import Input from '../../../components/text-input-component/textInput';
 import Button from '../../../components/button-component';
 import Loader from '../../../components/loader';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute, CommonActions} from '@react-navigation/native';
+import * as Keychain from 'react-native-keychain';
 import {
   addContacts,
   updateContact,
@@ -35,10 +35,10 @@ const AddContactScreen = props => {
   const [phone, setPhone] = useState('');
   const [relation, setRelation] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-  const buttonOk =()=>{
+  const buttonOk = () => {
     setModalVisible(false);
     navigation.navigate(RouteNames.sosNavRoutes.emergencyContactScreen);
-  }
+  };
   const addContactOnPress = async userID => {
     try {
       if (userData.user.step == 1) {
@@ -108,8 +108,23 @@ const AddContactScreen = props => {
       }
     } catch (error) {
       setLoading(false);
-      console.error('Network error:', error);
-      Alert.alert('Error during updating contact');
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
+          }),
+        );
+      } else {
+        console.error('Network error:', error);
+        Alert.alert('Error during updating contact', error);
+      }
     }
   };
 

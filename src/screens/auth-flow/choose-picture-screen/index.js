@@ -5,8 +5,15 @@ import {
   Image,
   SafeAreaView,
   PermissionsAndroid,
+  Alert,
 } from 'react-native';
-import {useNavigation, StackActions, useRoute} from '@react-navigation/native';
+import {
+  useNavigation,
+  useRoute,
+  CommonActions,
+  StackActions,
+} from '@react-navigation/native';
+import * as Keychain from 'react-native-keychain';
 import Loader from '../../../components/loader';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
@@ -76,7 +83,23 @@ const ChoosePicScreen = () => {
       );
       await addImage(user.email, imagePath);
     } catch (error) {
-      console.error('Image upload failed:', error);
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
+          }),
+        );
+      } else {
+        console.error('Network error:', error);
+        Alert.alert('Error during adding image', error);
+      }
     }
   };
 
