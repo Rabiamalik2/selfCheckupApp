@@ -4,6 +4,7 @@ import {View, Text, SafeAreaView} from 'react-native';
 import {useNavigation, StackActions} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
+import Loader from '../../../components/loader';
 import RouteNames from '../../../services/constants/route-names';
 import Input from '../../../components/text-input-component/textInput';
 import Button from '../../../components/button-component/index.js';
@@ -15,8 +16,11 @@ const ForgetPasswordScreen = props => {
   const navigation = useNavigation();
   const userData = useSelector(state => state.user);
   const [emailaddress, setEmailaddress] = useState('');
+  const [loading, setLoading] = React.useState(false);
   const sendEmailForReset = async () => {
+    setLoading(true);
     await sendResetPassEmail(emailaddress);
+    setLoading(false);
     navigation.dispatch(
       StackActions.replace(RouteNames.navigatorNames.authNavigator, {
         screen: RouteNames.authRoutes.codeScreen,
@@ -26,6 +30,7 @@ const ForgetPasswordScreen = props => {
   };
   return (
     <SafeAreaView style={styles.container}>
+    <Loader visible={loading} />
       <View style={styles.viewS1}>
         <Text style={styles.txtS1}>Self</Text>
         <Text style={styles.txtS2}>Check</Text>

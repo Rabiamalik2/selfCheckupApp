@@ -7,6 +7,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import styles from './styles';
 import Input from '../../../components/text-input-component/textInput';
 import Button from '../../../components/button-component/index.js';
+import Loader from '../../../components/loader';
 import NoAccount from '../../../components/text-input-component/noAccount';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -17,13 +18,17 @@ const ChangePasswordScreen = props => {
   const navigation = useNavigation();
   const route = useRoute();
   const email = route.params?.email;
+  const [loading, setLoading] = React.useState(false);
   const [pass, setpass] = useState('');
   const [password, setPassword] = useState('');
   console.log('Fp Screen', email);
   const updatePassword = async () => {
     if (pass == password) {
+      setLoading(true);
       const response = await updatePasswordApiCall(email, password);
+      setLoading(false);
       if (response.status == 201) {
+        setLoading(false);
         Alert.alert('Update Password', 'Your Password has been updated');
         navigation.dispatch(
           StackActions.replace(RouteNames.navigatorNames.authNavigator, {
@@ -32,6 +37,7 @@ const ChangePasswordScreen = props => {
           }),
         );
       } else {
+        setLoading(false);
         Alert.alert('Update Password', 'Your Password could not be updated');
       }
     }
@@ -43,6 +49,7 @@ const ChangePasswordScreen = props => {
       keyboardShouldPersistTaps="handled"
       scrollEnabled={false}>
       <SafeAreaView style={styles.container}>
+      <Loader visible={loading} />
         <View style={styles.viewS1}>
           <Text style={styles.txtS1}>Self</Text>
           <Text style={styles.txtS2}>Check</Text>
