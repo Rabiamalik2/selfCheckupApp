@@ -1,5 +1,5 @@
 //import liraries
-import React from 'react';
+import React,{useState} from 'react';
 import {
   View,
   Text,
@@ -14,15 +14,16 @@ import PopularActivities from '../../../components/fun-screen-items/popularActiv
 import RecentVideos from '../../../components/fun-screen-items/recentVideos/index.js';
 import Images from '../../../services/constants/images';
 import styles from './styles';
+import RouteNames from '../../../services/constants/route-names.js';
 // create a component
 const FunEduScreen = props => {
   const navigation = useNavigation();
-  const data = [
+  const [data, setData] = useState([
     {
       key: '1',
       name: 'Yoga Activity',
       onPress: () =>
-        navigation.navigate('funNavigator', {screen: 'yogaActivityScreen'}),
+        navigation.navigate(RouteNames.navigatorNames.funNavigator, {screen: RouteNames.funNavRoutes.yogaActivityScreen}),
       imageUri: Images.person,
     },
     {
@@ -35,17 +36,17 @@ const FunEduScreen = props => {
       key: '3',
       name: 'Health Activity',
       onPress: () =>
-        navigation.navigate('funNavigator', {screen: 'healthEduScreen'}),
+        navigation.navigate(RouteNames.navigatorNames.funNavigator, {screen: RouteNames.funNavRoutes.healthEduScreen}),
       imageUri: Images.health,
     },
     {
       key: '4',
       name: 'Yoga Video Activity',
       onPress: () =>
-        navigation.navigate('funNavigator', {screen: 'liveActivityScreen'}),
+        navigation.navigate(RouteNames.navigatorNames.funNavigator, {screen: RouteNames.funNavRoutes.liveActivityScreen}),
       imageUri: Images.person,
     },
-  ];
+  ])
   const renderItem = ({item}) => (
     <PopularActivities
       onPress={item.onPress}

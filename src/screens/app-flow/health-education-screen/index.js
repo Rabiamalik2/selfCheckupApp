@@ -11,11 +11,7 @@ import {
   FlatList,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {
-  responsiveHeight,
-  responsiveWidth,
-  responsiveFontSize,
-} from 'react-native-responsive-dimensions';
+import RouteNames from '../../../services/constants/route-names.js';
 import PopularActivities from '../../../components/fun-screen-items/popularActivities/index.js';
 import RecentVideos from '../../../components/fun-screen-items/recentVideos/index.js';
 import HealthItem from '../../../components/health-screen-items/index..js';
@@ -26,7 +22,7 @@ import Colors from '../../../services/constants/colors.js';
 
 const HealthEduScreen = props => {
   const navigation = useNavigation();
-  const data = [
+  const [data, setData] = useState([
     {
       key: '1',
       name: 'Health Insurance',
@@ -43,16 +39,20 @@ const HealthEduScreen = props => {
       key: '3',
       name: 'Yoga Video Activity',
       onPress: () =>
-        navigation.navigate('funNavigator', {screen: 'liveActivityScreen'}),
+        navigation.navigate(RouteNames.navigatorNames.funNavigator, {
+          screen: RouteNames.funNavRoutes.liveActivityScreen,
+        }),
       imageUri: Images.person,
     },
-  ];
-  const data1 = [
+  ]);
+  const [data1, setData1] = useState([
     {
       key: '1',
       name: 'Yoga Activity',
       onPress: () =>
-        navigation.navigate('funNavigator', {screen: 'yogaActivityScreen'}),
+        navigation.navigate(RouteNames.navigatorNames.funNavigator, {
+          screen: RouteNames.funNavRoutes.yogaActivityScreen,
+        }),
       imageUri: Images.person,
     },
     {
@@ -65,17 +65,21 @@ const HealthEduScreen = props => {
       key: '3',
       name: 'Health Activity',
       onPress: () =>
-        navigation.navigate('funNavigator', {screen: 'healthEduScreen'}),
+        navigation.navigate(RouteNames.navigatorNames.funNavigator, {
+          screen: RouteNames.funNavRoutes.healthEduScreen,
+        }),
       imageUri: Images.health,
     },
     {
       key: '4',
       name: 'Yoga Video Activity',
       onPress: () =>
-        navigation.navigate('funNavigator', {screen: 'liveActivityScreen'}),
+        navigation.navigate(RouteNames.navigatorNames.funNavigator, {
+          screen: RouteNames.funNavRoutes.liveActivityScreen,
+        }),
       imageUri: Images.person,
     },
-  ];
+  ]);
   const renderItem = ({item}) => (
     <HealthItem
       onPress={item.onPress}
