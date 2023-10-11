@@ -35,6 +35,10 @@ const AddContactScreen = props => {
   const [phone, setPhone] = useState('');
   const [relation, setRelation] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const buttonOk =()=>{
+    setModalVisible(false);
+    navigation.navigate(RouteNames.sosNavRoutes.emergencyContactScreen);
+  }
   const addContactOnPress = async userID => {
     try {
       if (userData.user.step == 1) {
@@ -51,7 +55,7 @@ const AddContactScreen = props => {
         if (response.status === 201) {
           setLoading(false);
           setModalVisible(true);
-          navigation.navigate(RouteNames.sosNavRoutes.emergencyContactScreen);
+          // navigation.navigate(RouteNames.sosNavRoutes.emergencyContactScreen);
           setLoading(false);
         } else {
           setLoading(false);
@@ -184,7 +188,7 @@ const AddContactScreen = props => {
                         </Text>
                         <Button
                           style={[styles.button, styles.buttonClose]}
-                          onPress={() => setModalVisible(!modalVisible)}
+                          onPress={buttonOk}
                           name="Ok"
                         />
                       </View>
