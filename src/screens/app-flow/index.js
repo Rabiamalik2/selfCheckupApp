@@ -1,4 +1,4 @@
-import HomeScreen from './home-screen';
+
 import DashboardScreen from './dashboard-screen';
 import DoctorInfoScreen from './doctor-info-screen';
 import MedicoreInfoScreen from './medicare-info-screen';
@@ -17,7 +17,7 @@ import AddContactScreen from './add-contact-screen';
 import PersonalInfoScreen from './personal-info';
 
 const AppRoutes = {
-  HomeScreen,
+
   DashboardScreen,
   DoctorInfoScreen,
   MedicoreInfoScreen,
