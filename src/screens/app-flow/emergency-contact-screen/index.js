@@ -8,9 +8,9 @@ import {
 } from '../../../services/apis/app/contactApis';
 import {
   useNavigation,
-  useRoute,
   CommonActions,
-  StackActions,
+  useIsFocused,
+  useFocusEffect
 } from '@react-navigation/native';
 import * as Keychain from 'react-native-keychain';
 import {useSelector} from 'react-redux';
@@ -25,6 +25,7 @@ const EmergencyContactScreen = props => {
   const navigation = useNavigation();
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = useState([]);
+  const isFocused = useIsFocused();
   // console.log('contacts', data.length);
   const getEmergencyContacts = async () => {
     try {
@@ -87,7 +88,9 @@ const EmergencyContactScreen = props => {
     }
   };
   useEffect(() => {
-    getEmergencyContacts();
+    if (isFocused) {
+      getEmergencyContacts();
+    }
   }, []);
   return (
     <SafeAreaView style={styles.container}>

@@ -9,7 +9,7 @@ import Colors from '../../../services/constants/colors';
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     // flexGrow: 0,
     alignItems: 'center',
     backgroundColor: Colors.white,
