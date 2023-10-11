@@ -13,7 +13,6 @@ const SosNavigation = () => {
         <Stack.Screen name={sosNavRoutes.sosScreen} component={TabNavRoutes.TabNavRoutes.SosScreen} />
         <Stack.Screen name={sosNavRoutes.emergencyContactScreen} component={SosNavRoutes.SosNavRoutes.EmergencyContactScreen} />
         <Stack.Screen name={sosNavRoutes.addContactScreen} component={SosNavRoutes.SosNavRoutes.AddContactScreen} />
-        <Stack.Screen name={sosNavRoutes.contactAddedScreen} component={SosNavRoutes.SosNavRoutes.ContactAddedScreen} />
         <Stack.Screen name={sosNavRoutes.personalInfoScreen} component={SosNavRoutes.SosNavRoutes.PersonalInfoScreen} />
         </Stack.Navigator>
     );

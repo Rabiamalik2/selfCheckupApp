@@ -14,7 +14,6 @@ import VitalSignsScreen from './vital-sign-screen';
 import QuestionaireScreen1 from './questionaire-screen';
 import EmergencyContactScreen from './emergency-contact-screen';
 import AddContactScreen from './add-contact-screen';
-import ContactAddedScreen from './contact-added-screen';
 import PersonalInfoScreen from './personal-info';
 
 const AppRoutes = {
@@ -43,7 +42,6 @@ const TabNavRoutes = {
 const SosNavRoutes = {
   EmergencyContactScreen,
   AddContactScreen,
-  ContactAddedScreen,
   PersonalInfoScreen,
 };
 
