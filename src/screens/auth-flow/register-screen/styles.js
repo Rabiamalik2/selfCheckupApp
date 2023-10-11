@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   },
 
   btnView: {
-    marginTop: 10,
+    marginTop: -10,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -97,17 +97,17 @@ const styles = StyleSheet.create({
     height: responsiveHeight(5),
     alignItems: 'center',
     borderRadius: 12,
-    marginTop: -5,
     color: 'white',
   },
   fbToS: {
+    marginVertical:4,
     backgroundColor: Colors.oceanBlue,
     justifyContent: 'center',
     width: responsiveWidth(80),
     height: responsiveHeight(5),
     alignItems: 'center',
     borderRadius: 12,
-    marginTop: 5,
+
   },
   signfbS: {
     color: Colors.white,

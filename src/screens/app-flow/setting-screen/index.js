@@ -1,23 +1,71 @@
-import React from 'react';
-import {View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+  Modal,
+  Alert,
+} from 'react-native';
+import Loader from '../../../components/loader';
+import Button from '../../../components/button-component';
 import {useNavigation, StackActions} from '@react-navigation/native';
 import styles from '../setting-screen/styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector} from 'react-redux';
+import {deleteUser} from '../../../services/apis/app/userApis';
 import RouteNames from '../../../services/constants/route-names';
-
+import * as Keychain from 'react-native-keychain';
 const SettingScreen = props => {
   const navigation = useNavigation();
   const userData = useSelector(state => state.user);
   console.log('sys:', userData);
-  const Logout = () => {
-    navigation.navigate(RouteNames.navigatorNames.authNavigator, {
-      screen: RouteNames.authRoutes.loginScreen,
-    });
+  const [loading, setLoading] = React.useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const Logout = async () => {
+    try {
+      await Keychain.resetGenericPassword();
+      navigation.navigate(RouteNames.navigatorNames.authNavigator, {
+        screen: RouteNames.authRoutes.loginScreen,
+      });
+    } catch (error) {
+      console.error('Error during logout:', error);
+      Alert.alert('Error during logout');
+    }
+  };
+  const buttonDel = () => {
+    setModalVisible(true);
+  };
+  const cancelDelete = () => {
+    Alert.alert('Delete Profile', 'Deletion Canceled');
+    setModalVisible(false);
+  };
+  const deleteSelectedUser = async () => {
+    try {
+      setLoading(true);
+      const response = await deleteUser(userData.user._id);
+      setLoading(false);
+      if (response.status == 204) {
+        setLoading(false);
+        Alert.alert(
+          'Delete Profile',
+          'Profile Deleted , Redirecting You to login Page.',
+        );
+        setModalVisible(false);
+        await Keychain.resetGenericPassword();
+        navigation.navigate(RouteNames.navigatorNames.authNavigator, {
+          screen: RouteNames.authRoutes.loginScreen,
+        });
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error('Error deleting:', error);
+    }
   };
   return (
     <SafeAreaView style={styles.container}>
+      <Loader visible={loading} />
       <View style={styles.istView}>
         <TouchableOpacity onPress={() => props.navigation.goBack()}>
           <MaterialIcons name="keyboard-arrow-left" style={styles.arrowIcon} />
@@ -80,7 +128,7 @@ const SettingScreen = props => {
             <Text style={styles.biTxt}>Symptom Tracking</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.biView}>
+        <TouchableOpacity style={styles.biView} onPress={buttonDel}>
           <Text style={styles.deleteTxt}>Delete health Profile</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.logoutView} onPress={Logout}>
@@ -88,6 +136,36 @@ const SettingScreen = props => {
           <Text style={styles.biTxt}>Logout</Text>
         </TouchableOpacity>
       </View>
+      {modalVisible == true ? (
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}>
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>
+                  Do You really want to delete your profile?
+                </Text>
+                <View style={styles.buttonView}>
+                  <Button
+                    onPress={deleteSelectedUser}
+                    style={[styles.button]}
+                    name="Yes"
+                  />
+                  <Button
+                    onPress={cancelDelete}
+                    style={[styles.button]}
+                    name="No"
+                  />
+                </View>
+              </View>
+            </View>
+          </Modal>
+        </View>
+      ) : (
+        <View></View>
+      )}
     </SafeAreaView>
   );
 };

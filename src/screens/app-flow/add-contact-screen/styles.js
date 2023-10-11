@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   scView: {
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 30,
     flexDirection: 'row',
     marginBottom: 10,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(5),
     color: 'white',
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.purple,
     marginHorizontal: 10,
     alignItems: 'center',
     borderWidth: 1,
@@ -147,6 +147,43 @@ const styles = StyleSheet.create({
     left: -60,
     fontSize: responsiveFontSize(4),
     color: Colors.purple,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: Colors.skyBlue,
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: Colors.darkPink,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    backgroundColor:Colors.purple,
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  textStyle: {
+    color: Colors.white,
+    fontFamily: Fonts.poppinsExtraBold,
+    textAlign: 'center',
+  },
+  modalText: {
+    color: Colors.white,
+    marginBottom: 15,
+    textAlign: 'center',
   },
 });
 export default styles;

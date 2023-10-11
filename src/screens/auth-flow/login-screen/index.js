@@ -16,13 +16,8 @@ import * as Keychain from 'react-native-keychain';
 import {loginToMyProfile} from '../../../services/apis/auth';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {
-  responsiveHeight,
-  responsiveWidth,
-} from 'react-native-responsive-dimensions';
 import {useDispatch} from 'react-redux';
 import {setUser} from '../../../services/redux/reducers/user-reducer';
-import Colors from '../../../services/constants/colors';
 GoogleSignin.configure({
   webClientId:
     '416536186096-94n53m91gd4vdi536fn6lea7qfi9tmqb.apps.googleusercontent.com',
@@ -76,6 +71,8 @@ const LoginScreen = props => {
           );
           setLoading(false);
         }
+      } else if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
       } else {
         console.error('Credentials not matching:', error);
         Alert.alert('Invalid credentials');
@@ -83,6 +80,9 @@ const LoginScreen = props => {
     } catch (error) {
       console.error('Error during login:', error);
       Alert.alert('Error during login');
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+      }
     }
   };
 
@@ -129,12 +129,14 @@ const LoginScreen = props => {
                   <TouchableOpacity
                     onPress={() =>
                       navigation.dispatch(
-                        StackActions.replace(RouteNames.navigatorNames.authNavigator, {
-                          screen: RouteNames.authRoutes.forgetPasswordScreen,
-                        }),
+                        StackActions.replace(
+                          RouteNames.navigatorNames.authNavigator,
+                          {
+                            screen: RouteNames.authRoutes.forgetPasswordScreen,
+                          },
+                        ),
                       )
                     }
-                    // navigate(RouteNames.appRoutes.forgetPasswordScreen)}
                     style={styles.fpassToStle}>
                     <Text style={styles.txtFpass}>Forgot Password?</Text>
                   </TouchableOpacity>
@@ -145,34 +147,23 @@ const LoginScreen = props => {
                   name="Sign In"
                 />
                 <View style={styles.horizontalLine} />
-                <Text
-                  style={{
-                    textAlign: 'center',
-                    color: Colors.white,
-                    marginTop: 20,
-                    marginBottom: 2,
-                  }}>
-                  Or sign in with
-                </Text>
+                <Text style={styles.signinTxt}>Or sign in with</Text>
                 <View style={styles.googleAndPhoneStyle}>
                   <TouchableOpacity
                     style={styles.googleButtonStyle}
                     onPress={() =>
                       onGoogleButtonPress().then(() =>
                         navigation.dispatch(
-                          StackActions.replace(RouteNames.navigatorNames.appNavigator, {
-                            screen: RouteNames.appRoutes.dashboardScreen,
-                          }),
+                          StackActions.replace(
+                            RouteNames.navigatorNames.appNavigator,
+                            {
+                              screen: RouteNames.appRoutes.dashboardScreen,
+                            },
+                          ),
                         ),
                       )
                     }>
-                    <Image
-                      source={Images.google}
-                      style={{
-                        height: responsiveHeight(2),
-                        width: responsiveWidth(4),
-                      }}
-                    />
+                    <Image source={Images.google} style={styles.googleImg} />
                     <Text style={styles.googleTxt}>Google</Text>
                   </TouchableOpacity>
                   <View style={styles.verticalLine} />
@@ -180,18 +171,15 @@ const LoginScreen = props => {
                     style={styles.googleButtonStyle}
                     onPress={() =>
                       navigation.dispatch(
-                        StackActions.replace(RouteNames.navigatorNames.authNavigator, {
-                          screen: RouteNames.authRoutes.signinWithPhoneScreen,
-                        }),
+                        StackActions.replace(
+                          RouteNames.navigatorNames.authNavigator,
+                          {
+                            screen: RouteNames.authRoutes.signinWithPhoneScreen,
+                          },
+                        ),
                       )
                     }>
-                    <Image
-                      source={Images.phone}
-                      style={{
-                        height: responsiveHeight(2),
-                        width: responsiveWidth(4),
-                      }}
-                    />
+                    <Image source={Images.phone} style={styles.phoneImg} />
                     <Text style={styles.googleTxt}>Phone Number</Text>
                   </TouchableOpacity>
                 </View>

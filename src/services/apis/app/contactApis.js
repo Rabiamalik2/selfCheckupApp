@@ -41,7 +41,7 @@ const updateContact = async (
   phone,
   relation,
 ) => {
-  const response = await axiosInstance.post(endPoints?.contactKey, {
+  const response = await axiosInstance.put(endPoints?.contactKey, {
     contactID: contactID,
     firstname: firstname,
     lastname: lastname,

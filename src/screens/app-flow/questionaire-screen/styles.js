@@ -219,6 +219,7 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(1.7),
     alignItems: 'center',
   },
+  buttonView: {flexDirection: 'row', alignItems: 'center'},
 });
 
 export default styles;

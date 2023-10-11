@@ -10,10 +10,8 @@ const Button = ({onPress, name, style}) => {
   return (
     <View style={styles.btnSigninView}>
       <TouchableOpacity
-        style={[style, styles.toSignin]}
-        onPress={() => {
-          onPress();
-        }}>
+        style={style}
+        onPress={onPress}>
         <Text style={[styles.signinS]}>{name}</Text>
       </TouchableOpacity>
     </View>
@@ -24,7 +22,7 @@ export default Button;
 
 const styles = StyleSheet.create({
   btnSigninView: {
-    marginTop: 10,
+    marginTop: 2,
     justifyContent: 'center',
     alignItems: 'center',
   },

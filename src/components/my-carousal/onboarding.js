@@ -54,21 +54,27 @@ const Onboarding = props => {
       <View style={{bottom: 130}}>
         <TouchableOpacity
           style={styles.registerTo}
-          onPress={RouteNames.authRoutes.registerScreen}>
+          onPress={() =>
+            navigation.navigate(RouteNames.navigatorNames.authNavigator, {
+              screen: RouteNames.authRoutes.registerScreen,
+            })
+          }>
           <Text style={styles.registerTxt}>REGISTER</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.signinTo}
           onPress={() =>
-            navigation.navigate(RouteNames.authRoutes.loginScreen)
+            navigation.navigate(RouteNames.navigatorNames.authNavigator, {
+              screen: RouteNames.authRoutes.loginScreen,
+            })
           }>
           <Text style={styles.signinTxt}>SIGN IN</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.termsTo}
           onPress={() =>
-            navigation.navigate('authNavigator', {
-              screen: 'termScreen',
+            navigation.navigate(RouteNames.navigatorNames.authNavigator, {
+              screen: RouteNames.authRoutes.termScreen,
               params: {isReadOnly: true},
             })
           }>

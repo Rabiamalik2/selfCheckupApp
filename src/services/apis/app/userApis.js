@@ -7,10 +7,21 @@ const fetchUserData = async userID => {
       params: {userID: userID},
     });
     const data = response.data;
-    //console.log('data:', data);
     return data;
   } catch (error) {
     console.error('Error fetching data:', error);
+  }
+};
+
+const deleteUser = async userID => {
+  try {
+    console.log(userID);
+    const response = await axiosInstance.delete(endPoints?.userKey, {
+      params: {userID: userID},
+    });
+    return response;
+  } catch (error) {
+    console.error('Error Deleting User:', error);
   }
 };
 
@@ -19,8 +30,6 @@ const addImage = async (email, imagePath) => {
     email: email,
     imagePath: imagePath,
   });
-  // console.log(email);
-  // console.log('add Image', response);
   return response;
 };
 
@@ -31,9 +40,34 @@ const getPersonalInfo = async (userID, dob, gender, homeAddress) => {
     gender: gender,
     homeAddress: homeAddress,
   });
-  //console.log('perosnal info Api:', userID);
-  //console.log('personal info', response);
   return response;
 };
 
-export {addImage, getPersonalInfo, fetchUserData};
+const sendResetPassEmail = async userEmail => {
+  const response = await axiosInstance.post(endPoints.resetPassKey, {
+    userEmail: userEmail,
+  });
+  return response;
+};
+const confirmPasscode = async code => {
+  const response = await axiosInstance.post(endPoints.codeKey, {
+    code: code,
+  });
+  return response;
+};
+const updatePasswordApiCall = async (email, password) => {
+  const response = await axiosInstance.put(endPoints.updatePasswordKey, {
+    email: email,
+    password: password,
+  });
+  return response;
+};
+export {
+  addImage,
+  getPersonalInfo,
+  fetchUserData,
+  deleteUser,
+  sendResetPassEmail,
+  confirmPasscode,
+  updatePasswordApiCall,
+};

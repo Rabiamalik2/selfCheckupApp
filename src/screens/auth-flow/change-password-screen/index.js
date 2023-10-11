@@ -1,18 +1,41 @@
 //import liraries
-import React, {Component} from 'react';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React, {Component, useState} from 'react';
+import {View, Text, Alert} from 'react-native';
+import {useNavigation, StackActions, useRoute} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import styles from './styles';
+import Input from '../../../components/text-input-component/textInput';
+import Button from '../../../components/button-component/index.js';
 import NoAccount from '../../../components/text-input-component/noAccount';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import RouteNames from '../../../services/constants/route-names';
+import {updatePasswordApiCall} from '../../../services/apis/app/userApis';
 // create a component
 const ChangePasswordScreen = props => {
   const navigation = useNavigation();
-
+  const route = useRoute();
+  const email = route.params?.email;
+  const [pass, setpass] = useState('');
+  const [password, setPassword] = useState('');
+  console.log('Fp Screen', email);
+  const updatePassword = async () => {
+    if (pass == password) {
+      const response = await updatePasswordApiCall(email, password);
+      if (response.status == 201) {
+        Alert.alert('Update Password', 'Your Password has been updated');
+        navigation.dispatch(
+          StackActions.replace(RouteNames.navigatorNames.authNavigator, {
+            screen: RouteNames.authRoutes.loginScreen,
+            params: {email},
+          }),
+        );
+      } else {
+        Alert.alert('Update Password', 'Your Password could not be updated');
+      }
+    }
+  };
   return (
     <KeyboardAwareScrollView
       enableOnAndroid={true}
@@ -36,31 +59,25 @@ const ChangePasswordScreen = props => {
                 account and continue your health journey.
               </Text>
               <View>
-                <View style={styles.viewpass}>
-                  <TextInput
-                    placeholder="Password"
-                    placeholderTextColor="white"
-                    secureTextEntry={true}
-                    style={styles.textPsdS}
-                  />
-                  <Entypo name="eye-with-line" style={styles.icon1S} />
-                </View>
-                <View style={styles.viewpass}>
-                  <TextInput
-                    placeholder="Confirm Password"
-                    placeholderTextColor="white"
-                    secureTextEntry={true}
-                    style={styles.textPsdS}
-                  />
-                  <Entypo name="eye-with-line" style={styles.icon1S} />
-                </View>
-              </View>
-              <View style={styles.btnSigninView}>
-                <TouchableOpacity
+                <Input
+                  password
+                  placeholder={'Enter Password'}
+                  placeholderTextColor="white"
+                  value={pass}
+                  onChangeText={text => setpass(text)}
+                />
+                <Input
+                  password
+                  placeholder={'Reconfirm Password'}
+                  placeholderTextColor="white"
+                  value={password}
+                  onChangeText={text => setPassword(text)}
+                />
+                <Button
+                  onPress={updatePassword}
                   style={styles.toSignin}
-                  onPress={RouteNames.authRoutes.loginScreen}>
-                  <Text style={styles.signinS}>UPDATE PASSWORD</Text>
-                </TouchableOpacity>
+                  name="Update Password"
+                />
               </View>
             </View>
           </View>

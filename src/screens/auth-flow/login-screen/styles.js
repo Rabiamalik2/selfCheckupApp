@@ -197,5 +197,19 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderColor: Colors.lightGrey,
   },
+  googleImg: {
+    height: responsiveHeight(2),
+    width: responsiveWidth(4),
+  },
+  signinTxt: {
+    textAlign: 'center',
+    color: Colors.white,
+    marginTop: 20,
+    marginBottom: 2,
+  },
+  phoneImg: {
+    height: responsiveHeight(2),
+    width: responsiveWidth(4),
+  },
 });
 export default styles;

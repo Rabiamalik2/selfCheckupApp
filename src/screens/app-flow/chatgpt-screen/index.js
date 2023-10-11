@@ -8,7 +8,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Loader from '../../../components/loader';
 import 'react-native-get-random-values';
 import {createMsgApi, getGptMSgs} from '../../../services/apis/app/chatApis';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity,Modal,} from 'react-native';
 import styles from './styles';
 import Colors from '../../../services/constants/colors';
 import {useSelector} from 'react-redux';

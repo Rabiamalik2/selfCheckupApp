@@ -1,11 +1,19 @@
 //import libraries
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, SafeAreaView, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+  Alert,
+  Modal,
+} from 'react-native';
 import styles from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import Input from '../../../components/text-input-component/textInput';
+import Button from '../../../components/button-component';
 import Loader from '../../../components/loader';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {
@@ -20,13 +28,13 @@ const AddContactScreen = props => {
   const navigation = useNavigation();
   const Route = useRoute();
   const contactId = Route.params?.itemId;
-
   const userData = useSelector(state => state.user);
   const [loading, setLoading] = useState(false);
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [phone, setPhone] = useState('');
   const [relation, setRelation] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
   const addContactOnPress = async userID => {
     try {
       if (userData.user.step == 1) {
@@ -42,6 +50,7 @@ const AddContactScreen = props => {
         setLoading(false);
         if (response.status === 201) {
           setLoading(false);
+          setModalVisible(true);
           navigation.navigate(RouteNames.sosNavRoutes.emergencyContactScreen);
           setLoading(false);
         } else {
@@ -63,7 +72,8 @@ const AddContactScreen = props => {
           setLoading(false);
           if (response.status === 201) {
             setLoading(false);
-            navigation.navigate(RouteNames.sosNavRoutes.emergencyContactScreen);
+            setModalVisible(true);
+            // navigation.navigate(RouteNames.sosNavRoutes.emergencyContactScreen);
           } else {
             setLoading(false);
             console.error('Error:', response.data);
@@ -82,7 +92,8 @@ const AddContactScreen = props => {
           setLoading(false);
           if (response.status === 201) {
             setLoading(false);
-            navigation.navigate(RouteNames.sosNavRoutes.emergencyContactScreen);
+            setModalVisible(true);
+            // navigation.navigate(RouteNames.sosNavRoutes.emergencyContactScreen);
             setLoading(false);
           } else {
             setLoading(false);
@@ -108,10 +119,7 @@ const AddContactScreen = props => {
         <Loader visible={loading} />
         <View style={styles.scView}>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <MaterialIcons
-              name="west"
-              style={styles.westIcon}
-            />
+            <MaterialIcons name="west" style={styles.westIcon} />
           </TouchableOpacity>
           <Text style={styles.selfTxt}>Self</Text>
           <Text style={styles.checkTxt}>Check</Text>
@@ -163,6 +171,29 @@ const AddContactScreen = props => {
                   <Text style={styles.saveBtnS}>Save</Text>
                 </TouchableOpacity>
               </View>
+              {modalVisible == true ? (
+                <View style={styles.centeredView}>
+                  <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}>
+                    <View style={styles.centeredView}>
+                      <View style={styles.modalView}>
+                        <Text style={styles.modalText}>
+                          Emergency Contact has been added.
+                        </Text>
+                        <Button
+                          style={[styles.button, styles.buttonClose]}
+                          onPress={() => setModalVisible(!modalVisible)}
+                          name="Ok"
+                        />
+                      </View>
+                    </View>
+                  </Modal>
+                </View>
+              ) : (
+                <View></View>
+              )}
             </View>
           </View>
         </View>
@@ -173,3 +204,7 @@ const AddContactScreen = props => {
 
 //make this component available to the app
 export default AddContactScreen;
+/*onRequestClose={() => {
+                      Alert.alert('Modal has been closed.');
+                      setModalVisible(!modalVisible);
+                    }}*/

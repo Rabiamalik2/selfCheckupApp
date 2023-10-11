@@ -14,7 +14,6 @@ import {
 import Loader from '../../../components/loader';
 import {useSelector} from 'react-redux';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import Colors from '../../../services/constants/colors';
 import RouteNames from '../../../services/constants/route-names';
 
 const QuestionaireScreen1 = props => {
@@ -188,7 +187,7 @@ const QuestionaireScreen1 = props => {
                   )}
                 </View>
               )}
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={styles.buttonView}>
                 <Button
                   onPress={handlePreviousQuestion}
                   style={styles.Save}

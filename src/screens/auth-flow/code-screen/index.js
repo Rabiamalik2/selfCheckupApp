@@ -1,13 +1,29 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, StackActions, useRoute} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
-import OTPInputView from '@twotalltotems/react-native-otp-input';
+import Input from '../../../components/text-input-component/textInput';
 import RouteNames from '../../../services/constants/route-names';
+import {confirmPasscode} from '../../../services/apis/app/userApis';
 // create a component
 const CodeScreen = props => {
   const navigation = useNavigation();
+  const [code, setCode] = useState('');
+  const route = useRoute();
+  const email = route.params?.emailaddress;
+  console.log('Code Screen', email)
+  const resetCodeConfirmation = async () => {
+    const response = await confirmPasscode(code);
+    if (response.status == 201) {
+      navigation.dispatch(
+        StackActions.replace(RouteNames.navigatorNames.authNavigator, {
+          screen: RouteNames.authRoutes.changePasswordScreen,
+          params:{email}
+        }),
+      );
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.viewS1}>
@@ -25,24 +41,17 @@ const CodeScreen = props => {
               Please enter the verification code that was sent to your email
               address.
             </Text>
-            <OTPInputView
-              style={{width: '80%', height: 200}}
-              pinCount={4}
-              autoFocusOnLoad
-              codeInputFieldStyle={styles.underlineStyleBase}
-              codeInputHighlightStyle={styles.underlineStyleHighLighted}
-              onCodeFilled={code => {
-                console.log(`Code is ${code}, you are good to go!`);
-              }}
+            <Input
+              placeholder={'Enter Code'}
+              placeholderTextColor="white"
+              value={code}
+              returnKeyType="next"
+              onChangeText={text => setCode(text)}
             />
             <View style={styles.btnNextView}>
               <TouchableOpacity
                 style={styles.nextTo}
-                onPress={() =>
-                  props.navigation.navigate(
-                    RouteNames.authRoutes.changePasswordScreen,
-                  )
-                }>
+                onPress={resetCodeConfirmation}>
                 <Text style={styles.txtNextS}>NEXT</Text>
               </TouchableOpacity>
             </View>
