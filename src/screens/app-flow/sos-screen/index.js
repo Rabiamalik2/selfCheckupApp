@@ -8,6 +8,7 @@ import {
   BackHandler,
   FlatList,
   Alert,
+  Modal,
 } from 'react-native';
 import styles from './styles';
 import Loader from '../../../components/loader';
@@ -22,6 +23,7 @@ import {
   CommonActions,
   StackActions,
 } from '@react-navigation/native';
+import Button from '../../../components/button-component';
 import * as Keychain from 'react-native-keychain';
 import {useSelector} from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -45,11 +47,19 @@ const SosScreen = props => {
   const navigation = useNavigation();
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const buttonOk = () => {
+    setModalVisible(false);
+    props.navigation.navigate(RouteNames.sosNavRoutes.addContactScreen);
+  };
   const getEmergencyContacts = async () => {
     try {
       setLoading(true);
       const fetchedData = await fetchEmergencyContacts(userData.user._id);
       setData(fetchedData);
+      if (data.length <= 0) {
+        setModalVisible(true);
+      }
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -132,19 +142,42 @@ const SosScreen = props => {
           }>
           <Text style={styles.txt2}>Your Emergency Contacts</Text>
         </TouchableOpacity>
-        <View style={styles.flatListView}>
-          <FlatList
-            data={data}
-            keyExtractor={item => item._id.toString()}
-            renderItem={({item}) => (
-              <TouchableOpacity onPress={() => sendMessage(item.phone)}>
-                <Text style={styles.txt3}>
-                  {item ? item.firstname : 'Loading...'}
-                </Text>
-              </TouchableOpacity>
-            )}
-          />
-        </View>
+        {data.length <= 0 ? (
+          <View style={styles.centeredView}>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}>
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalText}>
+                    You have no Emergency Contacts at the moment please enter
+                    atleast one.
+                  </Text>
+                  <Button
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={buttonOk}
+                    name="Ok"
+                  />
+                </View>
+              </View>
+            </Modal>
+          </View>
+        ) : (
+          <View style={styles.flatListView}>
+            <FlatList
+              data={data}
+              keyExtractor={item => item._id.toString()}
+              renderItem={({item}) => (
+                <TouchableOpacity onPress={() => sendMessage(item.phone)}>
+                  <Text style={styles.txt3}>
+                    {item ? item.firstname : 'Loading...'}
+                  </Text>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        )}
 
         <Text style={styles.txt4}>via Text Message</Text>
       </View>
