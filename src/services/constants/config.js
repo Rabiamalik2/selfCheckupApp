@@ -1,21 +1,22 @@
-const baseUrl = 'http://192.168.33.201:5000/api/'
+// const baseUrl = 'http://192.168.33.201:5000/api/'
+const baseUrl = "https://ill-plum-goose-tux.cyclic.app/api/"
 const endPoints = {
-userKey: '/user',
-personalInfoKey:'/user/personalInfo',
-imageKey:'/user/addImage',
+userKey: 'user',
+personalInfoKey:'user/personalInfo',
+imageKey:'user/addImage',
 loginkey: 'login',
-resetPassKey: '/resetPassword',
-codeKey: '/codeConfirmation',
-updatePasswordKey: '/updatePassword',
-contactKey: '/userContact',
+resetPassKey: 'resetPassword',
+codeKey: 'codeConfirmation',
+updatePasswordKey: 'updatePassword',
+contactKey: 'userContact',
 sendMessageKey: 'sendSosMessage',
-chatGptMsgKey : "/chatGptMsgs",
-medDetailsKey: '/medical/storemedicoreData',
-docDetailsKey: '/medical/storedoctorData',
-storeVitalSignsKey: '/medical/vitalData',
-displayVS: "/medical/vitalData",
-displayQuestionsKey: '/questionaire',
-storeQuestionaireAnswersKey : '/questionaire/answers',
+chatGptMsgKey : "chatGptMsgs",
+medDetailsKey: 'medical/storemedicoreData',
+docDetailsKey: 'medical/storedoctorData',
+storeVitalSignsKey: 'medical/vitalData',
+displayVS: "medical/vitalData",
+displayQuestionsKey: 'questionaire',
+storeQuestionaireAnswersKey : 'questionaire/answers',
 }
 
 const appleMerchantId = ''

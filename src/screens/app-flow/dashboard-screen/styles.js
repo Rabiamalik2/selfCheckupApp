@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     //justifyContent: 'center',
     alignItems: 'center',
     // flexGrow: 0,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.screenBackground,
   },
   scView: {
     alignItems: 'center',
@@ -213,5 +213,44 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(3),
   },
   contactTo: {alignItems: 'center', justifyContent: 'center'},
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: Colors.purple,
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: Colors.lightGrey,
+    shadowColor: Colors.lightGrey,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    backgroundColor: Colors.purple,
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  textStyle: {
+    color: Colors.white,
+    fontFamily: Fonts.poppinsExtraBold,
+    textAlign: 'center',
+  },
+  modalText: {
+    color: Colors.white,
+    marginBottom: 15,
+    textAlign: 'center',
+  },
 });
 export default styles;

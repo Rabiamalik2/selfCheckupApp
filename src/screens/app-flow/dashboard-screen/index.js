@@ -1,34 +1,51 @@
 //import liraries
-import React from 'react';
-import {View, Text, Image, TouchableOpacity, BackHandler} from 'react-native';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  BackHandler,
+  Modal,
+} from 'react-native';
+import {
+  useFocusEffect,
+  useIsFocused,
+  StackActions,
+  useNavigation,
+} from '@react-navigation/native';
 import styles from './styles';
+import Button from '../../../components/button-component';
 import Images from '../../../services/constants/images';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import RouteNames from '../../../services/constants/route-names';
+import {useSelector} from 'react-redux';
 // create a component
 const DashboardScreen = props => {
   const navigation = useNavigation();
-  useFocusEffect(
-    React.useCallback(() => {
-      const onBackPress = () => {
-        navigation.navigate('authNavigator', {screen: 'welcomeScreen'});
-        // Return true to stop default back navigaton
-        // Return false to keep default back navigaton
-        return true;
-      };
-
-      // Add Event Listener for hardwareBackPress
-      BackHandler.addEventListener('hardwareBackPress', onBackPress);
-
-      return () => {
-        // Once the Screen gets blur Remove Event Listener
-        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-      };
-    }, []),
-  );
-
+  const userData = useSelector(state => state.user);
+  console.log('dash:', userData);
+  const [modalVisible, setModalVisible] = useState(false);
+  const isFocused = useIsFocused();
+  const buttonOk = () => {
+    setModalVisible(false);
+    navigation.dispatch(
+      StackActions.replace(RouteNames.navigatorNames.sosNavigator, {
+        screen: RouteNames.sosNavRoutes.addContactScreen,
+      }),
+    );
+  };
+  const emergencyContacts = () => {
+    if (userData.user.step == 1) {
+      setModalVisible(true);
+    }
+  };
+  useEffect(() => {
+    if (isFocused) {
+      emergencyContacts();
+    }
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.scView}>
@@ -43,6 +60,7 @@ const DashboardScreen = props => {
           <MaterialIcons name="person" style={styles.iconContact} />
         </TouchableOpacity>
       </View>
+     
       <View style={styles.viewS1}>
         <View style={styles.viewImg1}>
           <TouchableOpacity
@@ -155,6 +173,23 @@ const DashboardScreen = props => {
           <MaterialIcons name="contacts" style={styles.iconContact} />
         </TouchableOpacity>
       </View>
+      <View style={styles.centeredView}>
+      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>
+              You have no Emergency Contacts at the moment, please enter
+              atleast one.
+            </Text>
+            <Button
+              style={[styles.button, styles.buttonClose]}
+              onPress={buttonOk}
+              name="Ok"
+            />
+          </View>
+        </View>
+      </Modal>
+    </View>
     </SafeAreaView>
   );
 };

@@ -10,15 +10,16 @@ import Fonts from '../../../services/constants/fonts';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 10,
     // flexGrow: 0,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.screenBackground,
   },
   scView: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 30,
+    // marginTop: 30,
     flexDirection: 'row',
-    marginBottom: 10,
+    // marginBottom: 10,
   },
   selfTxt: {
     fontFamily: Fonts.poppinsExtraBold,
@@ -79,9 +80,15 @@ const styles = StyleSheet.create({
   viewS2: {
     transform: [{scaleX: 0.56}],
     alignItems: 'center',
-    marginTop: 150,
+    marginTop: 60,
     justifyContent: 'center',
   },
+  scrollView: {
+    flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+  },
+
   subTxt: {
     paddingVertical: 1,
     paddingTop: 10,
@@ -217,9 +224,52 @@ const styles = StyleSheet.create({
   options: {
     color: Colors.white,
     fontSize: responsiveFontSize(1.7),
+    // alignItems: 'center',
+    // justifyContent:'center'
+  },
+  buttonView: {
+    flexDirection: 'row',
     alignItems: 'center',
   },
-  buttonView: {flexDirection: 'row', alignItems: 'center'},
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: Colors.purple,
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: Colors.lightGrey,
+    shadowColor: Colors.lightGrey,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    backgroundColor: Colors.purple,
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  textStyle: {
+    color: Colors.white,
+    fontFamily: Fonts.poppinsExtraBold,
+    textAlign: 'center',
+  },
+  modalText: {
+    color: Colors.white,
+    marginBottom: 15,
+    textAlign: 'center',
+  },
 });
 
 export default styles;

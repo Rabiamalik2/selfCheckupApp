@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // flexGrow: 0,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.screenBackground,
   },
   scView: {
     justifyContent: 'center',
@@ -102,21 +102,33 @@ const styles = StyleSheet.create({
   subView: {
     padding: 10,
     width: responsiveWidth(90),
-    height: responsiveHeight(5),
+    height: responsiveHeight(6),
     borderRadius: 10,
     backgroundColor: Colors.orange,
-    marginTop: 20,
+    padding: 10,
+    margin: 10,
+    borderRadius: 15,
   },
   subTxt: {
+    flex:1,
     paddingLeft: 20,
     alignItems: 'center',
     fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(1.7),
     color: Colors.white,
   },
+  flatListView: {
+    marginTop: 20,
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  iconContainer: {
+    flexDirection: 'row',
+  },
   icon1View: {
-    left: 230,
-    marginHorizontal: 3,
+    margin: 5,
     width: responsiveWidth(5),
     height: responsiveHeight(2),
     alignItems: 'center',
@@ -125,11 +137,47 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   icon1: {
-    textAlign: 'center',
-    fontSize: responsiveFontSize(7),
+    fontSize: responsiveFontSize(2),
+    color: Colors.orange,
   },
-  flatListView: {
-    marginTop: 20,
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: Colors.purple,
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: Colors.lightGrey,
+    shadowColor: Colors.lightGrey,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    backgroundColor: Colors.purple,
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  textStyle: {
+    color: Colors.white,
+    fontFamily: Fonts.poppinsExtraBold,
+    textAlign: 'center',
+  },
+  modalText: {
+    color: Colors.white,
+    marginBottom: 15,
+    textAlign: 'center',
   },
 });
 export default styles;

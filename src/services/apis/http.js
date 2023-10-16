@@ -15,7 +15,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   async config => {
     const credentials = await Keychain.getGenericPassword();
-    // console.log("axios: " ,credentials)
+    console.log("axios: " ,config.baseURL, config.url)
     if (credentials) {
       const token = credentials.password;
       // console.log("token: " ,token)

@@ -21,6 +21,8 @@ export default NoAccount;
 
 const styles = StyleSheet.create({
   viewS7: {
+    flex:1,
+    bottom:10,
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 20,
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.poppinsBold,
   },
   txtS4: {
-    flex: 1,
+    // flex: 1,
     paddingVertical: 0,
     color: Colors.orange,
     fontFamily: Fonts.poppinsExtraBold,

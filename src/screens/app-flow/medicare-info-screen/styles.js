@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         // flexGrow: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.screenBackground,
     },
     scView:{
         justifyContent: 'center',

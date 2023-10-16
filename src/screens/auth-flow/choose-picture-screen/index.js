@@ -25,6 +25,7 @@ import RouteNames from '../../../services/constants/route-names';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import {addImage} from '../../../services/apis/app/userApis';
 import storage from '@react-native-firebase/storage';
+
 // create a component
 const ChoosePicScreen = () => {
   const Route = useRoute();
@@ -76,12 +77,15 @@ const ChoosePicScreen = () => {
       const downloadURL = await storageRef.getDownloadURL();
       console.log('Image uploaded successfully:', downloadURL);
       const imagePath = downloadURL;
+      setLoading(true);
+      await addImage(user.email, imagePath);
+      setLoading(false);
+      console.log('add image:', imagePath);
       navigation.dispatch(
         StackActions.replace(RouteNames.navigatorNames.authNavigator, {
           screen: RouteNames.authRoutes.signupCompleteScreen,
         }),
       );
-      await addImage(user.email, imagePath);
     } catch (error) {
       if (error.response && error.response.status === 401) {
         await Keychain.resetGenericPassword();
@@ -119,7 +123,7 @@ const ChoosePicScreen = () => {
               <>
                 <Image
                   source={{uri: galleryPhoto}}
-                  style={{width: 200, height: 200}}
+                  style={styles.imageContainer}
                 />
                 <Button
                   onPress={choosePhotoFromGallery}

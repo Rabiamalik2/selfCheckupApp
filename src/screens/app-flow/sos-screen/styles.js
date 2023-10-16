@@ -10,6 +10,7 @@ import Fonts from '../../../services/constants/fonts';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Colors.screenBackground,
     // flexGrow: 0,
     // justifyContent: 'space-between',
     // alignItems: 'center',

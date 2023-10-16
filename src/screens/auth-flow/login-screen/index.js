@@ -13,7 +13,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Loader from '../../../components/loader';
 import auth from '@react-native-firebase/auth';
 import * as Keychain from 'react-native-keychain';
-import {loginToMyProfile} from '../../../services/apis/auth';
+import {loginToMyProfile} from '../../../services/apis/auth/index.js';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {useDispatch} from 'react-redux';
@@ -44,41 +44,48 @@ const LoginScreen = props => {
     try {
       setLoading(true);
       const response = await loginToMyProfile(emailaddress, password);
-      // console.log('From login Page: ', response.data);
+      setLoading(false);
+      // console.log(response.status)
       const token = response.data.token;
-      // console.log(token,"token")
       await Keychain.setGenericPassword(emailaddress, token);
       if (response.status === 200) {
         const user = response.data.user;
         console.log('From login Page user: ', user);
         const step = user.step;
-        // await fetchUserData(user._id);
         dispatch(setUser(response.data.user));
         if (step === 1) {
+          setLoading(false);
           navigation.dispatch(
             StackActions.replace(RouteNames.navigatorNames.sosNavigator, {
               screen: RouteNames.sosNavRoutes.addContactScreen,
               params: {user},
             }),
           );
-          setLoading(false);
         } else {
+          setLoading(false);
           navigation.dispatch(
             StackActions.replace(RouteNames.navigatorNames.appNavigator, {
               screen: RouteNames.appRoutes.dashboardScreen,
               params: {user},
             }),
           );
-          setLoading(false);
         }
-      }  else {
-        console.error('Credentials not matching:', error);
-        Alert.alert('Invalid credentials');
+      } else {
+        setLoading(false);
+        if (response.status === 401) {
+          Alert.alert(
+            'Invalid credentials',
+            'Wrong email or password. Please try again.',
+          );
+        }
       }
     } catch (error) {
+      setLoading(false);
       console.error('Error during login:', error);
-      Alert.alert('Error during login');
-      
+      Alert.alert(
+        'Error',
+        'An error occurred while logging in. Please try again.',
+      );
     }
   };
 
@@ -98,7 +105,12 @@ const LoginScreen = props => {
           <View style={styles.childView}>
             <View style={styles.viewS2}>
               <View style={styles.backArrowView}>
-                <Ionicons name="arrow-back-outline" style={styles.backArrow} />
+                <TouchableOpacity onPress={() => navigation.navigate(RouteNames.authRoutes.welcomeScreen)}>
+                  <Ionicons
+                    name="arrow-back-outline"
+                    style={styles.backArrow}
+                  />
+                </TouchableOpacity>
               </View>
               <Text style={styles.wbS}>Welcome Back!</Text>
               <Text style={styles.wbS1}>
@@ -116,6 +128,7 @@ const LoginScreen = props => {
                 />
                 <Input
                   password
+                  autoCapitalize="none"
                   placeholder={'Password'}
                   placeholderTextColor="white"
                   value={password}

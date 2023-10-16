@@ -10,10 +10,10 @@ import Colors from '../../../services/constants/colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    bottom:1,
-    // flexGrow: 0,
+    marginTop:-10,
+    // marginBottom: 60,
     alignItems: 'center',
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.screenBackground,
   },
   viewS1: {
     marginTop: 30,

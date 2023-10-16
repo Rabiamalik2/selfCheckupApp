@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // flexGrow: 0,
     alignItems: 'center',
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.screenBackground,
   },
   viewS1: {
     marginTop: 30,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   parentView: {
     marginTop: 30,
     width: responsiveWidth(100),
-    height: responsiveHeight(73),
+    height: responsiveHeight(80),
     borderTopStartRadius: 300,
     borderTopEndRadius: 300,
     overflow: 'hidden',
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   childView: {
     marginTop: 13,
     width: responsiveWidth(100),
-    height: responsiveHeight(70),
+    height: responsiveHeight(80),
     borderTopStartRadius: 300,
     borderTopEndRadius: 300,
     backgroundColor: Colors.purple,

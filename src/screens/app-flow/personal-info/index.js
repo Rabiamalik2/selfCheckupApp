@@ -63,7 +63,9 @@ const PersonalInfoScreen = props => {
         gender,
         homeAddress,
       );
+      setLoading(false);
       if (response.status === 200) {
+        setLoading(false);
         //  console.log("user's personal Info", response)
         navigation.dispatch(
           StackActions.replace(RouteNames.navigatorNames.appNavigator, {

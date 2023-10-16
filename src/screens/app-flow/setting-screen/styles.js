@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // flexGrow: 0,
     marginTop: 20,
+    backgroundColor: Colors.screenBackground,
   },
   istView: {
     flexDirection: 'row',

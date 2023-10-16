@@ -16,7 +16,7 @@ import EmergencyContactScreen from './emergency-contact-screen';
 import AddContactScreen from './add-contact-screen';
 import PersonalInfoScreen from './personal-info';
 
-const AppRoutes = {
+const otherRoutes = {
 
   DashboardScreen,
   DoctorInfoScreen,
@@ -46,7 +46,7 @@ const SosNavRoutes = {
 };
 
 export default {
-  AppRoutes,
+  otherRoutes,
   FunNavRoutes,
   SelfCheckNavRoutes,
   TabNavRoutes,

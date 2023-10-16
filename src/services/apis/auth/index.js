@@ -13,10 +13,12 @@ const registerMe = async (firstname, lastname, phone, email, password) => {
 };
 
 const loginToMyProfile = async (email, password) => {
+  console.log(email, password);
   const response = await axiosInstance.post(endPoints?.loginkey, {
     email: email,
     password: password,
   });
+  console.log(response.data);
   return response;
 };
 

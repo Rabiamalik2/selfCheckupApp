@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   icon1S: {
     left: -40,
     fontSize: responsiveFontSize(2.5),
-    color: Colors.black,
+    color: Colors.lightGrey,
   },
   iconPicker: {
     left: 230,

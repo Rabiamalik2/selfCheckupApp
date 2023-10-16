@@ -46,8 +46,14 @@ const WelcomeScreen = () => {
         // setUserData(isValid.user);
         if (isValid) {
           navigation.dispatch(
-            StackActions.replace(RouteNames.navigatorNames.appNavigator, {
-              screen: RouteNames.appRoutes.dashboardScreen,
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                {
+                  name: RouteNames.navigatorNames.appNavigator,
+                  // params: {screen: RouteNames.appRoutes.dashboardScreen},
+                },
+              ],
             }),
           );
         } else {

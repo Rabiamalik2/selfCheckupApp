@@ -1,5 +1,13 @@
 import React, {Component, useRef, useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, SafeAreaView, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+  Alert,
+  ScrollView,
+  Modal,
+} from 'react-native';
 import styles from './styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Input from '../../../components/text-input-component/textInput';
@@ -26,9 +34,14 @@ const QuestionaireScreen1 = props => {
   // console.log('questionaire screen:', userData);
   const navigation = useNavigation();
   const [loading, setLoading] = React.useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [questionaire, setQuestionaire] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const buttonOk = () => {
+    setModalVisible(false);
+    navigation.navigate(RouteNames.appRoutes.dashboardScreen);
+  };
   const showQuestions = async () => {
     try {
       setLoading(true);
@@ -39,12 +52,7 @@ const QuestionaireScreen1 = props => {
         setLoading(false);
       } else {
         setLoading(false);
-        Alert.alert('Already Done');
-        navigation.dispatch(
-          StackActions.replace('appNavigator', {
-            screen: 'dashboardScreen',
-          }),
-        );
+        setModalVisible(true);
       }
     } catch (error) {
       setLoading(false);
@@ -111,7 +119,7 @@ const QuestionaireScreen1 = props => {
   }, []);
 
   const handleOptionChange = (questionId, selectedOption) => {
-    console.log('SelectedOpt:', selectedOption);
+    // console.log('SelectedOpt:', selectedOption);
     if (Array.isArray(selectedOption)) {
       selectedOption = selectedOption[0];
     }
@@ -150,21 +158,24 @@ const QuestionaireScreen1 = props => {
           <Text style={styles.selfTxt}>Self</Text>
           <Text style={styles.checkTxt}>Check</Text>
         </View>
-        <View style={{alignItems: 'center'}}>
+        <View style={{}}>
           <Text style={styles.subTxt}>One-Time Questionaire</Text>
         </View>
         <View style={styles.parent}>
           <View style={styles.child}>
             <View style={styles.viewS2}>
-              {questionaire.length > 0 && (
-                <View key={questionaire[0].questions[currentQuestionIndex]._id}>
-                  <Text style={styles.txtStyle1}>
-                    {questionaire[0].questions[currentQuestionIndex].text}
-                  </Text>
-                  {questionaire[0].questions[currentQuestionIndex].type ===
-                  'checkbox' ? (
-                    questionaire[0].questions[currentQuestionIndex].options.map(
-                      (option, optionIndex) => (
+              <ScrollView style={styles.scrollView}>
+                {questionaire.length > 0 && (
+                  <View
+                    key={questionaire[0].questions[currentQuestionIndex]._id}>
+                    <Text style={styles.txtStyle1}>
+                      {questionaire[0].questions[currentQuestionIndex].text}
+                    </Text>
+                    {questionaire[0].questions[currentQuestionIndex].type ===
+                    'checkbox' ? (
+                      questionaire[0].questions[
+                        currentQuestionIndex
+                      ].options.map((option, optionIndex) => (
                         <View key={optionIndex} style={styles.txtStyle2}>
                           <CheckBox
                             style={styles.txtStyle3}
@@ -200,36 +211,56 @@ const QuestionaireScreen1 = props => {
                           />
                           <Text style={styles.options}>{option}</Text>
                         </View>
-                      ),
-                    )
-                  ) : (
-                    <Input
-                      value={
-                        selectedAnswers[
-                          questionaire[0].questions[currentQuestionIndex]._id
-                        ] || ''
-                      }
-                      onChangeText={text =>
-                        handleOptionChange(
-                          questionaire[0].questions[currentQuestionIndex]._id,
-                          text,
-                        )
-                      }
-                    />
-                  )}
+                      ))
+                    ) : (
+                      <Input
+                        value={
+                          selectedAnswers[
+                            questionaire[0].questions[currentQuestionIndex]._id
+                          ] || ''
+                        }
+                        onChangeText={text =>
+                          handleOptionChange(
+                            questionaire[0].questions[currentQuestionIndex]._id,
+                            text,
+                          )
+                        }
+                      />
+                    )}
+                  </View>
+                )}
+
+                <View style={styles.buttonView}>
+                  <Button
+                    onPress={handlePreviousQuestion}
+                    style={styles.Save}
+                    name="Previous"
+                  />
+                  <Button
+                    onPress={handleNextQuestion}
+                    style={styles.Save}
+                    name="Next"
+                  />
                 </View>
-              )}
-              <View style={styles.buttonView}>
-                <Button
-                  onPress={handlePreviousQuestion}
-                  style={styles.Save}
-                  name="Previous"
-                />
-                <Button
-                  onPress={handleNextQuestion}
-                  style={styles.Save}
-                  name="Next"
-                />
+              </ScrollView>
+              <View style={styles.centeredView}>
+                <Modal
+                  animationType="slide"
+                  transparent={true}
+                  visible={modalVisible}>
+                  <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                      <Text style={styles.modalText}>
+                        Questionaire Already Completed.
+                      </Text>
+                      <Button
+                        style={[styles.button, styles.buttonClose]}
+                        onPress={buttonOk}
+                        name="Ok"
+                      />
+                    </View>
+                  </View>
+                </Modal>
               </View>
             </View>
           </View>

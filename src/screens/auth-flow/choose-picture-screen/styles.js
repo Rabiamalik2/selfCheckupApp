@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // flexGrow: 0,
     alignItems: 'center',
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.screenBackground,
   },
   viewS1: {
     marginTop: 30,
@@ -128,6 +128,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     color: Colors.white,
+  },
+  imageContainer: {
+    marginBottom: 10,
+    width: responsiveWidth(60),
+    height: responsiveHeight(30),
+    borderWidth: 2,
+    borderColor: Colors.lightGrey,
+    borderRadius: 20,
   },
   btnSkip: {
     marginTop: 10,

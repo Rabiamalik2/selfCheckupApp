@@ -113,13 +113,15 @@ const SettingScreen = props => {
       <View style={styles.optionStyle}>
         <Text style={styles.infoTxt}>Your Information</Text>
 
-        <TouchableOpacity style={styles.biView}>
-          <MaterialCommunityIcons
-            name="card-account-details"
-            style={styles.biIcon}
-          />
-          <Text style={styles.biTxt}>Basic Information</Text>
-        </TouchableOpacity>
+        {
+          //<TouchableOpacity style={styles.biView}>
+        //   <MaterialCommunityIcons
+        //     name="card-account-details"
+        //     style={styles.biIcon}
+        //   />
+        //   <Text style={styles.biTxt}>Basic Information</Text>
+        // </TouchableOpacity>
+      }
         <TouchableOpacity
           style={styles.biView}
           onPress={() =>
@@ -135,37 +137,40 @@ const SettingScreen = props => {
           />
           <Text style={styles.biTxt}>Personal Information</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.biView}>
-          <MaterialCommunityIcons
-            name="sticker-text-outline"
-            style={styles.hbIcon}
-          />
-          <Text style={styles.biTxt}>Health Background</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.biView}>
-          <MaterialIcons name="medication" style={styles.medicIcon} />
-          <Text style={styles.biTxt}>Medication</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.biView}>
-          <MaterialCommunityIcons name="bee" style={styles.allergiesIcon} />
-          <Text style={styles.biTxt}>Allergies</Text>
-        </TouchableOpacity>
 
-        <View style={styles.historyView}>
-          <Text style={styles.infoTxt}>History</Text>
+       { 
+        // <TouchableOpacity style={styles.biView}>
+        //   <MaterialCommunityIcons
+        //     name="sticker-text-outline"
+        //     style={styles.hbIcon}
+        //   />
+        //   <Text style={styles.biTxt}>Health Background</Text>
+        // </TouchableOpacity>
+        // <TouchableOpacity style={styles.biView}>
+        //   <MaterialIcons name="medication" style={styles.medicIcon} />
+        //   <Text style={styles.biTxt}>Medication</Text>
+        // </TouchableOpacity>
+        // <TouchableOpacity style={styles.biView}>
+        //   <MaterialCommunityIcons name="bee" style={styles.allergiesIcon} />
+        //   <Text style={styles.biTxt}>Allergies</Text>
+        // </TouchableOpacity>
 
-          <TouchableOpacity style={styles.biView}>
-            <MaterialIcons name="insert-chart-outlined" style={styles.haIcon} />
-            <Text style={styles.biTxt}>Health Assessments</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.biView}>
-            <MaterialCommunityIcons
-              name="vector-polyline"
-              style={styles.stIcon}
-            />
-            <Text style={styles.biTxt}>Symptom Tracking</Text>
-          </TouchableOpacity>
-        </View>
+        // <View style={styles.historyView}>
+        //   <Text style={styles.infoTxt}>History</Text>
+
+        //   <TouchableOpacity style={styles.biView}>
+        //     <MaterialIcons name="insert-chart-outlined" style={styles.haIcon} />
+        //     <Text style={styles.biTxt}>Health Assessments</Text>
+        //   </TouchableOpacity>
+        //   <TouchableOpacity style={styles.biView}>
+        //     <MaterialCommunityIcons
+        //       name="vector-polyline"
+        //       style={styles.stIcon}
+        //     />
+        //     <Text style={styles.biTxt}>Symptom Tracking</Text>
+        //   </TouchableOpacity>
+        // </View>
+      }
         <TouchableOpacity style={styles.biView} onPress={buttonDel}>
           <Text style={styles.deleteTxt}>Delete health Profile</Text>
         </TouchableOpacity>

@@ -39,7 +39,9 @@ const MedicoreInfoScreen = props => {
         insuranceId,
         userData.user,
       );
+      setLoading(false);
       if (response.status === 200) {
+        setLoading(false);
         navigation.dispatch(
           StackActions.replace(RouteNames.navigatorNames.appNavigator, {
             screen: RouteNames.appRoutes.doctorInfoScreen,
@@ -74,7 +76,7 @@ const MedicoreInfoScreen = props => {
   };
   return (
     <KeyboardAwareScrollView
-      style={{flex: 1, flexGrow: 0}}
+      style={{flex: 1}}
       enableOnAndroid={true}
       scrollEnabled={false}
       extraScrollHeight={50}>

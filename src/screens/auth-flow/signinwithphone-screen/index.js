@@ -43,6 +43,7 @@ const SiginInWithPhoneScreen = props => {
             <Text style={styles.fpTxt}>Sign In With Your Phone Number</Text>
             <Text style={styles.item}>Please Enter Your Phone Number</Text>
             <Input
+              autoCapitalize={'none'}
               placeholder={'Phone Number'}
               placeholderTextColor="white"
               value={phone}
@@ -62,7 +63,7 @@ const SiginInWithPhoneScreen = props => {
       </View>
       <Account
         name="Sign In"
-        description=" Remembered your password?"
+        description="Wanna go back to signin page?"
         onPress={() => navigation.navigate(RouteNames.authRoutes.loginScreen)}
       />
     </SafeAreaView>

@@ -22,17 +22,19 @@ import Colors from '../../../services/constants/colors.js';
 
 const HealthEduScreen = props => {
   const navigation = useNavigation();
+  const [disable, setDisable] = useState(true);
+  const handleOnPress = () => {
+    setDisable(true);
+  };
   const [data, setData] = useState([
     {
       key: '1',
       name: 'Health Insurance',
-      onPress: {},
       imageUri: Images.img5,
     },
     {
       key: '2',
       name: 'Health Activity',
-      onPress: {},
       imageUri: Images.img6,
     },
     {
@@ -43,6 +45,15 @@ const HealthEduScreen = props => {
           screen: RouteNames.funNavRoutes.liveActivityScreen,
         }),
       imageUri: Images.person,
+    },
+    {
+      key: '4',
+      name: 'Cycling Activity',
+      imageUri: Images.bike,
+      onPress: () =>
+        navigation.navigate(RouteNames.navigatorNames.funNavigator, {
+          screen: RouteNames.funNavRoutes.healthEduScreen,
+        }),
     },
   ]);
   const [data1, setData1] = useState([
@@ -59,7 +70,10 @@ const HealthEduScreen = props => {
       key: '2',
       name: 'Cycling Activity',
       imageUri: Images.bike,
-      onPress: {},
+      onPress: () =>
+        navigation.navigate(RouteNames.navigatorNames.funNavigator, {
+          screen: RouteNames.funNavRoutes.healthEduScreen,
+        }),
     },
     {
       key: '3',

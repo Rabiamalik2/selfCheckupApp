@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     // flexGrow: 0,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.screenBackground,
     paddingBottom: 100,
   },
   viewS1: {

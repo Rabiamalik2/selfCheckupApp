@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // flexGrow: 0,
     alignItems: 'center',
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.screenBackground,
   },
   viewS1: {
     marginTop: 30,

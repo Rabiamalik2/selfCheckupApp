@@ -88,6 +88,7 @@ const ChangePasswordScreen = props => {
               <View>
                 <Input
                   password
+                  autoCapitalize="none"
                   placeholder={'Enter Password'}
                   placeholderTextColor="white"
                   value={pass}
@@ -95,6 +96,7 @@ const ChangePasswordScreen = props => {
                 />
                 <Input
                   password
+                  autoCapitalize="none"
                   placeholder={'Reconfirm Password'}
                   placeholderTextColor="white"
                   value={password}

@@ -12,19 +12,19 @@ const AppNavigation = () => {
     <Stack.Navigator screenOptions={options}>
       <Stack.Screen
         name={appRoutes.dashboardScreen}
-        component={AppRoutes.AppRoutes.DashboardScreen}
+        component={AppRoutes.otherRoutes.DashboardScreen}
       />
       <Stack.Screen
         name={appRoutes.doctorInfoScreen}
-        component={AppRoutes.AppRoutes.DoctorInfoScreen}
+        component={AppRoutes.otherRoutes.DoctorInfoScreen}
       />
       <Stack.Screen
         name={appRoutes.medicoreInfoScreen}
-        component={AppRoutes.AppRoutes.MedicoreInfoScreen}
+        component={AppRoutes.otherRoutes.MedicoreInfoScreen}
       />
       <Stack.Screen
         name={appRoutes.settingScreen}
-        component={AppRoutes.AppRoutes.SettingScreen}
+        component={AppRoutes.otherRoutes.SettingScreen}
       />
     </Stack.Navigator>
   );

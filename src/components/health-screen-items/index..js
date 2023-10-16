@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {
   View,
   Text,
@@ -8,12 +8,12 @@ import {
 import styles from './styles';
 // create a component
 const HealthItem = ({source, name, onPress}) => {
+  const [disable, setDisable] = useState(true);
+  const handleOnPress = () => {setDisable(true)};
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() => {
-          onPress();
-        }}
+        onPress={handleOnPress}
         style={styles.healthTo}>
         <Image source={source} style={styles.image} />
         <View style={styles.healthView}>

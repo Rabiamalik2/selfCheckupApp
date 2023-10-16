@@ -25,8 +25,7 @@ const TermsScreen = props => {
   const navigation = useNavigation();
   const route = useRoute();
   const isReadOnly = route.params?.isReadOnly || false;
-  //console.log("Route.params:", Route.params);
-  const user = route.params?.user.newUser;
+  const user = route.params?.user?.newUser;
   console.log('Terms Screen', user);
   useFocusEffect(
     React.useCallback(() => {
@@ -113,23 +112,12 @@ const TermsScreen = props => {
           </View>
         </View>
       </View>
-
       <Account
         name="Sign In"
         description="Already have an Account?"
         onPress={() => navigation.navigate(RouteNames.authRoutes.loginScreen)}
       />
-      <Terms
-        name="Terms & Conditions"
-        onPress={() =>
-          navigation.dispatch(
-            StackActions.replace(RouteNames.navigatorNames.authNavigator, {
-              screen: RouteNames.authRoutes.termScreen,
-              params: {isReadOnly: true},
-            }),
-          )
-        }
-      />
+
     </SafeAreaView>
   );
 };

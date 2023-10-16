@@ -117,6 +117,7 @@ const RegisterScreen = props => {
               />
               <Input
                 password
+                autoCapitalize={"none"}
                 placeholder={'Password'}
                 placeholderTextColor="white"
                 value={password}
@@ -127,13 +128,6 @@ const RegisterScreen = props => {
                 style={styles.regToS}
                 onPress={register}
                 name="Register"
-              />
-              <Button
-                style={styles.fbToS}
-                onPress={() =>
-                  navigation.navigate(RouteNames.authRoutes.registerScreen)
-                }
-                name="SIGN UP WITH facebook"
               />
             </View>
           </View>
