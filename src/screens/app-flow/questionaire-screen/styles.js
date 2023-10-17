@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   scView: {
     justifyContent: 'center',
     alignItems: 'center',
-    // marginTop: 30,
+    marginTop: 30,
     flexDirection: 'row',
     // marginBottom: 10,
   },
@@ -50,14 +50,14 @@ const styles = StyleSheet.create({
   },
   txt: {
     alignItems: 'center',
-    marginTop: 30,
+    marginTop: 13,
     fontFamily: Fonts.poppinsRegular,
     fontSize: responsiveFontSize(2),
     color: Colors.black,
-    marginBottom: 20,
+    // marginBottom: 20,
   },
   parent: {
-    top: 50,
+    top: 70,
     height: responsiveHeight(100),
     width: responsiveWidth(100),
     borderTopStartRadius: 500,
@@ -84,9 +84,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   scrollView: {
-    flex: 1,
+    // flex: 1,
+    height: responsiveHeight(100),
+    width: responsiveWidth(100),
     // justifyContent: 'center',
-    // alignItems: 'center',
+    alignItems: 'center',
   },
 
   subTxt: {
@@ -94,10 +96,10 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     textAlign: 'center',
     color: Colors.purple,
-    padding: 20,
+    // padding: 20,
     fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(2.3),
-    marginTop: 12,
+    marginTop: 20,
   },
   btnView: {
     marginTop: 10,
@@ -210,6 +212,8 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontSize: responsiveFontSize(2),
     marginBottom: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   txtStyle2: {
@@ -224,12 +228,13 @@ const styles = StyleSheet.create({
   options: {
     color: Colors.white,
     fontSize: responsiveFontSize(1.7),
-    // alignItems: 'center',
-    // justifyContent:'center'
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonView: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   centeredView: {
     flex: 1,

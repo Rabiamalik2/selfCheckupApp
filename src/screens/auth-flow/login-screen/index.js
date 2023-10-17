@@ -70,22 +70,28 @@ const LoginScreen = props => {
             }),
           );
         }
-      } else {
-        setLoading(false);
-        if (response.status === 401) {
-          Alert.alert(
-            'Invalid credentials',
-            'Wrong email or password. Please try again.',
-          );
-        }
       }
     } catch (error) {
       setLoading(false);
-      console.error('Error during login:', error);
-      Alert.alert(
-        'Error',
-        'An error occurred while logging in. Please try again.',
-      );
+      if (error.response && error.response.status === 401) {
+        console.error('Error during login:', error);
+        Alert.alert(
+          'Invalid credentials',
+          'Credentials does not match. Please try again.',
+        );
+      } else if (error.response && error.response.status === 400) {
+        console.error('Error during login:', error);
+        Alert.alert('Invalid credentials', 'Please enter email & password');
+      } else if (error.response && error.response.status === 404) {
+        console.error('Error during login:', error);
+        Alert.alert('Invalid credentials', 'User not found');
+      } else {
+        console.error('Error during login:', error);
+        Alert.alert(
+          'Error',
+          'An error occurred while logging in. Please try again.',
+        );
+      }
     }
   };
 
@@ -105,7 +111,10 @@ const LoginScreen = props => {
           <View style={styles.childView}>
             <View style={styles.viewS2}>
               <View style={styles.backArrowView}>
-                <TouchableOpacity onPress={() => navigation.navigate(RouteNames.authRoutes.welcomeScreen)}>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate(RouteNames.authRoutes.welcomeScreen)
+                  }>
                   <Ionicons
                     name="arrow-back-outline"
                     style={styles.backArrow}

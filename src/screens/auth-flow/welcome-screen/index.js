@@ -16,6 +16,7 @@ import * as Keychain from 'react-native-keychain';
 import {fetchUserData} from '../../../services/apis/app/userApis';
 import {setUser} from '../../../services/redux/reducers/user-reducer';
 import RouteNames from '../../../services/constants/route-names';
+import SplashScreen from 'react-native-splash-screen';
 // create a component
 const WelcomeScreen = () => {
   const navigation = useNavigation();
@@ -45,6 +46,7 @@ const WelcomeScreen = () => {
         dispatch(setUser(isValid.user));
         // setUserData(isValid.user);
         if (isValid) {
+          SplashScreen.hide();
           navigation.dispatch(
             CommonActions.reset({
               index: 0,
@@ -56,7 +58,9 @@ const WelcomeScreen = () => {
               ],
             }),
           );
+          SplashScreen.hide();
         } else {
+          SplashScreen.hide();
           navigation.dispatch(
             CommonActions.reset({
               index: 0,
@@ -68,6 +72,7 @@ const WelcomeScreen = () => {
               ],
             }),
           );
+          SplashScreen.hide();
         }
       }
     } catch (error) {
@@ -76,6 +81,7 @@ const WelcomeScreen = () => {
   };
   useEffect(() => {
     checkKeychainAndNavigate();
+    SplashScreen.hide();
   }, []);
 
   return (

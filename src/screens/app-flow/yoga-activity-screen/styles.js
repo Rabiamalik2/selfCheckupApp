@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
   txt1: {
     alignItems: 'center',
     marginTop: 30,
+    marginBottom:30,
     fontFamily: Fonts.poppinsRegular,
     fontSize: responsiveFontSize(3),
     color: Colors.purple,

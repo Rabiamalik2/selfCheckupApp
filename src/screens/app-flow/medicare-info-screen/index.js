@@ -110,6 +110,7 @@ const MedicoreInfoScreen = props => {
                   </Picker>
                 </View>
                 <Input
+                  keyboardType="default"
                   placeholder={'Enter the medicare or mediCaid ID'}
                   placeholderTextColor="white"
                   value={mediID}
@@ -118,6 +119,7 @@ const MedicoreInfoScreen = props => {
                   //MaterialIcons name="arrow-drop-down" style={styles.icon1}
                 />
                 <Input
+                  keyboardType="default"
                   placeholder={'Name of your Medical Insurance'}
                   placeholderTextColor="white"
                   value={insuranceName}
@@ -125,6 +127,7 @@ const MedicoreInfoScreen = props => {
                   onChangeText={text => setInsuranceName(text)}
                 />
                 <Input
+                  keyboardType="default"
                   placeholder={'Medical Insurance Id Number'}
                   placeholderTextColor="white"
                   value={insuranceId}

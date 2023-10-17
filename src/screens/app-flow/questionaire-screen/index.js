@@ -34,10 +34,11 @@ const QuestionaireScreen1 = props => {
   // console.log('questionaire screen:', userData);
   const navigation = useNavigation();
   const [loading, setLoading] = React.useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+ 
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [questionaire, setQuestionaire] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [modalVisible, setModalVisible] = useState(false);
   const buttonOk = () => {
     setModalVisible(false);
     navigation.navigate(RouteNames.appRoutes.dashboardScreen);
@@ -129,6 +130,9 @@ const QuestionaireScreen1 = props => {
       [questionId]: selectedOption,
     });
   };
+  // const handleScrollEnable =  questionaire[0].questions[
+  //     currentQuestionIndex
+  //   ].options.length > 3
 
   const handleNextQuestion = () => {
     // console.log(questionaire[0].questions,'questionaire[0]')
@@ -160,12 +164,18 @@ const QuestionaireScreen1 = props => {
         </View>
         <View style={{}}>
           <Text style={styles.subTxt}>One-Time Questionaire</Text>
+          <Text style={styles.subTxt}>Please fill it carefully.</Text>
         </View>
         <View style={styles.parent}>
           <View style={styles.child}>
             <View style={styles.viewS2}>
-              <ScrollView style={styles.scrollView}>
-                {questionaire.length > 0 && (
+              {questionaire.length > 0 && (
+                <ScrollView
+                  contentContainerStyle={styles.scrollView}
+                  showsVerticalScrollIndicator={
+                    questionaire[0].questions[currentQuestionIndex].options
+                      .length > 3
+                  }>
                   <View
                     key={questionaire[0].questions[currentQuestionIndex]._id}>
                     <Text style={styles.txtStyle1}>
@@ -228,9 +238,7 @@ const QuestionaireScreen1 = props => {
                       />
                     )}
                   </View>
-                )}
-
-                <View style={styles.buttonView}>
+                  <View style={styles.buttonView}>
                   <Button
                     onPress={handlePreviousQuestion}
                     style={styles.Save}
@@ -242,7 +250,8 @@ const QuestionaireScreen1 = props => {
                     name="Next"
                   />
                 </View>
-              </ScrollView>
+                </ScrollView>
+              )}
               <View style={styles.centeredView}>
                 <Modal
                   animationType="slide"

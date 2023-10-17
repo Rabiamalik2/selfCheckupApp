@@ -91,6 +91,7 @@ const DoctorInfoScreen = props => {
               <Input
                 placeholder={'First and Last Name Of Your Primary Doctor'}
                 placeholderTextColor="white"
+                keyboardType="default"
                 value={docName}
                 returnKeyType="next"
                 onChangeText={text => setDocName(text)}
@@ -99,6 +100,7 @@ const DoctorInfoScreen = props => {
               <Input
                 placeholder={'Phone Number Of Your Primary Doctor'}
                 placeholderTextColor="white"
+                keyboardType="default"
                 value={phoneNumber}
                 returnKeyType="next"
                 onChangeText={text => setPhoneNumber(text)}
@@ -108,6 +110,7 @@ const DoctorInfoScreen = props => {
               <Input
                 placeholder={'Name Of Your Medical Insurance'}
                 placeholderTextColor="white"
+                keyboardType="default"
                 value={insuranceName}
                 returnKeyType="next"
                 onChangeText={text => setInsuranceName(text)}

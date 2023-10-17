@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   BackHandler,
   Modal,
+  Alert
 } from 'react-native';
 import {
   useFocusEffect,
@@ -14,6 +15,7 @@ import {
   StackActions,
   useNavigation,
 } from '@react-navigation/native';
+import {fetchUserData} from '../../../services/apis/app/userApis';
 import styles from './styles';
 import Button from '../../../components/button-component';
 import Images from '../../../services/constants/images';
@@ -25,8 +27,10 @@ import {useSelector} from 'react-redux';
 const DashboardScreen = props => {
   const navigation = useNavigation();
   const userData = useSelector(state => state.user);
-  console.log('dash:', userData);
+  // console.log('dash:', userData);
+  const [data, setData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [loading, setLoading] = React.useState(false);
   const isFocused = useIsFocused();
   const buttonOk = () => {
     setModalVisible(false);
@@ -36,14 +40,47 @@ const DashboardScreen = props => {
       }),
     );
   };
-  const emergencyContacts = () => {
-    if (userData.user.step == 1) {
-      setModalVisible(true);
+  const getEmergencyContacts = async () => {
+    try {
+      setLoading(true);
+      const fetchedData = await fetchUserData(userData.user.email);
+      console.log(fetchedData.user)
+      setData(fetchedData.user.step);
+      console.log(fetchedData.user.step)
+      if(fetchedData.user.step == 1)
+      {
+        setModalVisible(true);
+      }
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      if (error.response && error.response.status === 401) {
+        await Keychain.resetGenericPassword();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: RouteNames.navigatorNames.authNavigator,
+                params: {screen: RouteNames.authRoutes.loginScreen},
+              },
+            ],
+          }),
+        );
+      } else {
+        console.error('Error:', error);
+        Alert.alert('Error getting contacts', error);
+      }
     }
   };
+  // const emergencyContacts = () => {
+  //   if (userData.user.step == 1) {
+  //     setModalVisible(true);
+  //   }
+  // };
   useEffect(() => {
     if (isFocused) {
-      emergencyContacts();
+      getEmergencyContacts();
     }
   }, []);
   return (

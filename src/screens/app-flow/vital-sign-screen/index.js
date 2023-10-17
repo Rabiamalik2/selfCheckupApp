@@ -146,6 +146,7 @@ const VitalSignsScreen = props => {
               </Text>
               <View style={{marginTop: 40}}>
                 <Input
+                  keyboardType="decimal-pad"
                   placeholder={'Blood Sugar Level (mg/dl)'}
                   placeholderTextColor="white"
                   value={bloodPressure}
@@ -153,6 +154,7 @@ const VitalSignsScreen = props => {
                   onChangeText={text => setBloodPressure(text)}
                 />
                 <Input
+                  keyboardType="decimal-pad"
                   placeholder={'Blood Sugar Level (mg/dl)'}
                   placeholderTextColor="white"
                   value={bloodSugarLevel}
@@ -160,6 +162,7 @@ const VitalSignsScreen = props => {
                   onChangeText={text => setBloodSugarLevel(text)}
                 />
                 <Input
+                  keyboardType="decimal-pad"
                   placeholder={'Pulse(beats per minute)'}
                   placeholderTextColor="white"
                   value={pulse}
@@ -167,6 +170,7 @@ const VitalSignsScreen = props => {
                   onChangeText={text => setPulse(text)}
                 />
                 <Input
+                  keyboardType="decimal-pad"
                   placeholder={'Body Temperature: F'}
                   placeholderTextColor="white"
                   value={bodyTemprature}

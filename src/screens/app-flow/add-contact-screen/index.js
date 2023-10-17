@@ -37,7 +37,17 @@ const AddContactScreen = props => {
   const [modalVisible, setModalVisible] = useState(false);
   const buttonOk = () => {
     setModalVisible(false);
-    navigation.navigate(RouteNames.sosNavRoutes.emergencyContactScreen);
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [
+          {
+            name: RouteNames.navigatorNames.sosNavigator,
+            params: {screen: RouteNames.sosNavRoutes.emergencyContactScreen},
+          },
+        ],
+      }),
+    );
   };
   const addContactOnPress = async userID => {
     try {
@@ -155,6 +165,7 @@ const AddContactScreen = props => {
                 details.
               </Text>
               <Input
+                keyboardType="default"
                 placeholder={'First Name'}
                 placeholderTextColor="white"
                 value={firstname}
@@ -162,6 +173,7 @@ const AddContactScreen = props => {
                 onChangeText={text => setFirstname(text)}
               />
               <Input
+                keyboardType="default"
                 placeholder={'Last Name'}
                 placeholderTextColor="white"
                 value={lastname}
@@ -169,6 +181,7 @@ const AddContactScreen = props => {
                 onChangeText={text => setLastname(text)}
               />
               <Input
+                keyboardType="number-pad"
                 placeholder={'Phone'}
                 placeholderTextColor="white"
                 value={phone}
@@ -176,6 +189,7 @@ const AddContactScreen = props => {
                 onChangeText={text => setPhone(text)}
               />
               <Input
+                keyboardType="default"
                 autoCapitalize="none"
                 placeholder={'Relation'}
                 placeholderTextColor="white"
@@ -190,25 +204,25 @@ const AddContactScreen = props => {
                   <Text style={styles.saveBtnS}>Save</Text>
                 </TouchableOpacity>
               </View>
-                <View style={styles.centeredView}>
-                  <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalVisible}>
-                    <View style={styles.centeredView}>
-                      <View style={styles.modalView}>
-                        <Text style={styles.modalText}>
-                          Emergency Contact has been added.
-                        </Text>
-                        <Button
-                          style={[styles.button, styles.buttonClose]}
-                          onPress={buttonOk}
-                          name="Ok"
-                        />
-                      </View>
+              <View style={styles.centeredView}>
+                <Modal
+                  animationType="slide"
+                  transparent={true}
+                  visible={modalVisible}>
+                  <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                      <Text style={styles.modalText}>
+                        Emergency Contact has been added.
+                      </Text>
+                      <Button
+                        style={[styles.button, styles.buttonClose]}
+                        onPress={buttonOk}
+                        name="Ok"
+                      />
                     </View>
-                  </Modal>
-                </View>
+                  </View>
+                </Modal>
+              </View>
             </View>
           </View>
         </View>

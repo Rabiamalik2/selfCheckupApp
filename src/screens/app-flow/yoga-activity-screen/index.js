@@ -24,10 +24,6 @@ const YogaActivityScreen = props => {
         </View>
       </View>
       <View style={styles.inpStyle}>
-        <TextInput
-          placeholder="Type Here"
-          style={styles.txtStyle}
-        />
         <Text style={styles.subTxt}>
           Amazing Yoga Trainer: Samina Naz {'\n'}9:20 am-12/03/2023{' '}
         </Text>

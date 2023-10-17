@@ -179,5 +179,23 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
   },
+  buttonView: {
+    flexDirection: 'row',
+    marginTop: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    justifyContent: 'center',
+    backgroundColor: Colors.oceanBlue,
+    borderColor:Colors.lightGrey,
+    borderWidth: 1,
+    width: responsiveWidth(20),
+    height: responsiveHeight(4),
+    alignItems: 'center',
+    marginHorizontal:5,
+    borderRadius: 12,
+    marginTop: 10,
+  },
 });
 export default styles;

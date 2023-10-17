@@ -1,5 +1,5 @@
 //import liraries
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -23,30 +23,39 @@ const FunEduScreen = props => {
       key: '1',
       name: 'Yoga Activity',
       onPress: () =>
-        navigation.navigate(RouteNames.navigatorNames.funNavigator, {screen: RouteNames.funNavRoutes.yogaActivityScreen}),
+        navigation.navigate(RouteNames.navigatorNames.funNavigator, {
+          screen: RouteNames.funNavRoutes.yogaActivityScreen,
+        }),
       imageUri: Images.person,
     },
     {
       key: '2',
       name: 'Cycling Activity',
       imageUri: Images.bike,
-      onPress: {},
+      onPress: () =>
+        navigation.navigate(RouteNames.navigatorNames.funNavigator, {
+          screen: RouteNames.funNavRoutes.funEduScreen,
+        }),
     },
     {
       key: '3',
       name: 'Health Activity',
       onPress: () =>
-        navigation.navigate(RouteNames.navigatorNames.funNavigator, {screen: RouteNames.funNavRoutes.healthEduScreen}),
+        navigation.navigate(RouteNames.navigatorNames.funNavigator, {
+          screen: RouteNames.funNavRoutes.healthEduScreen,
+        }),
       imageUri: Images.health,
     },
     {
       key: '4',
       name: 'Yoga Video Activity',
       onPress: () =>
-        navigation.navigate(RouteNames.navigatorNames.funNavigator, {screen: RouteNames.funNavRoutes.liveActivityScreen}),
+        navigation.navigate(RouteNames.navigatorNames.funNavigator, {
+          screen: RouteNames.funNavRoutes.liveActivityScreen,
+        }),
       imageUri: Images.person,
     },
-  ])
+  ]);
   const renderItem = ({item}) => (
     <PopularActivities
       onPress={item.onPress}

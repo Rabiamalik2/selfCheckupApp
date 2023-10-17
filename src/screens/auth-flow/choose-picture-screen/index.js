@@ -36,7 +36,7 @@ const ChoosePicScreen = () => {
   const [cameraPhoto, setCameraPhoto] = useState(null);
   const [galleryPhoto, setGalleryPhoto] = useState(null);
   let options = {
-    saveToPhotos: true,
+    saveToPhotos: false,
     mediaType: 'photo',
   };
   const takePhotoFromCamera = async () => {
@@ -47,8 +47,10 @@ const ChoosePicScreen = () => {
 
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         const result = await launchCamera(options);
-        if (result) {
-          console.log('Photo captured:', result.uri);
+
+        console.log('Photo captured:', result.assets[0].uri);
+        if (!result.cancelled) {
+          setGalleryPhoto(result.assets[0].uri);
         } else {
           console.log('Photo capture failed.');
         }
@@ -69,6 +71,7 @@ const ChoosePicScreen = () => {
   };
   const proceedButton = async () => {
     try {
+      setLoading(true);
       const fileName = `${Date.now()}_${Math.random()}`;
       const storageRef = storage().ref().child(`/selfCheckImages/${fileName}`);
       const response = await fetch(galleryPhoto);
@@ -77,7 +80,6 @@ const ChoosePicScreen = () => {
       const downloadURL = await storageRef.getDownloadURL();
       console.log('Image uploaded successfully:', downloadURL);
       const imagePath = downloadURL;
-      setLoading(true);
       await addImage(user.email, imagePath);
       setLoading(false);
       console.log('add image:', imagePath);

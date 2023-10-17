@@ -158,6 +158,7 @@ const PersonalInfoScreen = props => {
                   </Picker>
                 </View>
                 <Input
+                  keyboardType="default"
                   placeholder={'Home Address'}
                   placeholderTextColor="white"
                   value={homeAddress}

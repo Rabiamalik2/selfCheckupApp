@@ -1,6 +1,4 @@
-import React, {
-  useState,
-} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -57,14 +55,25 @@ const RegisterScreen = props => {
           RouteNames.authRoutes.termScreen,
           (params = {isReadOnly: false, user}),
         );
+      } else if (response.status == 400) {
+        setLoading(false);
+        Alert.alert('Email already exists, please enter a valid email.');
       } else {
         setLoading(false);
         Alert.alert('Registration failed. Please try again.');
       }
     } catch (error) {
-      setLoading(false)
-      console.error('Error during registering user:', error);
-      Alert.alert('Error during registering user');
+      setLoading(false);
+      if (error.response && error.response.status === 400) {
+        setLoading(false);
+        Alert.alert(
+          'Account Registration failed',
+          'Email already exists, please enter a valid email.',
+        );
+      } else {
+        console.error('Error during registering user:', error);
+        Alert.alert('Error during registering user', error);
+      }
     }
   };
   return (
@@ -100,6 +109,7 @@ const RegisterScreen = props => {
                 onChangeText={text => setLastname(text)}
               />
               <Input
+                keyboardType="number-pad"
                 placeholder={'Phone'}
                 placeholderTextColor="white"
                 value={phone}
@@ -117,7 +127,7 @@ const RegisterScreen = props => {
               />
               <Input
                 password
-                autoCapitalize={"none"}
+                autoCapitalize={'none'}
                 placeholder={'Password'}
                 placeholderTextColor="white"
                 value={password}

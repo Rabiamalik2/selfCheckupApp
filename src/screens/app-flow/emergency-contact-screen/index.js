@@ -29,15 +29,20 @@ import Button from '../../../components/button-component';
 import RouteNames from '../../../services/constants/route-names';
 
 const EmergencyContactScreen = props => {
+  const [contactId, setContactId] = useState('');
   const userData = useSelector(state => state.user);
   const navigation = useNavigation();
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = useState([]);
   const isFocused = useIsFocused();
   const [modalVisible, setModalVisible] = useState(false);
-  const buttonOk = () => {
+  const buttonDel = id => {
+    setContactId(id);
+    setModalVisible(true);
+  };
+  const cancelDelete = () => {
+    Alert.alert('Delete Emergency Contact', 'Deletion Canceled');
     setModalVisible(false);
-    props.navigation.navigate(RouteNames.sosNavRoutes.addContactScreen);
   };
   // console.log('contacts', data.length);
   const getEmergencyContacts = async () => {
@@ -45,9 +50,6 @@ const EmergencyContactScreen = props => {
       setLoading(true);
       const fetchedData = await fetchEmergencyContacts(userData.user._id);
       setData(fetchedData);
-      if(data.length <=0 ){
-        setModalVisible(true);
-      }
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -70,17 +72,21 @@ const EmergencyContactScreen = props => {
       }
     }
   };
-  const deleteContacts = async id => {
+  const deleteEmergencyContact = async () => {
     try {
-      console.log(id);
+      console.log(contactId);
       setLoading(true);
-
-      const response = await deleteContact(userData.user._id, id);
-      setLoading(false);
-      if (response.status == 204) {
-        setLoading(false);
-        getEmergencyContacts();
-        console.log('contact Deleted ');
+      const response = await deleteContact(userData.user._id, contactId);
+      if (response.status == 204 || response.status == 201) {
+        
+        const fetchedData = await fetchEmergencyContacts(userData.user._id);
+        console.log('contact Deleted ', fetchedData.length);
+        setData(fetchedData);
+        if (fetchedData.length <= 0) {
+          navigation.navigate(RouteNames.sosNavRoutes.addContactScreen);
+        }
+        setModalVisible(false);
+       
       }
     } catch (error) {
       setLoading(false);
@@ -145,68 +151,69 @@ const EmergencyContactScreen = props => {
             </TouchableOpacity>
 
             <View style={styles.flatListView}>
-              {data.length <= 0 ? (
-                <View style={styles.centeredView}>
-                  <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalVisible}>
-                    <View style={styles.centeredView}>
-                      <View style={styles.modalView}>
-                        <Text style={styles.modalText}>
-                          You have no Emergency Contacts at the moment please
-                          enter atleast one.
-                        </Text>
+              <FlatList
+                data={data}
+                keyExtractor={item => item._id.toString()}
+                renderItem={({item}) => (
+                  <View style={styles.subView}>
+                    <View style={styles.rowContainer}>
+                      <Text style={styles.subTxt}>
+                        {item ? item.firstname : 'Loading...'}
+                      </Text>
+                      <View style={styles.iconContainer}>
+                        <TouchableOpacity
+                          style={styles.icon1View}
+                          onPress={() =>
+                            props.navigation.navigate(
+                              RouteNames.navigatorNames.sosNavigator,
+                              {
+                                screen:
+                                  RouteNames.sosNavRoutes.addContactScreen,
+                                params: {itemId: item._id},
+                              },
+                            )
+                          }>
+                          <MaterialIcons
+                            name="mode-edit-outline"
+                            style={styles.icon1}
+                          />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          style={styles.icon1View}
+                          onPress={() => buttonDel(item._id)}>
+                          <Entypo name="cross" style={styles.icon1} />
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  </View>
+                )}
+              />
+              <View style={styles.centeredView}>
+                <Modal
+                  animationType="slide"
+                  transparent={true}
+                  visible={modalVisible}>
+                  <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                      <Text style={styles.modalText}>
+                        Do you really want to delete this contact?
+                      </Text>
+                      <View style={styles.buttonView}>
                         <Button
-                          style={[styles.button, styles.buttonClose]}
-                          onPress={buttonOk}
-                          name="Ok"
+                          onPress={deleteEmergencyContact}
+                          style={[styles.button]}
+                          name="Yes"
+                        />
+                        <Button
+                          onPress={cancelDelete}
+                          style={[styles.button]}
+                          name="No"
                         />
                       </View>
                     </View>
-                  </Modal>
-                </View>
-              ) : (
-                <FlatList
-                  data={data}
-                  keyExtractor={item => item._id.toString()}
-                  renderItem={({item}) => (
-                    <View style={styles.subView}>
-                      <View style={styles.rowContainer}>
-                        <Text style={styles.subTxt}>
-                          {item ? item.firstname : 'Loading...'}
-                        </Text>
-                        <View style={styles.iconContainer}>
-                          <TouchableOpacity
-                            style={styles.icon1View}
-                            onPress={() =>
-                              props.navigation.navigate(
-                                RouteNames.navigatorNames.sosNavigator,
-                                {
-                                  screen:
-                                    RouteNames.sosNavRoutes.addContactScreen,
-                                  params: {itemId: item._id},
-                                },
-                              )
-                            }>
-                            <MaterialIcons
-                              name="mode-edit-outline"
-                              style={styles.icon1}
-                            />
-                          </TouchableOpacity>
-                          <TouchableOpacity
-                            style={styles.icon1View}
-                            onPress={() => deleteContacts(item._id)}>
-                            <Entypo name="cross" style={styles.icon1} />
-                          </TouchableOpacity>
-                        </View>
-                      </View>
-                    </View>
-                  )}
-                />
-
-                // <View><Text>No Contacts</Text></View>
-              )}
+                  </View>
+                </Modal>
+              </View>
             </View>
           </View>
         </View>
