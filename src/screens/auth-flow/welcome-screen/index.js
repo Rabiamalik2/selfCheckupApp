@@ -29,58 +29,104 @@ const WelcomeScreen = () => {
       setLoading(true);
       const response = await fetchUserData(token);
       console.log('isTokenValid', response.user);
-      setLoading(false);
       return response;
     } catch (error) {
       setLoading(false);
       return false;
     }
   };
-  const checkKeychainAndNavigate = async () => {
-    try {
-      const credentials = await Keychain.getGenericPassword();
-      if (credentials) {
-        const token = credentials.password;
-        const isValid = await isTokenValid(token);
-        // console.log("isuser: ", isValid.user)
-        dispatch(setUser(isValid.user));
-        // setUserData(isValid.user);
-        if (isValid) {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [
-                {
-                  name: RouteNames.navigatorNames.appNavigator,
-                  // params: {screen: RouteNames.appRoutes.dashboardScreen},
-                },
-              ],
-            }),
-          );
-          SplashScreen.hide();
-        } else {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [
-                {
-                  name: RouteNames.navigatorNames.authNavigator,
-                  params: {screen: RouteNames.authRoutes.loginScreen},
-                },
-              ],
-            }),
-          );
-          SplashScreen.hide();
-        }
-      }
-    } catch (error) {
-      console.error('Error while checking keychain:', error);
-    }
-  };
+  // const checkKeychainAndNavigate = async () => {
+  //   try {
+  //     const credentials = await Keychain.getGenericPassword();
+  //     if (credentials) {
+  //       const token = credentials.password;
+  //       const isValid = await isTokenValid(token);
+  //       // console.log("isuser: ", isValid.user)
+  //       dispatch(setUser(isValid.user));
+  //       // setUserData(isValid.user);
+  //       if (isValid) {
+  //         navigation.dispatch(
+  //           CommonActions.reset({
+  //             index: 0,
+  //             routes: [
+  //               {
+  //                 name: RouteNames.navigatorNames.appNavigator,
+  //                 // params: {screen: RouteNames.appRoutes.dashboardScreen},
+  //               },
+  //             ],
+  //           }),
+  //         );
+  //         // setLoading(false);
+  //         SplashScreen.hide();
+  //       } else {
+  //         navigation.dispatch(
+  //           CommonActions.reset({
+  //             index: 0,
+  //             routes: [
+  //               {
+  //                 name: RouteNames.navigatorNames.authNavigator,
+  //                 params: {screen: RouteNames.authRoutes.loginScreen},
+  //               },
+  //             ],
+  //           }),
+  //         );
+  //         // setLoading(false);
+  //         SplashScreen.hide();
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error('Error while checking keychain:', error);
+  //   }
+  // };
   useEffect(() => {
-    checkKeychainAndNavigate();
-    SplashScreen.hide();
-  }, []);
+    const init = async () => {
+      try {
+        const credentials = await Keychain.getGenericPassword();
+        if (credentials) {
+          const token = credentials.password;
+          const isValid = await isTokenValid(token);
+          dispatch(setUser(isValid.user));
+  
+          if (isValid) {
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [
+                  {
+                    name: RouteNames.navigatorNames.appNavigator,
+                  },
+                ],
+              })
+            );
+          } else {
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [
+                  {
+                    name: RouteNames.navigatorNames.authNavigator,
+                    params: { screen: RouteNames.authRoutes.loginScreen },
+                  },
+                ],
+              })
+            );
+          }
+        }
+  
+        // At this point, the loading has completed successfully
+        setLoading(false);
+  
+        // Hide the splash screen after loading has completed
+        SplashScreen.hide();
+      } catch (error) {
+        console.error('Error during initialization:', error);
+  
+        // Handle errors here if needed
+      }
+    };
+  
+    init();
+  }, [navigation, dispatch]);
 
   return (
     <SafeAreaView style={styles.container}>
