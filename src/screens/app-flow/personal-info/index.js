@@ -100,12 +100,11 @@ const PersonalInfoScreen = props => {
     }
   };
   return (
-    <KeyboardAwareScrollView
-      enableOnAndroid={true}
-      extraScrollHeight={50}
-      keyboardShouldPersistTaps="handled"
-      scrollEnabled={false}>
-      <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={{flexGrow: 1}}
+        // enableOnAndroid={true}
+        keyboardShouldPersistTaps="handled">
         <Loader visible={loading} />
         <View style={styles.scView}>
           <Text style={styles.selfTxt}>Self</Text>
@@ -145,8 +144,14 @@ const PersonalInfoScreen = props => {
                 <View style={styles.pickerView}>
                   <Picker
                     selectedValue={gender}
+                    dropdownIconColor={"white"}
                     onValueChange={itemValue => setGender(itemValue)}
                     style={styles.picker}>
+                    <Picker.Item
+                      label="Gender"
+                      style={styles.pickerItem}
+                      enabled={false}
+                      value="Gender"></Picker.Item>
                     <Picker.Item
                       label="Male"
                       style={styles.pickerItem}
@@ -174,8 +179,8 @@ const PersonalInfoScreen = props => {
             </View>
           </View>
         </View>
-      </SafeAreaView>
-    </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 };
 

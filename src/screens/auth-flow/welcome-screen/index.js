@@ -46,7 +46,6 @@ const WelcomeScreen = () => {
         dispatch(setUser(isValid.user));
         // setUserData(isValid.user);
         if (isValid) {
-          SplashScreen.hide();
           navigation.dispatch(
             CommonActions.reset({
               index: 0,
@@ -60,7 +59,6 @@ const WelcomeScreen = () => {
           );
           SplashScreen.hide();
         } else {
-          SplashScreen.hide();
           navigation.dispatch(
             CommonActions.reset({
               index: 0,

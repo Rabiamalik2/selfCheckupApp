@@ -7,6 +7,7 @@ import {
   FlatList,
   Alert,
   Modal,
+  BackHandler,
 } from 'react-native';
 import styles from './styles';
 import {
@@ -34,14 +35,14 @@ const EmergencyContactScreen = props => {
   const navigation = useNavigation();
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = useState([]);
-  const isFocused = useIsFocused();
+  const isFocused = useIsFocused(true);
   const [modalVisible, setModalVisible] = useState(false);
+
   const buttonDel = id => {
     setContactId(id);
     setModalVisible(true);
   };
   const cancelDelete = () => {
-    Alert.alert('Delete Emergency Contact', 'Deletion Canceled');
     setModalVisible(false);
   };
   // console.log('contacts', data.length);
@@ -50,6 +51,7 @@ const EmergencyContactScreen = props => {
       setLoading(true);
       const fetchedData = await fetchEmergencyContacts(userData.user._id);
       setData(fetchedData);
+      console.log('apiFunc', fetchedData);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -66,6 +68,9 @@ const EmergencyContactScreen = props => {
             ],
           }),
         );
+      } else if (error.response && error.response.status === 404) {
+        console.error('Error:', error);
+        Alert.alert('User not found', error);
       } else {
         console.error('Error:', error);
         Alert.alert('Error getting contacts', error);
@@ -75,18 +80,21 @@ const EmergencyContactScreen = props => {
   const deleteEmergencyContact = async () => {
     try {
       console.log(contactId);
+      setModalVisible(false);
       setLoading(true);
       const response = await deleteContact(userData.user._id, contactId);
-      if (response.status == 204 || response.status == 201) {
-        
+      if (response.status == 204) {
+        getEmergencyContacts();
+      } else if (response.status == 201) {
+        setLoading(false);
         const fetchedData = await fetchEmergencyContacts(userData.user._id);
         console.log('contact Deleted ', fetchedData.length);
         setData(fetchedData);
         if (fetchedData.length <= 0) {
+          // setLoading(false)
           navigation.navigate(RouteNames.sosNavRoutes.addContactScreen);
+          getEmergencyContacts();
         }
-        setModalVisible(false);
-       
       }
     } catch (error) {
       setLoading(false);
@@ -110,10 +118,12 @@ const EmergencyContactScreen = props => {
     }
   };
   useEffect(() => {
+    console.log(isFocused)
     if (isFocused) {
       getEmergencyContacts();
+      console.log('onpage');
     }
-  }, []);
+  }, [isFocused]);//dependency
   return (
     <SafeAreaView style={styles.container}>
       <Loader visible={loading} />

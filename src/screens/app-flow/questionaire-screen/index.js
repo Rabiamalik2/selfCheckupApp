@@ -7,6 +7,7 @@ import {
   Alert,
   ScrollView,
   Modal,
+  Dimensions,
 } from 'react-native';
 import styles from './styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -34,7 +35,6 @@ const QuestionaireScreen1 = props => {
   // console.log('questionaire screen:', userData);
   const navigation = useNavigation();
   const [loading, setLoading] = React.useState(false);
- 
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [questionaire, setQuestionaire] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -130,9 +130,6 @@ const QuestionaireScreen1 = props => {
       [questionId]: selectedOption,
     });
   };
-  // const handleScrollEnable =  questionaire[0].questions[
-  //     currentQuestionIndex
-  //   ].options.length > 3
 
   const handleNextQuestion = () => {
     // console.log(questionaire[0].questions,'questionaire[0]')
@@ -169,89 +166,95 @@ const QuestionaireScreen1 = props => {
         <View style={styles.parent}>
           <View style={styles.child}>
             <View style={styles.viewS2}>
-              {questionaire.length > 0 && (
-                <ScrollView
-                  contentContainerStyle={styles.scrollView}
-                  showsVerticalScrollIndicator={
-                    questionaire[0].questions[currentQuestionIndex].options
-                      .length > 3
-                  }>
-                  <View
-                    key={questionaire[0].questions[currentQuestionIndex]._id}>
-                    <Text style={styles.txtStyle1}>
-                      {questionaire[0].questions[currentQuestionIndex].text}
-                    </Text>
-                    {questionaire[0].questions[currentQuestionIndex].type ===
-                    'checkbox' ? (
-                      questionaire[0].questions[
-                        currentQuestionIndex
-                      ].options.map((option, optionIndex) => (
-                        <View key={optionIndex} style={styles.txtStyle2}>
-                          <CheckBox
-                            style={styles.txtStyle3}
-                            value={
-                              selectedAnswers[
-                                questionaire[0].questions[currentQuestionIndex]
-                                  ._id
-                              ] &&
-                              selectedAnswers[
-                                questionaire[0].questions[currentQuestionIndex]
-                                  ._id
-                              ] == option
-                            }
-                            onValueChange={newValue => {
-                              console.log('newValue', newValue);
-                              handleOptionChange(
-                                questionaire[0].questions[currentQuestionIndex]
-                                  ._id,
-                                newValue
-                                  ? option
-                                  : (selectedAnswers[
-                                      questionaire[0].questions[
-                                        currentQuestionIndex
-                                      ]._id
-                                    ] =
-                                      selectedAnswers[
+              <ScrollView
+                contentContainerStyle={{flexGrow: 1}}
+                scrollEnabled={true}
+                // showsVerticalScrollIndicator={true}
+              >
+                {questionaire.length > 0 && (
+                  <View>
+                    <View
+                      key={questionaire[0].questions[currentQuestionIndex]._id}>
+                      <Text style={styles.txtStyle1}>
+                        {questionaire[0].questions[currentQuestionIndex].text}
+                      </Text>
+                      {questionaire[0].questions[currentQuestionIndex].type ===
+                      'checkbox' ? (
+                        questionaire[0].questions[
+                          currentQuestionIndex
+                        ].options.map((option, optionIndex) => (
+                          <View key={optionIndex} style={styles.txtStyle2}>
+                            <CheckBox
+                              style={styles.txtStyle3}
+                              value={
+                                selectedAnswers[
+                                  questionaire[0].questions[
+                                    currentQuestionIndex
+                                  ]._id
+                                ] &&
+                                selectedAnswers[
+                                  questionaire[0].questions[
+                                    currentQuestionIndex
+                                  ]._id
+                                ] == option
+                              }
+                              onValueChange={newValue => {
+                                console.log('newValue', newValue);
+                                handleOptionChange(
+                                  questionaire[0].questions[
+                                    currentQuestionIndex
+                                  ]._id,
+                                  newValue
+                                    ? option
+                                    : (selectedAnswers[
                                         questionaire[0].questions[
                                           currentQuestionIndex
                                         ]._id
-                                      ] !== option),
-                              );
-                            }}
-                          />
-                          <Text style={styles.options}>{option}</Text>
-                        </View>
-                      ))
-                    ) : (
-                      <Input
-                        value={
-                          selectedAnswers[
-                            questionaire[0].questions[currentQuestionIndex]._id
-                          ] || ''
-                        }
-                        onChangeText={text =>
-                          handleOptionChange(
-                            questionaire[0].questions[currentQuestionIndex]._id,
-                            text,
-                          )
-                        }
+                                      ] =
+                                        selectedAnswers[
+                                          questionaire[0].questions[
+                                            currentQuestionIndex
+                                          ]._id
+                                        ] !== option),
+                                );
+                              }}
+                            />
+                            <Text style={styles.options}>{option}</Text>
+                          </View>
+                        ))
+                      ) : (
+                        <Input
+                          value={
+                            selectedAnswers[
+                              questionaire[0].questions[currentQuestionIndex]
+                                ._id
+                            ] || ''
+                          }
+                          onChangeText={text =>
+                            handleOptionChange(
+                              questionaire[0].questions[currentQuestionIndex]
+                                ._id,
+                              text,
+                            )
+                          }
+                        />
+                      )}
+                    </View>
+                    <View style={styles.buttonView}>
+                      <Button
+                        onPress={handlePreviousQuestion}
+                        style={styles.Save}
+                        name="Previous"
                       />
-                    )}
+                      <Button
+                        onPress={handleNextQuestion}
+                        style={styles.Save}
+                        name="Next"
+                      />
+                    </View>
                   </View>
-                  <View style={styles.buttonView}>
-                  <Button
-                    onPress={handlePreviousQuestion}
-                    style={styles.Save}
-                    name="Previous"
-                  />
-                  <Button
-                    onPress={handleNextQuestion}
-                    style={styles.Save}
-                    name="Next"
-                  />
-                </View>
-                </ScrollView>
-              )}
+                )}
+              </ScrollView>
               <View style={styles.centeredView}>
                 <Modal
                   animationType="slide"

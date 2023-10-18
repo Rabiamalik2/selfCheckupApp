@@ -70,9 +70,9 @@ const DoctorInfoScreen = props => {
   };
   return (
     <KeyboardAwareScrollView
-      style={{flex: 1}}
-      enableOnAndroid={true}
-      scrollEnabled={false}
+      contentContainerStyle={{flexGrow: 1}}
+      // enableOnAndroid={true}
+      keyboardShouldPersistTaps="handled"
       extraScrollHeight={50}>
       <SafeAreaView style={styles.container}>
         <Loader visible={loading} />

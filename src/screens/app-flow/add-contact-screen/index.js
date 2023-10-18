@@ -15,6 +15,7 @@ import Input from '../../../components/text-input-component/textInput';
 import Button from '../../../components/button-component';
 import Loader from '../../../components/loader';
 import {useNavigation, useRoute, CommonActions} from '@react-navigation/native';
+import {Picker} from '@react-native-picker/picker';
 import * as Keychain from 'react-native-keychain';
 import {
   addContacts,
@@ -37,17 +38,14 @@ const AddContactScreen = props => {
   const [modalVisible, setModalVisible] = useState(false);
   const buttonOk = () => {
     setModalVisible(false);
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [
-          {
-            name: RouteNames.navigatorNames.sosNavigator,
-            params: {screen: RouteNames.sosNavRoutes.emergencyContactScreen},
-          },
-        ],
-      }),
+    console.log('going');
+    props.navigation.navigate(
+      RouteNames.navigatorNames.sosNavigator,
+      {
+        screen: RouteNames.sosNavRoutes.emergencyContactScreen,
+      },
     );
+  
   };
   const addContactOnPress = async userID => {
     try {
@@ -66,7 +64,6 @@ const AddContactScreen = props => {
           setLoading(false);
           setModalVisible(true);
           // navigation.navigate(RouteNames.sosNavRoutes.emergencyContactScreen);
-          setLoading(false);
         } else {
           setLoading(false);
           console.error('Error:', response.data);
@@ -139,12 +136,13 @@ const AddContactScreen = props => {
   };
 
   return (
-    <KeyboardAwareScrollView
-      style={{flex: 1}}
-      enableOnAndroid={true}
-      scrollEnabled={false}
-      extraScrollHeight={50}>
-      <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={{flexGrow: 1}}
+       enableOnAndroid={true}
+        keyboardShouldPersistTaps="handled"
+        extraScrollHeight={-150}
+        >
         <Loader visible={loading} />
         <View style={styles.scView}>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
@@ -188,15 +186,51 @@ const AddContactScreen = props => {
                 returnKeyType="next"
                 onChangeText={text => setPhone(text)}
               />
-              <Input
-                keyboardType="default"
-                autoCapitalize="none"
-                placeholder={'Relation'}
-                placeholderTextColor="white"
-                value={relation}
-                onChangeText={text => setRelation(text)}
-                returnKeyType="next"
-              />
+              <View style={styles.pickerView}>
+                <Picker
+                  selectedValue={relation}
+                  onValueChange={itemValue => setRelation(itemValue)}
+                  dropdownIconColor={"white"}
+                  style={styles.picker}>
+                  <Picker.Item
+                    label="Relation"
+                    style={styles.pickerItem}
+                    enabled={false}
+                    value="Relation"></Picker.Item>
+                  <Picker.Item
+                    label="Father"
+                    style={styles.pickerItem}
+                    value="Father"></Picker.Item>
+                  <Picker.Item
+                    label="Mother"
+                    style={styles.pickerItem}
+                    value="Mother"></Picker.Item>
+                  <Picker.Item
+                    label="Sister"
+                    style={styles.pickerItem}
+                    value="Sister"></Picker.Item>
+                  <Picker.Item
+                    label="Brother"
+                    style={styles.pickerItem}
+                    value="Brother"></Picker.Item>
+                  <Picker.Item
+                    label="Husband"
+                    style={styles.pickerItem}
+                    value="Husband"></Picker.Item>
+                  <Picker.Item
+                    label="Wife"
+                    style={styles.pickerItem}
+                    value="Wife"></Picker.Item>
+                  <Picker.Item
+                    label="Son"
+                    style={styles.pickerItem}
+                    value="Son"></Picker.Item>
+                  <Picker.Item
+                    label="Daughter"
+                    style={styles.pickerItem}
+                    value="Daughter"></Picker.Item>
+                </Picker>
+              </View>
               <View style={styles.btnView}>
                 <TouchableOpacity
                   style={styles.saveToS}
@@ -226,8 +260,8 @@ const AddContactScreen = props => {
             </View>
           </View>
         </View>
-      </SafeAreaView>
-    </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 };
 

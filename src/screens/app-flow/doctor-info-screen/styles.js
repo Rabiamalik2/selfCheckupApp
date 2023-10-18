@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   viewS2: {
-    transform: [{scaleX: 0.7}],
+    transform: [{scaleX: 0.5}],
     alignItems: 'center',
     marginTop: 50,
     justifyContent: 'center',

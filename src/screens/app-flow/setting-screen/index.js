@@ -52,11 +52,11 @@ const SettingScreen = props => {
     setModalVisible(true);
   };
   const cancelDelete = () => {
-    Alert.alert('Delete Profile', 'Deletion Canceled');
     setModalVisible(false);
   };
   const deleteSelectedUser = async () => {
     try {
+      setModalVisible(false);
       setLoading(true);
       const response = await deleteUser(userData.user._id);
       setLoading(false);
@@ -66,7 +66,7 @@ const SettingScreen = props => {
           'Delete Profile',
           'Profile Deleted , Redirecting You to login Page.',
         );
-        setModalVisible(false);
+        
         await Keychain.resetGenericPassword();
         navigation.dispatch(
           CommonActions.reset({

@@ -122,6 +122,7 @@ const HealthEduScreen = props => {
           <FlatList
             data={data}
             horizontal={true}
+            showsHorizontalScrollIndicator={false}
             renderItem={renderItem}
             keyExtractor={item => item.key}
           />
@@ -134,6 +135,7 @@ const HealthEduScreen = props => {
             <FlatList
               data={data1}
               horizontal={true}
+              showsHorizontalScrollIndicator={false}
               renderItem={renderRecentItem}
               keyExtractor={item => item.key}
             />

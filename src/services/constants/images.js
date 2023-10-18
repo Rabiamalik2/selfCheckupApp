@@ -19,5 +19,6 @@ const Images = {
     img6: require('../../assets/images/img6.png'),
     google: require('../../assets/images/google.png'),
     phone: require('../../assets/images/phone.png'),
+    background: require('../../assets/images/backgroundQuestionaire.png'),
 }
 export default Images

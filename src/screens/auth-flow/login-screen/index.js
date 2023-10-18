@@ -97,10 +97,10 @@ const LoginScreen = props => {
 
   return (
     <KeyboardAwareScrollView
-      enableOnAndroid={true}
-      extraScrollHeight={0}
+      contentContainerStyle={{flexGrow: 1}}
+      // enableOnAndroid={true}
       keyboardShouldPersistTaps="handled"
-      scrollEnabled={false}>
+      extraScrollHeight={50}>
       <SafeAreaView style={styles.container}>
         <Loader visible={loading} />
         <View style={styles.viewS1}>

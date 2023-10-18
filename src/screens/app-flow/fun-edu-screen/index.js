@@ -86,6 +86,7 @@ const FunEduScreen = props => {
         <FlatList
           data={data}
           horizontal={true}
+          showsHorizontalScrollIndicator ={false}
           renderItem={renderItem}
           keyExtractor={item => item.key}
         />
@@ -97,6 +98,7 @@ const FunEduScreen = props => {
           </View>
           <FlatList
             data={data}
+            showsHorizontalScrollIndicator ={false}
             horizontal={true}
             renderItem={renderRecentItem}
             keyExtractor={item => item.key}

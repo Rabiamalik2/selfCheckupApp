@@ -76,9 +76,8 @@ const MedicoreInfoScreen = props => {
   };
   return (
     <KeyboardAwareScrollView
-      style={{flex: 1}}
-      enableOnAndroid={true}
-      scrollEnabled={false}
+      contentContainerStyle={{flexGrow: 1}}
+      // enableOnAndroid={true}
       extraScrollHeight={50}>
       <SafeAreaView style={styles.container}>
         <Loader visible={loading} />
@@ -98,7 +97,13 @@ const MedicoreInfoScreen = props => {
                   <Picker
                     selectedValue={mediQues}
                     onValueChange={itemValue => setMediQues(itemValue)}
+                    dropdownIconColor={"white"}
                     style={styles.picker}>
+                    <Picker.Item
+                    label="Please Select"
+                    style={styles.pickerItem}
+                    enabled={false}
+                    value="Please Select"></Picker.Item>
                     <Picker.Item
                       label="Yes"
                       style={styles.pickerItem}

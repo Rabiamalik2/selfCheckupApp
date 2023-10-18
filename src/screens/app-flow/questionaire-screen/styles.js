@@ -78,17 +78,19 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   viewS2: {
+    height: responsiveHeight(100),
+    width: responsiveWidth(100),
     transform: [{scaleX: 0.56}],
     alignItems: 'center',
     marginTop: 60,
     justifyContent: 'center',
   },
   scrollView: {
-    // flex: 1,
-    height: responsiveHeight(100),
-    width: responsiveWidth(100),
+    // height: responsiveHeight(100),
+    // width: responsiveWidth(100),
+    flexGrow: 1,
     // justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
   },
 
   subTxt: {

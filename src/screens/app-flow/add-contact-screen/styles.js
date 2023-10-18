@@ -10,9 +10,8 @@ import Fonts from '../../../services/constants/fonts';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // flexGrow: 0,
-    backgroundColor: Colors.screenBackground,
   },
+
   scView: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
   },
   parent: {
     top: 50,
-    height: responsiveHeight(100),
+    // flex:1,
     width: responsiveWidth(100),
     borderTopStartRadius: 500,
     borderTopEndRadius: 500,
@@ -57,7 +56,7 @@ const styles = StyleSheet.create({
   },
   child: {
     marginTop: 15,
-    height: responsiveHeight(100),
+    // flex:1,
     width: responsiveWidth(100),
     borderTopStartRadius: 400,
     borderTopEndRadius: 400,
@@ -67,12 +66,11 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   viewS2: {
-    transform: [{scaleX: 0.56}],
-    alignItems: 'center',
-    marginTop: 50,
-    justifyContent: 'center',
+    transform: [{scaleX: 0.55}],
+    // alignItems: 'center',
+    marginTop: responsiveHeight(10),
+    // justifyContent: 'center',
   },
-
   mainTxt: {
     textAlign: 'center',
     alignItems: 'center',
@@ -101,27 +99,6 @@ const styles = StyleSheet.create({
   icon1: {
     textAlign: 'center',
     fontSize: responsiveFontSize(7),
-  },
-  txtinpView: {
-    width: responsiveWidth(80),
-    height: responsiveHeight(5),
-    alignItems: 'center',
-    borderRadius: 12,
-    borderWidth: 2,
-    marginTop: 20,
-    justifyContent: 'center',
-    backgroundColor: Colors.purple,
-    opacity: 0.5,
-    borderColor: Colors.lightGrey,
-  },
-  textiS: {
-    marginLeft: 15,
-    marginRight: 210,
-    paddingVertical: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 100,
-    height: 40,
   },
   btnView: {
     marginTop: 10,
@@ -184,6 +161,29 @@ const styles = StyleSheet.create({
     color: Colors.white,
     marginBottom: 15,
     textAlign: 'center',
+  },
+  pickerView: {
+    width: responsiveWidth(80),
+    height: responsiveHeight(5),
+    borderRadius: 12,
+    color: Colors.lightGrey,
+    backgroundColor: Colors.purple,
+    borderColor: Colors.lightGrey,
+    borderWidth: 2,
+    opacity: 0.5,
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+  picker: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: Colors.white,
+    // backgroundColor:Colors.lightGrey,
+    marginTop: 4,
+    fontSize: responsiveFontSize(2),
+  },
+  pickerItem: {
+    fontSize: responsiveFontSize(1.7),
   },
 });
 export default styles;

@@ -27,7 +27,7 @@ import {useSelector} from 'react-redux';
 const DashboardScreen = props => {
   const navigation = useNavigation();
   const userData = useSelector(state => state.user);
-  // console.log('dash:', userData);
+  console.log('dash:', userData);
   const [data, setData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = React.useState(false);
@@ -43,7 +43,7 @@ const DashboardScreen = props => {
   const getEmergencyContacts = async () => {
     try {
       setLoading(true);
-      const fetchedData = await fetchUserData(userData.user.email);
+      const fetchedData = await fetchUserData(userData.user._id);
       console.log(fetchedData.user)
       setData(fetchedData.user.step);
       console.log(fetchedData.user.step)
