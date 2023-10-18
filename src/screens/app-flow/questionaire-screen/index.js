@@ -184,42 +184,64 @@ const QuestionaireScreen1 = props => {
                           currentQuestionIndex
                         ].options.map((option, optionIndex) => (
                           <View key={optionIndex} style={styles.txtStyle2}>
-                            <CheckBox
-                              style={styles.txtStyle3}
-                              value={
-                                selectedAnswers[
-                                  questionaire[0].questions[
-                                    currentQuestionIndex
-                                  ]._id
-                                ] &&
-                                selectedAnswers[
-                                  questionaire[0].questions[
-                                    currentQuestionIndex
-                                  ]._id
-                                ] == option
-                              }
-                              onValueChange={newValue => {
-                                console.log('newValue', newValue);
+                            <TouchableOpacity
+                              style={styles.optionTO}
+                              onPress={() => {
+                                const newValue =
+                                  !selectedAnswers[
+                                    questionaire[0].questions[
+                                      currentQuestionIndex
+                                    ]._id
+                                  ] ||
+                                  selectedAnswers[
+                                    questionaire[0].questions[
+                                      currentQuestionIndex
+                                    ]._id
+                                  ] !== option;
                                 handleOptionChange(
                                   questionaire[0].questions[
                                     currentQuestionIndex
                                   ]._id,
-                                  newValue
-                                    ? option
-                                    : (selectedAnswers[
-                                        questionaire[0].questions[
-                                          currentQuestionIndex
-                                        ]._id
-                                      ] =
-                                        selectedAnswers[
+                                  newValue ? option : null,
+                                );
+                              }}>
+                              <CheckBox
+                                style={styles.txtStyle3}
+                                value={
+                                  selectedAnswers[
+                                    questionaire[0].questions[
+                                      currentQuestionIndex
+                                    ]._id
+                                  ] &&
+                                  selectedAnswers[
+                                    questionaire[0].questions[
+                                      currentQuestionIndex
+                                    ]._id
+                                  ] == option
+                                }
+                                onValueChange={newValue => {
+                                  console.log('newValue', newValue);
+                                  handleOptionChange(
+                                    questionaire[0].questions[
+                                      currentQuestionIndex
+                                    ]._id,
+                                    newValue
+                                      ? option
+                                      : (selectedAnswers[
                                           questionaire[0].questions[
                                             currentQuestionIndex
                                           ]._id
-                                        ] !== option),
-                                );
-                              }}
-                            />
-                            <Text style={styles.options}>{option}</Text>
+                                        ] =
+                                          selectedAnswers[
+                                            questionaire[0].questions[
+                                              currentQuestionIndex
+                                            ]._id
+                                          ] !== option),
+                                  );
+                                }}
+                              />
+                              <Text style={styles.options}>{option}</Text>
+                            </TouchableOpacity>
                           </View>
                         ))
                       ) : (

@@ -1,7 +1,7 @@
 //import liraries
 import React, {useState} from 'react';
 import {View, Text, Image, TouchableOpacity, Alert} from 'react-native';
-import {useNavigation, StackActions} from '@react-navigation/native';
+import {useNavigation, StackActions, CommonActions} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Images from '../../../services/constants/images';
 import RouteNames from '../../../services/constants/route-names';
@@ -56,9 +56,28 @@ const LoginScreen = props => {
         if (step === 1) {
           setLoading(false);
           navigation.dispatch(
-            StackActions.replace(RouteNames.navigatorNames.sosNavigator, {
-              screen: RouteNames.sosNavRoutes.addContactScreen,
-              params: {user},
+            CommonActions.reset({
+              index: 2, // The index is the number of screens to reset.
+              routes: [
+                {
+                  name: RouteNames.navigatorNames.appNavigator,
+                  params: {screen: RouteNames.appRoutes.dashboardScreen},
+                },
+                {
+                  name: RouteNames.navigatorNames.sosNavigator,
+                  state: {
+                    routes: [
+                      {
+                        name: RouteNames.sosNavRoutes.emergencyContactScreen,
+                      },
+                      {
+                        name: RouteNames.sosNavRoutes.addContactScreen,
+                        params: {user},
+                      },
+                    ],
+                  },
+                },
+              ],
             }),
           );
         } else {

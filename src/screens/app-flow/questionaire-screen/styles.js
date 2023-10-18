@@ -10,14 +10,14 @@ import Fonts from '../../../services/constants/fonts';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 10,
+    marginBottom:responsiveHeight(10),
     // flexGrow: 0,
     backgroundColor: Colors.screenBackground,
   },
   scView: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 30,
+    marginTop: 10,
     flexDirection: 'row',
     // marginBottom: 10,
   },
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     // marginBottom: 20,
   },
   parent: {
-    top: 70,
+    top: 30,
     height: responsiveHeight(100),
     width: responsiveWidth(100),
     borderTopStartRadius: 500,
@@ -221,7 +221,13 @@ const styles = StyleSheet.create({
   txtStyle2: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginHorizontal: 10,
+  },
+  optionTO:{
+    flexDirection: 'row',
+    alignItems: 'center',
     margin: 10,
+    // paddingHorizontal:20,
   },
   txtStyle3: {
     borderColor: Colors.white,
