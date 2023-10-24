@@ -1,5 +1,5 @@
 //import liraries
-import React, {Component, useState} from 'react';
+import React, {Component, useState, useRef} from 'react';
 import {View, Text, Alert} from 'react-native';
 import {useNavigation, StackActions, useRoute} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -15,6 +15,13 @@ import {updatePasswordApiCall} from '../../../services/apis/app/userApis';
 // create a component
 const ChangePasswordScreen = props => {
   const navigation = useNavigation();
+  const passwordInput = useRef(null);
+  const passInput = useRef(null);
+  const focusNextInput = nextInputRef => {
+    if (nextInputRef.current) {
+      nextInputRef.current.focus();
+    }
+  };
   const route = useRoute();
   const email = route.params?.email;
   const [loading, setLoading] = React.useState(false);
@@ -92,6 +99,9 @@ const ChangePasswordScreen = props => {
                   placeholder={'Enter Password'}
                   placeholderTextColor="white"
                   value={pass}
+                  ref={passwordInput}
+                  onSubmitEditting={() => focusNextInput(passInput)}
+                  returnKeyType={'next'}
                   onChangeText={text => setpass(text)}
                 />
                 <Input
@@ -100,6 +110,9 @@ const ChangePasswordScreen = props => {
                   placeholder={'Reconfirm Password'}
                   placeholderTextColor="white"
                   value={password}
+                  ref={passInput}
+                  // onSubmitEditting={register}
+                  returnKeyType={'next'}
                   onChangeText={text => setPassword(text)}
                 />
                 <Button

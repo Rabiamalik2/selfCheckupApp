@@ -40,18 +40,18 @@ const DashboardScreen = props => {
       }),
     );
   };
-  const getEmergencyContacts = async () => {
+  const checkEmergencyContacts = async () => {
     try {
-      setLoading(true);
-      const fetchedData = await fetchUserData(userData.user._id);
-      console.log(fetchedData.user)
-      setData(fetchedData.user.step);
-      console.log(fetchedData.user.step)
-      if(fetchedData.user.step == 1)
-      {
-        setModalVisible(true);
-      }
-      setLoading(false);
+      // setLoading(true);
+      // const fetchedData = await fetchUserData(userData.user._id);
+      // console.log(fetchedData,"1")
+      // setData(fetchedData.user.step);
+      // console.log(fetchedData.user.step)
+      // if(fetchedData.user.step == 1)
+      // {
+      //   setModalVisible(true);
+      // }
+      // setLoading(false);
     } catch (error) {
       setLoading(false);
       if (error.response && error.response.status === 401) {
@@ -80,7 +80,7 @@ const DashboardScreen = props => {
   // };
   useEffect(() => {
     if (isFocused) {
-      getEmergencyContacts();
+      checkEmergencyContacts();
     }
   }, []);
   return (

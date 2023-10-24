@@ -1,5 +1,5 @@
 //import liraries
-import React, {Component, useState} from 'react';
+import React, {Component, useState, useRef} from 'react';
 import {View, Text, SafeAreaView, Alert} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import styles from './styles';
@@ -22,6 +22,15 @@ import {useSelector} from 'react-redux';
 
 const MedicoreInfoScreen = props => {
   const navigation = useNavigation();
+  const mediQuesInput = useRef(null);
+  const mediIDInput = useRef(null);
+  const insuranceNameInput = useRef(null);
+  const insuranceIdInput = useRef(null);
+  const focusNextInput = nextInputRef => {
+    if (nextInputRef.current) {
+      nextInputRef.current.focus();
+    }
+  };
   const userData = useSelector(state => state.user);
   const [loading, setLoading] = React.useState(false);
   const [mediQues, setMediQues] = useState('');
@@ -97,13 +106,13 @@ const MedicoreInfoScreen = props => {
                   <Picker
                     selectedValue={mediQues}
                     onValueChange={itemValue => setMediQues(itemValue)}
-                    dropdownIconColor={"white"}
+                    dropdownIconColor={'white'}
                     style={styles.picker}>
                     <Picker.Item
-                    label="Please Select"
-                    style={styles.pickerItem}
-                    enabled={false}
-                    value="Please Select"></Picker.Item>
+                      label="Please Select"
+                      style={styles.pickerItem}
+                      enabled={false}
+                      value="Please Select"></Picker.Item>
                     <Picker.Item
                       label="Yes"
                       style={styles.pickerItem}
@@ -119,7 +128,9 @@ const MedicoreInfoScreen = props => {
                   placeholder={'Enter the medicare or mediCaid ID'}
                   placeholderTextColor="white"
                   value={mediID}
-                  returnKeyType="next"
+                  ref={mediID}
+                  onSubmitEditting={() => focusNextInput(insuranceNameInput)}
+                  returnKeyType={'next'}
                   onChangeText={text => setMediID(text)}
                   //MaterialIcons name="arrow-drop-down" style={styles.icon1}
                 />
@@ -128,15 +139,19 @@ const MedicoreInfoScreen = props => {
                   placeholder={'Name of your Medical Insurance'}
                   placeholderTextColor="white"
                   value={insuranceName}
-                  returnKeyType="next"
+                  ref={insuranceNameInput}
+                  onSubmitEditting={() => focusNextInput(insuranceIdInput)}
+                  returnKeyType={'next'}
                   onChangeText={text => setInsuranceName(text)}
                 />
                 <Input
                   keyboardType="default"
                   placeholder={'Medical Insurance Id Number'}
                   placeholderTextColor="white"
-                  value={insuranceId}
-                  returnKeyType="next"
+                  value={insuranceIdInput}
+                  ref={firstnameInput}
+                  // onSubmitEditting={() => focusNextInput(lastnameInput)}
+                  returnKeyType={'next'}
                   onChangeText={text => setInsuranceId(text)}
                 />
               </View>

@@ -1,5 +1,5 @@
 //import liraries
-import React, {Component, useState} from 'react';
+import React, {Component, useState, useRef} from 'react';
 import {View, Text, SafeAreaView, Alert} from 'react-native';
 import styles from './styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -20,6 +20,14 @@ import RouteNames from '../../../services/constants/route-names';
 
 const DoctorInfoScreen = props => {
   const navigation = useNavigation();
+  const docNameInput = useRef(null);
+  const phoneNumberInput = useRef(null);
+  const insuranceNameInput = useRef(null);
+  const focusNextInput = nextInputRef => {
+    if (nextInputRef.current) {
+      nextInputRef.current.focus();
+    }
+  };
   const userData = useSelector(state => state.user);
   const [loading, setLoading] = React.useState(false);
   const [docName, setDocName] = useState('');
@@ -93,7 +101,9 @@ const DoctorInfoScreen = props => {
                 placeholderTextColor="white"
                 keyboardType="default"
                 value={docName}
-                returnKeyType="next"
+                ref={docNameInput}
+                onSubmitEditting={() => focusNextInput(phoneNumberInput)}
+                returnKeyType={'next'}
                 onChangeText={text => setDocName(text)}
                 //MaterialIcons name="arrow-drop-down" style={styles.icon1}
               />
@@ -102,7 +112,9 @@ const DoctorInfoScreen = props => {
                 placeholderTextColor="white"
                 keyboardType="default"
                 value={phoneNumber}
-                returnKeyType="next"
+                ref={phoneNumberInput}
+                onSubmitEditting={() => focusNextInput(insuranceNameInput)}
+                returnKeyType={'next'}
                 onChangeText={text => setPhoneNumber(text)}
                 //MaterialIcons name="arrow-drop-down" style={styles.icon1}
               />
@@ -112,7 +124,9 @@ const DoctorInfoScreen = props => {
                 placeholderTextColor="white"
                 keyboardType="default"
                 value={insuranceName}
-                returnKeyType="next"
+                ref={insuranceNameInput}
+                // onSubmitEditting={() => focusNextInput(phoneNumberInput)}
+                returnKeyType={'next'}
                 onChangeText={text => setInsuranceName(text)}
                 //MaterialIcons name="arrow-drop-down" style={styles.icon1}
               />

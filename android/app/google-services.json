@@ -7,18 +7,26 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:416536186096:android:909c287e2ac85bd8d88635",
+        "mobilesdk_app_id": "1:416536186096:android:40850bcb4c20912ad88635",
         "android_client_info": {
           "package_name": "com.selfcheckupproject"
         }
       },
       "oauth_client": [
         {
-          "client_id": "416536186096-6iltd8jqcrf1487c71omd7jrg7oq4mj1.apps.googleusercontent.com",
+          "client_id": "416536186096-2o5pte06eso2rm4ibkfeu7onbplfcqhe.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.selfcheckupproject",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+            "certificate_hash": "aacbef6f708526699fa88f978ffa2de2c1942d34"
+          }
+        },
+        {
+          "client_id": "416536186096-5olqtc0spq34nh7tdlmbeveoa3mq8f1i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.selfcheckupproject",
+            "certificate_hash": "d5957377f1b1d4119cfe808fb9ae92477b6d4c56"
           }
         },
         {
@@ -28,7 +36,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAtKV7-3SJNrgqQgj5dRAT2hq0W9IR-zc0"
+          "current_key": "AIzaSyD2a0i3tnO_IwwB2OvNmTEG2cbON8gJ1Hg"
         }
       ],
       "services": {

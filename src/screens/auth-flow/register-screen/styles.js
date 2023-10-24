@@ -100,14 +100,13 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   fbToS: {
-    marginVertical:4,
+    marginVertical: 4,
     backgroundColor: Colors.oceanBlue,
     justifyContent: 'center',
     width: responsiveWidth(80),
     height: responsiveHeight(5),
     alignItems: 'center',
     borderRadius: 12,
-
   },
   signfbS: {
     color: Colors.white,
@@ -121,5 +120,44 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.poppinsExtraBold,
     fontSize: responsiveFontSize(4),
   },
+  txtinpView: {
+    flexDirection: 'row',
+    width: responsiveWidth(80),
+    alignItems: 'center',
+    borderRadius: 12,
+    backgroundColor: Colors.purple,
+    borderColor: Colors.lightGrey,
+    borderWidth: 2,
+    padding: 1.7,
+    opacity: 0.5,
+    // marginVertical:10,
+    marginBottom:25,
+  },
+  textiS: {
+    width: responsiveWidth(80),
+    height: responsiveHeight(5),
+    left: 10,
+    flexWrap: 'wrap',
+    color: Colors.white,
+  },
+  pickerTo: {
+    flexDirection: 'row',
+    width: responsiveWidth(80),
+    // alignItems: 'center',
+  },
+  pickerTxt: {
+    padding: 12,
+    marginLeft: 4,
+    marginRight: 4,
+    // fontSize: responsiveFontSize(2),
+    width: responsiveWidth(14),
+    height: responsiveHeight(5.3),
+    color: Colors.white,
+  },
+  pickerIcon:{
+    marginHorizontal:10,
+    fontSize: responsiveFontSize(2),
+    color: Colors.white,
+  }
 });
 export default styles;

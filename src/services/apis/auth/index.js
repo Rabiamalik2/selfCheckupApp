@@ -22,4 +22,22 @@ const loginToMyProfile = async (email, password) => {
   return response;
 };
 
-export {loginToMyProfile, registerMe};
+const loginwithGoogle = async userInfo => {
+  console.log(userInfo);
+  const response = await axiosInstance.post(endPoints?.googleLoginKey, {
+    userInfo: userInfo,
+  });
+  console.log('google api:', response.data);
+  return response;
+};
+
+const loginwithFb = async accessToken => {
+  console.log('apiCall:', accessToken);
+  const response = await axiosInstance.post(endPoints?.fbLoginKey, {
+    accessToken: accessToken,
+  });
+  console.log('fb api call:', response.data);
+  return response;
+};
+
+export {loginToMyProfile, registerMe, loginwithGoogle, loginwithFb};

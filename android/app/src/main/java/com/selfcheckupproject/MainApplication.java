@@ -10,6 +10,7 @@ import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
@@ -31,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
           
        
         }
+       
 
         @Override
         protected String getJSMainModuleName() {
@@ -52,7 +54,6 @@ public class MainApplication extends Application implements ReactApplication {
   public ReactNativeHost getReactNativeHost() {
     return mReactNativeHost;
   }
-
   @Override
   public void onCreate() {
     super.onCreate();

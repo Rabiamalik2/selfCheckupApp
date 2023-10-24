@@ -1,5 +1,5 @@
 //import liraries
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {View, Text, TouchableOpacity, SafeAreaView, Alert} from 'react-native';
 import {
   useNavigation,
@@ -26,6 +26,15 @@ import Colors from '../../../services/constants/colors';
 // create a component
 const VitalSignsScreen = props => {
   const navigation = useNavigation();
+  const bloodPressureInput = useRef(null);
+  const bloodSugarLevelInput = useRef(null);
+  const pulseInput = useRef(null);
+  const bodyTempratureInput = useRef(null);
+  const focusNextInput = nextInputRef => {
+    if (nextInputRef.current) {
+      nextInputRef.current.focus();
+    }
+  };
   const userData = useSelector(state => state.user);
   const [loading, setLoading] = React.useState(false);
   const [bloodPressure, setBloodPressure] = useState('');
@@ -150,7 +159,9 @@ const VitalSignsScreen = props => {
                   placeholder={'Blood Sugar Level (mg/dl)'}
                   placeholderTextColor="white"
                   value={bloodPressure}
-                  returnKeyType="next"
+                  ref={bloodPressureInput}
+                  onSubmitEditting={() => focusNextInput(bloodSugarLevelInput)}
+                  returnKeyType={'next'}
                   onChangeText={text => setBloodPressure(text)}
                 />
                 <Input
@@ -158,7 +169,9 @@ const VitalSignsScreen = props => {
                   placeholder={'Blood Sugar Level (mg/dl)'}
                   placeholderTextColor="white"
                   value={bloodSugarLevel}
-                  returnKeyType="next"
+                  ref={bloodSugarLevelInput}
+                  onSubmitEditting={() => focusNextInput(pulseInput)}
+                  returnKeyType={'next'}
                   onChangeText={text => setBloodSugarLevel(text)}
                 />
                 <Input
@@ -166,7 +179,9 @@ const VitalSignsScreen = props => {
                   placeholder={'Pulse(beats per minute)'}
                   placeholderTextColor="white"
                   value={pulse}
-                  returnKeyType="next"
+                  ref={pulseInput}
+                  onSubmitEditting={() => focusNextInput(bodyTempratureInput)}
+                  returnKeyType={'next'}
                   onChangeText={text => setPulse(text)}
                 />
                 <Input
@@ -174,7 +189,9 @@ const VitalSignsScreen = props => {
                   placeholder={'Body Temperature: F'}
                   placeholderTextColor="white"
                   value={bodyTemprature}
-                  returnKeyType="next"
+                  ref={bodyTempratureInput}
+                  // onSubmitEditting={() => focusNextInput(lastnameInput)}
+                  returnKeyType={'next'}
                   onChangeText={text => setBodyTemprature(text)}
                 />
                 <Button

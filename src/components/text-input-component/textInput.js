@@ -8,55 +8,62 @@ import React, {useState} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Colors from '../../services/constants/colors';
-const Input = ({
-  placeholder,
-  value,
-  keyboardType,
-  password,
-  picker,
-  error,
-  onChangeText,
-  OnSubmitEditting,
-  returnKeyType,
-  autoCapitalize,
-  name,
-  onFocus,
-  editable,
-}) => {
-  const [hidePassword, setHidePassword] = useState(password);
-  return (
-    <View style={styles.inpMainView}>
-      <View style={styles.txtinpView}>
-        <TextInput
-          autoCapitalize={autoCapitalize}
-          value={value}
-          onSubmitEditing={OnSubmitEditting}
-          returnKeyType={returnKeyType}
-          onChangeText={onChangeText}
-          secureTextEntry={hidePassword}
-          placeholder={placeholder}
-          placeholderTextColor="white"
-          keyboardType={keyboardType}
-          onFocus={onFocus}
-          editable={editable}
-          style={styles.textiS}
-        />
-        {password && (
-          <Entypo
-            onPress={() => {
-              setHidePassword(!hidePassword);
-            }}
-            name={hidePassword ? 'eye' : 'eye-with-line'}
-            style={styles.icon1S}
+
+
+const Input = React.forwardRef(
+  (
+    // placeholder,
+    // value,
+    // keyboardType,
+    // password,
+    // picker,
+    // error,
+    // onChangeText,
+    // onSubmitEditting,
+    // returnKeyType,
+    // autoCapitalize,
+    // name,
+    // onFocus,
+    // editable,
+    props,
+    ref,
+  ) => {
+    const [hidePassword, setHidePassword] = useState(props.password);
+    return (
+      <View style={styles.inpMainView}>
+        <View style={styles.txtinpView}>
+          <TextInput
+            autoCapitalize={props.autoCapitalize}
+            value={props.value}
+            ref={ref}
+            onSubmitEditing={props.onSubmitEditting}
+            returnKeyType={props.returnKeyType}
+            onChangeText={props.onChangeText}
+            secureTextEntry={hidePassword}
+            placeholder={props.placeholder}
+            placeholderTextColor="white"
+            keyboardType={props.keyboardType}
+            onFocus={props.onFocus}
+            editable={props.editable}
+            style={[styles.textiS, props.style]}
           />
-        )}
-        {picker && (
-          <MaterialIcons name="arrow-drop-down" style={styles.iconPicker} />
-        )}
+          {props.password && (
+            <Entypo
+              onPress={() => {
+                setHidePassword(!hidePassword);
+              }}
+              name={hidePassword ? 'eye' : 'eye-with-line'}
+              style={styles.icon1S}
+            />
+          )}
+          {props.picker && (
+            <MaterialIcons name="arrow-drop-down" style={styles.iconPicker} />
+          )}
+        </View>
       </View>
-    </View>
-  );
-};
+    );
+  },
+);
 export default Input;
 
 const styles = StyleSheet.create({

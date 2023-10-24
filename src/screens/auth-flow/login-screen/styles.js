@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   googleTxt: {
-    paddingLeft: 10,
+    paddingLeft: 2,
     color: Colors.white,
   },
   googleAndPhoneStyle: {
@@ -192,8 +192,8 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   horizontalLine: {
-    top: 20,
-    margin: 10,
+    bottom: 4,
+    marginTop: 10,
     borderBottomColor: Colors.black,
     borderBottomWidth: 2,
     borderColor: Colors.lightGrey,

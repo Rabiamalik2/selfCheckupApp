@@ -1,5 +1,5 @@
 //import libraries
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   View,
   Text,
@@ -27,6 +27,14 @@ import {useSelector} from 'react-redux';
 
 const AddContactScreen = props => {
   const navigation = useNavigation();
+  const firstnameInput = useRef(null);
+  const lastnameInput = useRef(null);
+  const phoneInput = useRef(null);
+  const focusNextInput = nextInputRef => {
+    if (nextInputRef.current) {
+      nextInputRef.current.focus();
+    }
+  };
   const Route = useRoute();
   const contactId = Route.params?.itemId;
   const userData = useSelector(state => state.user);
@@ -39,13 +47,10 @@ const AddContactScreen = props => {
   const buttonOk = () => {
     setModalVisible(false);
     console.log('going');
-    props.navigation.navigate(
-      RouteNames.navigatorNames.sosNavigator,
-      {
-        screen: RouteNames.sosNavRoutes.emergencyContactScreen,
-      },
-    );
-  
+
+    props.navigation.navigate(RouteNames.navigatorNames.sosNavigator, {
+      screen: RouteNames.sosNavRoutes.emergencyContactScreen,
+    });
   };
   const addContactOnPress = async userID => {
     try {
@@ -139,10 +144,9 @@ const AddContactScreen = props => {
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView
         contentContainerStyle={{flexGrow: 1}}
-       enableOnAndroid={true}
+        enableOnAndroid={true}
         keyboardShouldPersistTaps="handled"
-        extraScrollHeight={-150}
-        >
+        extraScrollHeight={-150}>
         <Loader visible={loading} />
         <View style={styles.scView}>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
@@ -167,7 +171,9 @@ const AddContactScreen = props => {
                 placeholder={'First Name'}
                 placeholderTextColor="white"
                 value={firstname}
-                returnKeyType="next"
+                ref={firstnameInput}
+                onSubmitEditting={() => focusNextInput(lastnameInput)}
+                returnKeyType={'next'}
                 onChangeText={text => setFirstname(text)}
               />
               <Input
@@ -175,7 +181,9 @@ const AddContactScreen = props => {
                 placeholder={'Last Name'}
                 placeholderTextColor="white"
                 value={lastname}
-                returnKeyType="next"
+                ref={lastnameInput}
+                onSubmitEditting={() => focusNextInput(phoneInput)}
+                returnKeyType={'next'}
                 onChangeText={text => setLastname(text)}
               />
               <Input
@@ -183,14 +191,16 @@ const AddContactScreen = props => {
                 placeholder={'Phone'}
                 placeholderTextColor="white"
                 value={phone}
-                returnKeyType="next"
+                ref={phoneInput}
+                // onSubmitEditting={() => focusNextInput(phoneInput)}
+                returnKeyType={'next'}
                 onChangeText={text => setPhone(text)}
               />
               <View style={styles.pickerView}>
                 <Picker
                   selectedValue={relation}
                   onValueChange={itemValue => setRelation(itemValue)}
-                  dropdownIconColor={"white"}
+                  dropdownIconColor={'white'}
                   style={styles.picker}>
                   <Picker.Item
                     label="Relation"
