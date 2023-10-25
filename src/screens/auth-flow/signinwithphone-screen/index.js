@@ -73,11 +73,11 @@ const SiginInWithPhoneScreen = props => {
     try {
       phoneNumber = `${countryCode}${phone}`;
       console.log(phoneNumber);
-      setLoading(true);
+
       const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+
       setConfirm(confirmation);
       setIsCodeSent(true);
-      setLoading(false);
     } catch (error) {
       console.error('Error sending verification code:', error);
     }
@@ -85,11 +85,13 @@ const SiginInWithPhoneScreen = props => {
   const verifyCode = async () => {
     try {
       setLoading(true);
+      
       await confirm.confirm(value);
+      setLoading(false);
       setAuthenticated(true);
       console.log('Phone number verified successfully!');
       setValue('');
-      setLoading(false);
+
       navigation.dispatch(
         StackActions.replace(RouteNames.navigatorNames.appNavigator, {
           screen: RouteNames.appRoutes.dashboardScreen,
